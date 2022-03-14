@@ -1,0 +1,4 @@
+Graphite: #170D05
+Orange: #D5761D
+Highlighted Gray: #827C74
+Gray: #84847C
