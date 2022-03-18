@@ -3,6 +3,8 @@ import Login from "./Login.js";
 import Logout from "./Logout.js";
 import AdminButtons from "./AdminButtons.js";
 import WeeklyEventsForm from "./WeeklyEventsForm.js";
+import ManageTeamsForm from "./ManageTeamsForm.js";
+import WeeklyMatchesForm from "./WeeklyMatchesForm.js";
 
 
 class AdminPage extends React.Component{
@@ -159,7 +161,7 @@ render() {
             <div>
                 <h1>Add Matches </h1>
                 <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick} handleEventsFormClick={this.handleEventsFormClick} handleManageTeamsClick={this.handleManageTeamsClick}/>
-
+                <WeeklyMatchesForm/>
                 <Logout handleLogoutClick={this.handleLogoutClick} />
             </div>
         )
@@ -181,7 +183,7 @@ render() {
             <div>
                 <h1>Manage teams </h1>
                 <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick} handleEventsFormClick={this.handleEventsFormClick} handleManageTeamsClick={this.handleManageTeamsClick}/>
-
+                <ManageTeamsForm/>
                 <Logout handleLogoutClick={this.handleLogoutClick} />
             </div>
         )

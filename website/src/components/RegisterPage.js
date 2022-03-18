@@ -6,10 +6,11 @@ class RegisterPage extends React.Component
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: false,
-            token: null,
             email: "",
-            password: ""
+            password: "",
+            userign: "",
+            userFirst:"",
+            userLast:"",
         }
         this.handlefirstName = this.handlefirstName.bind(this);
         this.handlelastName = this.handlelastName.bind(this);
@@ -20,24 +21,19 @@ class RegisterPage extends React.Component
     }
 
     componentDidMount() {
-        if (localStorage.getItem('LoginToken')) {
-            this.setState({
-                authenticated: true,
-                token: localStorage.getItem('LoginToken')
-            });
-        }
+
     }
 
     handlefirstName = (e) => {
-        this.setState({ firstName: e.target.value}) //Change these in the future.
+        this.setState({ userFirst: e.target.value}) //Change these in the future.
     }
 
     handlelastName = (e) => {
-        this.setState({ lastName: e.target.value}) //Change these in the future.
+        this.setState({ userLast: e.target.value}) //Change these in the future.
     }
 
     handleUserIGN = (e) => {
-        this.setState({ userIGN: e.target.value}) //Change these in the future.
+        this.setState({ userign: e.target.value}) //Change these in the future.
     }
 
     handleEmail = (e) => {
@@ -49,7 +45,26 @@ class RegisterPage extends React.Component
     }
 
     handleRegisterClick = () => {
-        
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/register"
+
+        let formData = new FormData();
+        formData.append('user_email', this.state.email);
+        formData.append('user_password', this.state.password);
+        formData.append('user_ign', this.state.userign);
+        formData.append('user_firstName', this.state.userFirst);
+        formData.append('user_lastName', this.state.userLast);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json()
+                } else {
+                    throw Error(response.statusText)
+                }
+            })
     }
 
 

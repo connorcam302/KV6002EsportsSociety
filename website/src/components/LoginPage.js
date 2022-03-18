@@ -1,5 +1,6 @@
 import React from "react";
 import Login from "./Login";
+import Logout from "./Logout";
 
 
 class LoginPage extends React.Component {
@@ -7,7 +8,6 @@ class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: false,
             authenticated: false,
             token: null,
             email: "",
@@ -20,10 +20,10 @@ class LoginPage extends React.Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem('LoginToken')) {
+        if (localStorage.getItem('UserLoginToken')) {
             this.setState({
                 authenticated: true,
-                token: localStorage.getItem('LoginToken')
+                token: localStorage.getItem('UserLoginToken')
             });
         }
     }
@@ -43,7 +43,7 @@ class LoginPage extends React.Component {
                 token: null
             }
         )
-        localStorage.removeItem('LoginToken');
+        localStorage.removeItem('UserLoginToken');
     }
 
     handleLoginClick = () => {
@@ -95,6 +95,14 @@ class LoginPage extends React.Component {
                 />
             </div>
         )
+        if (this.state.authenticated) {
+            page = (
+                <div>
+                    <h1>You're logged in, let's get gaming!</h1>
+                    <Logout handleLogoutClick={this.handleLogoutClick}/>
+                </div>
+            )
+        }
         return (
             <div>{page}</div>
         )
