@@ -4,6 +4,12 @@ import { Grid } from '@mui/material';
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import VikingProfile from './img/vikingclearback.png';
+import Navbar from './components/Navbar.js';
+import AdminPage from './components/AdminPage'
+import RegisterPage from './components/RegisterPage'
+import LoginPage from './components/LoginPage'
+import ErrorPage from './components/ErrorPage'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -42,54 +48,17 @@ function App() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
-        <header className="App-header">
-          <Box sx={{width:"px", backgroundColor:"secondary.main", paddingTop:2, paddingBottom:2}}>
-                
-          </Box>
-          <Grid container alignItems="center" justifyContent="center" >
-
-            <Grid item xs={12}>
-              <Typography variant="h1" sx={{paddingBottom:2}}>
-                Northumbria Vikings
-              </Typography>
-            </Grid>
-            <Grid item xs={2}/>
-            <Grid item xs={8}>
-              <Box>
-                <img src={VikingProfile} width="100%" alt='Vikings Logo'/>
-              </Box>
-            </Grid>
-            <Grid item xs={2}/>
-            <Grid item xs={8}>
-              <Box sx={{backgroundColor:"primary.main", paddingTop:2, paddingBottom:2}}>
-                <Typography>
-                  Box 1
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={4}>
-            <Box sx={{backgroundColor:"secondary.main", paddingTop:2, paddingBottom:2}}>
-                <Typography color="secondary.contrastText">
-                  Box 2
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={3}>
-            <Box sx={{backgroundColor:"primary.light", paddingTop:2, paddingBottom:2}}>
-                <Typography color="secondary.contrastText">
-                  Box 3
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={9}>
-            <Box sx={{backgroundColor:"secondary.light", paddingTop:2, paddingBottom:2}}>
-                <Typography color="secondary.contrastText">
-                  Box 4
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
-        </header>
+        <BrowserRouter>
+        <Navbar />
+          <Routes>
+            <Route path="/">
+              <Route index element={<RegisterPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="admin" element={<AdminPage />} />
+              <Route path="*" element={<ErrorPage/>} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </ThemeProvider>
     </div>
   );
