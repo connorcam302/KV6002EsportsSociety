@@ -9,9 +9,10 @@ class AdminButtons extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.props.handleEventsFormClick}>Add events</button>
-                <button onClick={this.props.handleManageTeamsClick}>Manage Teams</button>
-                <button onClick={this.props.handleAddMatchesClick}>Add matches</button>
+                <ul><button onClick={this.props.handleEventsFormClick}>Add events</button></ul>
+                <ul><button onClick={this.props.handleManageTeamsClick}>Manage Teams</button></ul>
+                <ul><button onClick={this.props.handleAddMatchesClick}>Add matches</button></ul>
+                <ul><button onClick={this.props.handleLogoutClick}>Logout </button></ul>
             </div>
         );
     }

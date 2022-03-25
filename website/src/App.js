@@ -1,9 +1,5 @@
 import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Grid } from '@mui/material';
-import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import VikingProfile from './img/vikingclearback.png';
 import Navbar from './components/Navbar.js';
 import AdminPage from './components/AdminPage'
 import RegisterPage from './components/RegisterPage'
@@ -54,6 +50,8 @@ function App() {
             <Route path="/">
               <Route index element={<RegisterPage />} />
               <Route path="login" element={<LoginPage />} />
+              <Route path="login/register" element={<RegisterPage />} />
+              <Route path="login/register/login" element={<LoginPage />} />
               <Route path="admin" element={<AdminPage />} />
               <Route path="*" element={<ErrorPage/>} />
             </Route>

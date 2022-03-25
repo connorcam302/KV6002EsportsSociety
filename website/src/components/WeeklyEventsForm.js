@@ -4,19 +4,35 @@ class WeeklyEventsForm extends React.Component {
     render() {
         return (
             <div>
-                <input
+                <ul><input
                     type='text'
                     placeholder='Title of event'
                     value={this.props.eventTitle}
                     onChange={this.props.handleEventTitle}
-                />
-                <input
+                /></ul>
+
+                <ul><input
+                    type='text'
+                    placeholder='Game being played'
+                    value={this.props.eventDesc}
+                    onChange={this.props.handleEventGame}
+                /></ul>
+
+                <ul><textarea
                     type='text'
                     placeholder='Description of event'
                     value={this.props.eventDesc}
                     onChange={this.props.handleEventDesc}
-                />
-                <button onClick={this.props.handleEventSubmit}>Submit Event</button>
+                /></ul>
+
+                <ul><input
+                    type='text'
+                    placeholder='Date & Time of event'
+                    value={this.props.eventDesc}
+                    onChange={this.props.handleEventTime}
+                /></ul>
+
+                <ul><button onClick={this.props.handleEventSubmit}>Submit Event</button></ul>
             </div>
         );
     }

@@ -1,6 +1,9 @@
 import React from "react";
 import Login from "./Login";
 import Logout from "./Logout";
+import RegisterLink from "./RegisterLink";
+import Grid from '@mui/material/Grid';
+import { Box } from "@mui/system";
 
 
 class LoginPage extends React.Component {
@@ -29,11 +32,11 @@ class LoginPage extends React.Component {
     }
 
     handleEmail = (e) => {
-        this.setState({ email: e.target.value})
+        this.setState({ email: e.target.value })
     }
 
     handlePassword = (e) => {
-        this.setState({ password: e.target.value})
+        this.setState({ password: e.target.value })
     }
 
     handleLogoutClick = () => {
@@ -83,23 +86,34 @@ class LoginPage extends React.Component {
             );
     }
 
-    render(){
-        let  page = ( 
-            <div>
-                <h1>Login</h1>
-                <h2>Please enter your details to log into your account.</h2>
-                <Login
-                handleEmail={this.handleEmail}
-                handlePassword={this.handlePassword}
-                handleLoginClick={this.handleLoginClick}
-                />
-            </div>
+    render() {
+        let page = (
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <h1>Login</h1>
+                        <h2>Please enter your details to log into your account.</h2>
+                    </Grid>
+                    <Grid item xs={4}>
+                    </Grid>
+                    <Grid item xs={4} sx={{ justifyContent: 'center' }}>
+                        <Login
+                            handleEmail={this.handleEmail}
+                            handlePassword={this.handlePassword}
+                            handleLoginClick={this.handleLoginClick}
+                        />
+                        <RegisterLink />
+                    </Grid>
+                    <Grid item xs={4}>
+                    </Grid>
+                </Grid>
+            </Box>
         )
         if (this.state.authenticated) {
             page = (
                 <div>
                     <h1>You're logged in, let's get gaming!</h1>
-                    <Logout handleLogoutClick={this.handleLogoutClick}/>
+                    <Logout handleLogoutClick={this.handleLogoutClick} />
                 </div>
             )
         }

@@ -1,40 +1,41 @@
 import React from "react";
 
-class Register extends React.Component{
-    render(){
-        return(
+class Register extends React.Component {
+    render() {
+        return (
             <div>
-                <input
-                    type='text'
-                    placeholder='Email Address'
-                    value={this.props.email}
-                    onChange={this.props.handleEmail}
-                />
-                <input
+                <ul>
+                    <input
+                        type='text'
+                        placeholder='Email Address'
+                        value={this.props.email}
+                        onChange={this.props.handleEmail}
+                    /></ul>
+                <ul><input
                     type='password'
                     placeholder='Password'
                     value={this.props.password}
                     onChange={this.props.handlePassword}
-                />
-                <input
+                /></ul>
+                <ul><input
                     type='text'
                     placeholder='User IGN'
                     value={this.props.userign}
                     onChange={this.props.handleUserIGN}
-                />
-                <input
+                /></ul>
+                <ul><input
                     type='text'
                     placeholder='First Name'
                     value={this.props.userFirst}
                     onChange={this.props.handlefirstName}
-                />
-                <input
+                /></ul>
+                <ul><input
                     type='text'
-                    placeholder='Last Name'
+                    placeholder='Last Name' C
                     value={this.props.userLast}
                     onChange={this.props.handlelastName}
-                />
-                <button onClick={this.props.handleRegisterClick}>Register Account</button>
+                /></ul>
+                <ul><button onClick={this.props.handleRegisterClick}>Register Account</button></ul>
             </div>
         )
     }

@@ -1,22 +1,23 @@
-import React from "react";
+import * as React from "react";
 
 class Login extends React.Component {
+
     render() {
         return (
             <div>
-                <input
+                <ul><input
                     type='text'
                     placeholder='Email here'
                     value={this.props.email}
                     onChange={this.props.handleEmail}
-                />
-                <input
+                /></ul>
+                <ul><input
                     type='password'
                     placeholder='Password here'
                     value={this.props.password}
                     onChange={this.props.handlePassword}
-                />
-                <button onClick={this.props.handleLoginClick}>Log in</button>
+                /></ul>
+                <ul><button onClick={this.props.handleLoginClick}>Log in</button></ul>
             </div>
         );
     }

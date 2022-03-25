@@ -1,76 +1,82 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {Link, useNavigate} from 'react-router-dom';
-import { Grid } from '@mui/material';
-import { Divider } from '@mui/material';
-
-
-
+import { useNavigate } from 'react-router-dom';
 
 export default function ButtonAppBar() {
     let navigate = useNavigate();
 
-    const toEvents = () =>{ 
-        let path = `events`; 
+    const toEvents = () => {
+        let path = `events`;
         navigate(path);
     }
 
-    const toLogin = () =>{ 
-        let path = `login`; 
+    const toLogin = () => {
+        let path = `login`;
         navigate(path);
     }
 
-    const toResults = () =>{ 
-        let path = `results`; 
+    const toResults = () => {
+        let path = `results`;
         navigate(path);
     }
 
-    const toTeams = () =>{ 
-        let path = `teams`; 
+    const toTeams = () => {
+        let path = `teams`;
         navigate(path);
     }
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-            <Box container spacing={2} alignItems="center" sx={{display: 'flex',flexDirection: 'row', paddingRight:2}}>
-                    <Typography sx={{fontSize:24, paddingLeft:2,paddingRight:2}}>
+    const toAdmin = () => {
+        let path = `admin`;
+        navigate(path);
+    }
+
+    return (
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+                <Box container spacing={2} alignItems="center" sx={{ display: 'flex', flexDirection: 'row', paddingRight: 2 }}>
+                    <Typography sx={{ fontSize: 24, paddingLeft: 2, paddingRight: 2 }}>
                         NORTHUMBRIA VIKINGS
                     </Typography>
                     <Button
-                        key="home"
+                        key="toEvents"
                         onClick={() => toEvents()}
-                        sx={{color: 'white', display: 'block'}}
+                        sx={{ color: 'white', display: 'block' }}
                     >
-                    Weekly Events
+                        Weekly Events
                     </Button>
                     <Button
-                        key="home"
+                        key="toResults"
                         onClick={() => toResults()}
-                        sx={{color: 'white', display: 'block', height:"100%"}}
+                        sx={{ color: 'white', display: 'block', height: "100%" }}
                     >
-                    Results
+                        Results
                     </Button>
                     <Button
-                        key="home"
+                        key="toTeams"
                         onClick={() => toTeams()}
-                        sx={{color: 'white', display: 'block'}}
+                        sx={{ color: 'white', display: 'block' }}
                     >
-                    Teams
+                        Teams
                     </Button>
                     <Button
-                        key="home"
-                        onClick={() => toLogin()}
-                        sx={{color: 'white', display: 'block', marginLeft: "auto"}}
+                        key="toAdmin"
+                        onClick={() => toAdmin()}
+                        sx={{ color: 'white', display: 'block', }}
                     >
-                    Login
+                        Admin
+                    </Button>
+                    <Button
+                        key="toLogin"
+                        onClick={() => toLogin()}
+                        sx={{ color: 'white', display: 'block', marginLeft: "auto" }}
+                    >
+                        Login
                     </Button>
                 </Box>
-      </AppBar>
-    </Box>
-  );
+            </AppBar>
+        </Box>
+    );
 }

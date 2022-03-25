@@ -1,16 +1,19 @@
 import React from "react";
 import Register from "./Register";
+import LoginLink from "./LoginLink";
+import Grid from '@mui/material/Grid';
+import { Box } from "@mui/system";
 
-class RegisterPage extends React.Component
-{
+
+class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             email: "",
             password: "",
             userign: "",
-            userFirst:"",
-            userLast:"",
+            userFirst: "",
+            userLast: "",
         }
         this.handlefirstName = this.handlefirstName.bind(this);
         this.handlelastName = this.handlelastName.bind(this);
@@ -25,23 +28,23 @@ class RegisterPage extends React.Component
     }
 
     handlefirstName = (e) => {
-        this.setState({ userFirst: e.target.value}) //Change these in the future.
+        this.setState({ userFirst: e.target.value }) //Change these in the future.
     }
 
     handlelastName = (e) => {
-        this.setState({ userLast: e.target.value}) //Change these in the future.
+        this.setState({ userLast: e.target.value }) //Change these in the future.
     }
 
     handleUserIGN = (e) => {
-        this.setState({ userign: e.target.value}) //Change these in the future.
+        this.setState({ userign: e.target.value }) //Change these in the future.
     }
 
     handleEmail = (e) => {
-        this.setState({ email: e.target.value})
+        this.setState({ email: e.target.value })
     }
 
     handlePassword = (e) => {
-        this.setState({ password: e.target.value})
+        this.setState({ password: e.target.value })
     }
 
     handleRegisterClick = () => {
@@ -67,27 +70,38 @@ class RegisterPage extends React.Component
             })
     }
 
-
-
-    render(){
-        let  page = ( 
-            <div>
-                <h1>Register your account</h1>
-                <h2>Please enter your details below to register your account!</h2>
-                <Register
-                handlefirstName={this.handlefirstName}
-                handlelastName={this.handlelastName}
-                handleUserIGN={this.handleUserIGN}
-                handleEmail={this.handleEmail}
-                handlePassword={this.handlePassword}
-                handleRegisterClick={this.handleRegisterClick}
-                />
-            </div>
+    render() {
+        let page = (
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <h1>Register your account</h1>
+                        <h2>Please enter your details below to register your account!</h2>
+                    </Grid>
+                    <Grid item xs={3}>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Register
+                            handlefirstName={this.handlefirstName}
+                            handlelastName={this.handlelastName}
+                            handleUserIGN={this.handleUserIGN}
+                            handleEmail={this.handleEmail}
+                            handlePassword={this.handlePassword}
+                            handleRegisterClick={this.handleRegisterClick}
+                        />
+                        <LoginLink />
+                    </Grid>
+                    <Grid item xs={3}>
+                    </Grid>
+                </Grid>
+            </Box>
         )
         return (
             <div>{page}</div>
         )
     }
+
+
 }
 
 export default RegisterPage;

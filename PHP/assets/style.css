@@ -1,0 +1,63 @@
+body{
+/*Used on the main body of each webpage. */
+text-align: left;
+background-color: rgb(237, 237, 237);;
+}
+
+/*These elements are used for the Headers on the webpage.*/
+h1 {
+    /*Used on all page headers.*/
+    color: rgb(68, 67, 67);
+    font-family: "Calibri";
+    font-size: 30px;
+    text-align: left;
+    text-decoration: underline;
+}
+
+h2 {
+    /*Used on the Documentation page headers for each API endpoint title.*/
+    color: rgb(68, 67, 67);;
+    font-family: "Calibri";
+    font-size: 28px;
+    text-align: left;
+    text-decoration: underline;
+}
+
+h3 {
+    /*Used on the Documentation sub headers for each category.*/
+    color: rgb(68, 67, 67);
+    font-family: "Calibri";
+    font-size:17px;
+    text-align: left;
+    text-decoration: underline;
+}
+
+/*These elements style the text found on the webpage*/
+p {
+     /*Sets the textsize, font and colour for most text on the webpage*/
+    color: rgb(68, 67, 67);
+    font-family: "Calibri";
+    font-size:15px;
+}
+
+a {
+    /*Used on the URL's at the top of the page.*/
+    color: rgb(68, 67, 67);
+    font-family: "Calibri";
+    font-size:15px;
+}
+
+li{
+    /*Styles the lists present on the page*/
+    color: rgb(68, 67, 67);;
+    font-family: "Calibri";
+    font-size:15px;
+    list-style: none;
+}
+
+pre{
+    /*Styles the preformatted text displayed in each documentation example*/
+    color: rgb(68, 67, 67);
+    font-family: "Consolas";
+    font-size:15px;
+}
