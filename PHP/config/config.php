@@ -1,5 +1,5 @@
 <?php
-define('BASEPATH', '/KV6002/Assessment/'); /**Sets the basename of the file. */
+define('BASEPATH', '/KV6002/Assessment/');
 define('DATABASE', 'db/esports.db');
 define ('DEVELOPMENT_MODE', true);
 define ('SECRET_KEY', '3F53682FA68DFCE82CCCDBD5F28D8'); //Implements the Secret key used to sign JSON Web Tokens.
