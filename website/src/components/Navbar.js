@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import NavbarLogin from './NavbarLogin.js'
 
 export default function ButtonAppBar() {
     let navigate = useNavigate();
@@ -61,20 +62,7 @@ export default function ButtonAppBar() {
                     >
                         Teams
                     </Button>
-                    <Button
-                        key="toAdmin"
-                        onClick={() => toAdmin()}
-                        sx={{ color: 'white', display: 'block', }}
-                    >
-                        Admin
-                    </Button>
-                    <Button
-                        key="toLogin"
-                        onClick={() => toLogin()}
-                        sx={{ color: 'white', display: 'block', marginLeft: "auto" }}
-                    >
-                        Login
-                    </Button>
+                    <NavbarLogin/>
                 </Box>
             </AppBar>
         </Box>
