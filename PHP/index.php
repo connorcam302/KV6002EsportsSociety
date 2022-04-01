@@ -17,17 +17,22 @@ switch ($request->getPath()) {
     case 'api/userlogin':
         $controller = new ControllerAuthenticateApi($request,$response);
             break;
-            break;
     case 'api/register':
         $controller = new ControllerRegisterApi($request,$response);
             break;
-            default:
-            if(is_a($response, "ResponseHTML")){
-                $controller = new ControllerError($request, $response);
-           } else {
-               $controller = new ControllerErrorApi($request, $response);
-           }
+    case 'api/team':
+        $controller = new ControllerTeam($request,$response);
             break;
+    case 'api/player':
+        $controller = new ControllerPlayer($request,$response);
+            break;
+    default:
+        if(is_a($response, "ResponseHTML")){
+            $controller = new ControllerError($request, $response);
+        } else {
+            $controller = new ControllerErrorApi($request, $response);
+        }
+        break;
     }
 
     echo $response->getData();
