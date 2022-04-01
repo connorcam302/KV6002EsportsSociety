@@ -18,6 +18,7 @@ class Login extends React.Component {
                     onChange={this.props.handlePassword}
                 /></ul>
                 <ul><button onClick={this.props.handleLoginClick}>Log in</button></ul>
+                <ul><button onClick={this.props.handleRegisterState}>Log in</button></ul>
             </div>
         );
     }

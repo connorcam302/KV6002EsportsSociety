@@ -25,13 +25,13 @@ export default function NavbarLogin() {
     const logout = () => {
         authenticated = false;
         admin = false;
-        localStorage.removeItem('loginToken');
+        localStorage.removeItem('UserLoginToken');
     }
 
-    if(localStorage.getItem("loginToken")) {
+    if(localStorage.getItem("UserLoginToken")) {
         authenticated = true;
-        let decodedToken = jwt_decode(localStorage.getItem("loginToken"))
-        if(decodedToken.isAdmin = 1) {
+        let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
+        if(decodedToken.user_isAdmin = 1) {
             admin = true;
         }
     }

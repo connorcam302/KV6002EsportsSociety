@@ -6,6 +6,7 @@ import RegisterPage from './components/RegisterPage'
 import LoginPage from './components/LoginPage'
 import ErrorPage from './components/ErrorPage'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginRegisterPage from './components/LoginRegisterPage';
 
 const theme = createTheme({
   palette: {
@@ -49,9 +50,7 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<RegisterPage />} />
-              <Route path="login" element={<LoginPage />} />
-              <Route path="login/register" element={<RegisterPage />} />
-              <Route path="login/register/login" element={<LoginPage />} />
+              <Route path="login" element={<LoginRegisterPage />} />
               <Route path="admin" element={<AdminPage />} />
               <Route path="*" element={<ErrorPage/>} />
             </Route>
