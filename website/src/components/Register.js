@@ -31,7 +31,7 @@ class Register extends React.Component {
                 /></ul>
                 <ul><input
                     type='text'
-                    placeholder='Last Name' C
+                    placeholder='Last Name'
                     value={this.props.userLast}
                     onChange={this.props.handlelastName}
                 /></ul>

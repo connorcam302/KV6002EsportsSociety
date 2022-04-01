@@ -191,7 +191,7 @@ class LoginRegisterPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if (response.status === 404) {
+                if ((response.status === 200) || (response.status === 204)) {
                     this.setState(
                         {
                             registered: true
@@ -204,7 +204,7 @@ class LoginRegisterPage extends React.Component {
                 else if (response.status === 403) {
                     this.setState({error: "The email address you have entered already exists, please try another email address."})
                 }
-                else if (this.handleEmail === undefined) {
+                else if (this.state.handleEmail === undefined) {
                     this.setState({error: "."})
                 }
             })
@@ -297,7 +297,7 @@ class LoginRegisterPage extends React.Component {
             )
         }
 
-        if (this.state.user) {
+        if (this.state.user && this.state.admin) {
             page = (
                 <div>
                     <h1>You're logged in, let's get gaming!</h1>

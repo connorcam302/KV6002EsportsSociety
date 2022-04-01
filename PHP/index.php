@@ -17,22 +17,10 @@ switch ($request->getPath()) {
     case 'api/userlogin':
         $controller = new ControllerAuthenticateApi($request,$response);
             break;
-    case 'api/adminlogin':
-        $controller = new ControllerAdminAuthenticateApi($request,$response);
             break;
     case 'api/register':
         $controller = new ControllerRegisterApi($request,$response);
             break;
-
-    case 'api/team':
-        $controller = new ControllerTeam($request,$response);
-            break;
-
-    case 'api/player':
-        $controller = new ControllerPlayer($request,$response);
-            break;
-
-
             default:
             if(is_a($response, "ResponseHTML")){
                 $controller = new ControllerError($request, $response);

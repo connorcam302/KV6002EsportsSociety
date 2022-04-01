@@ -29,6 +29,7 @@ class ControllerAuthenticateApi extends Controller
 
                         $payload = array(
                             "user_id" => $this->getGateway()->getResult()[0]['user_id'], //Assigns the user_id in the token to be the same as the id collected when checking the email address and password.
+                            "user_isAdmin" => $this->getGateway()->getResult()[0]['user_isAdmin'],
                             "exp" => time() + 2592000 //Set to 30 days till expiration.
                         );
 
@@ -42,6 +43,10 @@ class ControllerAuthenticateApi extends Controller
                 $this->getResponse()->setMessage("Unauthorized");
                 $this->getResponse()->setStatus(401);
             }
+            else{        
+                $this->message = "Resource Not Found";
+                $this->getResponse()->setStatus(404);
+                }
         } else {
             $this->getResponse()->setMessage("Method not Allowed");
             $this->getResponse()->setStatus(405);

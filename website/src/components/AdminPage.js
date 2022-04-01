@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "./Login.js";
 import AdminButtons from "./AdminButtons.js";
+import jwt_decode from "jwt-decode";
 import WeeklyEventsForm from "./WeeklyEventsForm.js";
 import ManageTeamsForm from "./ManageTeamsForm.js";
 import WeeklyMatchesForm from "./WeeklyMatchesForm.js";
@@ -32,18 +33,17 @@ class AdminPage extends React.Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem('AdminToken')) {
-            this.setState({
-                admin: true,
-                token: localStorage.getItem('AdminToken')
-            });
-        }
-
         if (localStorage.getItem('UserLoginToken')) {
+            let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
             this.setState({
                 authenticated: true,
                 token: localStorage.getItem('UserLoginToken')
-            });
+            })
+            if (decodedToken.user_isAdmin = 1) {
+                this.setState({
+                    admin: true,
+                });
+            }
         }
     }
 

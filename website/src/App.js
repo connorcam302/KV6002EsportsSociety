@@ -49,7 +49,7 @@ function App() {
         <Navbar />
           <Routes>
             <Route path="/">
-              <Route index element={<RegisterPage />} />
+              <Route index element={<AdminPage/>} />
               <Route path="login" element={<LoginRegisterPage />} />
               <Route path="admin" element={<AdminPage />} />
               <Route path="*" element={<ErrorPage/>} />

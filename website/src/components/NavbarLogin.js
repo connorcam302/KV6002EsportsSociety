@@ -1,13 +1,11 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import Logout from "./Logout";
 
 export default function NavbarLogin() {
 
-    let authenticated = false;
+    let user = false;
     let admin = false;
 
     let navigate = useNavigate();
@@ -23,20 +21,21 @@ export default function NavbarLogin() {
     }
 
     const logout = () => {
-        authenticated = false;
+        user = false;
         admin = false;
         localStorage.removeItem('UserLoginToken');
     }
 
     if(localStorage.getItem("UserLoginToken")) {
-        authenticated = true;
+        user = true;
         let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
         if(decodedToken.user_isAdmin = 1) {
             admin = true;
+            user = false;
         }
     }
 
-    if(authenticated && admin) {
+    if(admin) {
         return(
         <div>
             <Button
@@ -57,7 +56,7 @@ export default function NavbarLogin() {
         )
     }
 
-    if(authenticated && !admin) {
+    if(user) {
         return(
             <div>
             <Button
