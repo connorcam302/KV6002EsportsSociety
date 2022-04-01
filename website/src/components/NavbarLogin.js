@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function NavbarLogin() {
 
-    let user = false;
+    let authenticated = false;
     let admin = false;
 
     let navigate = useNavigate();
@@ -21,21 +21,21 @@ export default function NavbarLogin() {
     }
 
     const logout = () => {
-        user = false;
+        authenticated = false;
         admin = false;
         localStorage.removeItem('UserLoginToken');
     }
 
     if(localStorage.getItem("UserLoginToken")) {
-        user = true;
+        authenticated = true;
         let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
-        if(decodedToken.user_isAdmin = 1) {
+        if(decodedToken.user_isAdmin == 1) {
             admin = true;
-            user = false;
         }
     }
 
-    if(admin) {
+    if(authenticated && admin) {
+        console.log("User is admin.")
         return(
         <div>
             <Button
@@ -56,12 +56,13 @@ export default function NavbarLogin() {
         )
     }
 
-    if(user) {
+    if(authenticated && !admin) {
+        console.log("User is not admin.")
         return(
             <div>
             <Button
                 key="toLogin"
-                onClick={() => toLogin()}
+                onClick={() => logout()}
                 sx={{ color: 'white', display: 'block', marginLeft: "auto" }}
             >
                 Logout
