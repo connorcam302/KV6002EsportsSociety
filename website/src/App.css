@@ -62,7 +62,7 @@ ul{
 }
 
 textarea{
-  width: 100%;
+  width: 75%;
   height: 200px;
   padding: 12px 20px;
   margin: 8px 0;
@@ -76,7 +76,7 @@ textarea:focus {
 }
 
 input {
-  width: 100%;
+  width: 75%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;

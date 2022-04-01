@@ -1,13 +1,11 @@
 import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Navbar from './components/Navbar.js';
-import AdminPage from './components/AdminPage'
-import RegisterPage from './components/RegisterPage'
-import LoginPage from './components/LoginPage'
-import ErrorPage from './components/ErrorPage'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from './components/Navbar.js';
+import Homepage from './components/Homepage';
 import LoginRegisterPage from './components/LoginRegisterPage';
-
+import AdminPage from './components/AdminPage'
+import ErrorPage from './components/ErrorPage'
 
 /**
 * App
@@ -79,7 +77,7 @@ function App() {
         <Navbar />
           <Routes>
             <Route path="/">
-              <Route index element={<AdminPage/>} />
+              <Route index element={<Homepage/>} />
               <Route path="login" element={<LoginRegisterPage />} />
               <Route path="admin" element={<AdminPage />} />
               <Route path="*" element={<ErrorPage/>} />
