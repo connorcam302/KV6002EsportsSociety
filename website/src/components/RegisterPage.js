@@ -1,6 +1,5 @@
 import React from "react";
 import Register from "./Register";
-import LoginLink from "./LoginLink";
 import Grid from '@mui/material/Grid';
 import { Box } from "@mui/system";
 
@@ -89,7 +88,6 @@ class RegisterPage extends React.Component {
                             handlePassword={this.handlePassword}
                             handleRegisterClick={this.handleRegisterClick}
                         />
-                        <LoginLink />
                     </Grid>
                     <Grid item xs={3}>
                     </Grid>

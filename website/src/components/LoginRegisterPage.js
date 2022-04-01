@@ -1,15 +1,9 @@
 import React from "react";
 import Login from "./Login";
-import Logout from "./Logout";
 import Register from "./Register";
-import AdminButtons from "./AdminButtons.js";
 import jwt_decode from "jwt-decode";
-import WeeklyEventsForm from "./WeeklyEventsForm.js";
-import ManageTeamsForm from "./ManageTeamsForm.js";
-import WeeklyMatchesForm from "./WeeklyMatchesForm.js";
 import Grid from '@mui/material/Grid';
 import { Box } from "@mui/system";
-import Typography from '@mui/material/Typography';
 
 class LoginRegisterPage extends React.Component {
 
@@ -38,9 +32,6 @@ class LoginRegisterPage extends React.Component {
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleRegisterState = this.handleRegisterState.bind(this);
         this.handleLoginState = this.handleLoginState.bind(this);
-        this.handleEventsFormClick = this.handleEventsFormClick.bind(this);
-        this.handleManageTeamsClick = this.handleManageTeamsClick.bind(this);
-        this.handleAddMatchesClick = this.handleAddMatchesClick.bind(this);
     }
 
 
@@ -77,36 +68,6 @@ class LoginRegisterPage extends React.Component {
 
     handleUserIGN = (e) => {
         this.setState({ userign: e.target.value })
-    }
-
-    handleAddMatchesClick = () => {
-        this.setState(
-            {
-                MatchesForm: true,
-                ManageTeamsPage: false,
-                EventsForm: false,
-            }
-        )
-    }
-
-    handleEventsFormClick = () => {
-        this.setState(
-            {
-                EventsForm: true,
-                MatchesForm: false,
-                ManageTeamsPage: false
-            }
-        )
-    }
-
-    handleManageTeamsClick = () => {
-        this.setState(
-            {
-                ManageTeamsPage: true,
-                EventsForm: false,
-                MatchesForm: false,
-            }
-        )
     }
 
     handleLogoutClick = () => {
@@ -301,129 +262,16 @@ class LoginRegisterPage extends React.Component {
             page = (
                 <div>
                     <h1>You're logged in, let's get gaming!</h1>
-                    <Logout handleLogoutClick={this.handleLogoutClick} />
                 </div>
             )
         }
 
-        if (this.state.user && this.state.admin) {
-            page = (
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                Administrative Options
-                            </Typography>
-                            <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                Please select an option from the list on the left!
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
-                                handleEventsFormClick={this.handleEventsFormClick}
-                                handleManageTeamsClick={this.handleManageTeamsClick}
-                                handleLogoutClick={this.handleLogoutClick} />
-                        </Grid>
-                        <Grid item xs={8}>
-                        </Grid>
-                        <Grid item xs={3}>
-                        </Grid>
-                    </Grid>
-                </Box>
-            )
-        }
-
-        //Sets the state for the Add Match Form page upon button press.
-        if (this.state.MatchesForm && this.state.admin && this.state.user) {
-            page = (
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                Add Matches
-                            </Typography>
-                            <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                Enter the match details down below!
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
-                                handleEventsFormClick={this.handleEventsFormClick}
-                                handleManageTeamsClick={this.handleManageTeamsClick}
-                                handleLogoutClick={this.handleLogoutClick} />
-                        </Grid>
-                        <Grid item xs={10}>
-                            <WeeklyMatchesForm />
-                        </Grid>
-                        <Grid item xs={1}>
-                        </Grid>
-                    </Grid>
-                </Box>
-            )
-        }
-
-        if (this.state.EventsForm && this.state.admin && this.state.user) {
-            page = (
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                        <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                Add an event!
-                            </Typography>
-                            <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                Enter the event's details down below!
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
-                                handleEventsFormClick={this.handleEventsFormClick}
-                                handleManageTeamsClick={this.handleManageTeamsClick}
-                                handleLogoutClick={this.handleLogoutClick} />
-                        </Grid>
-                        <Grid item xs={10}>
-                            <WeeklyEventsForm />
-                        </Grid>
-                        <Grid item xs={1}>
-                        </Grid>
-                    </Grid>
-                </Box>
-            )
-        }
-
-        if (this.state.ManageTeamsPage && this.state.admin && this.state.user) {
-            page = (
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                        <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                Manage Teams
-                            </Typography>
-                            <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                Please use the table below to manage teams forms.
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
-                                handleEventsFormClick={this.handleEventsFormClick}
-                                handleManageTeamsClick={this.handleManageTeamsClick}
-                                handleLogoutClick={this.handleLogoutClick} />
-                        </Grid>
-                        <Grid item xs={10}>
-                            <ManageTeamsForm />
-                        </Grid>
-                        <Grid item xs={1}>
-                        </Grid>
-                    </Grid>
-                </Box>
-            )
-        }
 
         
         return (
             <div>{page}</div>
         )
     }
-
 
 }
 

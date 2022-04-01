@@ -104,5 +104,5 @@ button {
 
 button:hover {
   background-color: rgb#ffffff; /* Green */
-  color: white;
+  color: rgb(135, 135, 135);
 }

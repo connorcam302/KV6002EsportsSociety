@@ -1,4 +1,5 @@
 import * as React from "react";
+import Button from '@mui/material/Button';
 
 class Login extends React.Component {
 
@@ -17,8 +18,8 @@ class Login extends React.Component {
                     value={this.props.password}
                     onChange={this.props.handlePassword}
                 /></ul>
-                <ul><button onClick={this.props.handleLoginClick}>Log in</button></ul>
-                <ul><button onClick={this.props.handleRegisterState}>Log in</button></ul>
+                <ul><Button onClick={this.props.handleLoginClick}>Log in</Button></ul>
+                <ul><Button onClick={this.props.handleRegisterState}>Don't have an account, register one here!</Button></ul>
             </div>
         );
     }

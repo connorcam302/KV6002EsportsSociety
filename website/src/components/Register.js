@@ -1,4 +1,5 @@
 import React from "react";
+import Button from '@mui/material/Button';
 
 class Register extends React.Component {
     render() {
@@ -35,7 +36,8 @@ class Register extends React.Component {
                     value={this.props.userLast}
                     onChange={this.props.handlelastName}
                 /></ul>
-                <ul><button onClick={this.props.handleRegisterClick}>Register Account</button></ul>
+                <ul><Button onClick={this.props.handleRegisterClick}>Register Account</Button></ul>
+                <ul><Button onClick={this.props.handleLoginState}>Register Account</Button></ul>
             </div>
         )
     }

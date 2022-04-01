@@ -1,5 +1,4 @@
 import React from "react";
-import Login from "./Login.js";
 import AdminButtons from "./AdminButtons.js";
 import jwt_decode from "jwt-decode";
 import WeeklyEventsForm from "./WeeklyEventsForm.js";
@@ -14,7 +13,6 @@ class AdminPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: false,
             admin: false,
             token: null,
             EventsForm: false,
@@ -25,7 +23,6 @@ class AdminPage extends React.Component {
         }
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
-        this.handleLoginClick = this.handleLoginClick.bind(this);
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleEventsFormClick = this.handleEventsFormClick.bind(this);
         this.handleManageTeamsClick = this.handleManageTeamsClick.bind(this);
@@ -36,12 +33,11 @@ class AdminPage extends React.Component {
         if (localStorage.getItem('UserLoginToken')) {
             let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
             this.setState({
-                authenticated: true,
                 token: localStorage.getItem('UserLoginToken')
             })
             if (decodedToken.user_isAdmin = 1) {
                 this.setState({
-                    admin: true,
+                    admin: true
                 });
             }
         }
@@ -59,43 +55,6 @@ class AdminPage extends React.Component {
         this.setState({ email: e.target.value })
     }
 
-    handleLoginClick = () => {
-        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/adminlogin"
-
-        let formData = new FormData();
-        formData.append('user_email', this.state.email);
-        formData.append('user_password', this.state.password);
-
-        fetch(url, {
-            method: 'POST',
-            headers: new Headers(),
-            body: formData
-        })
-            .then((response) => {
-                if (response.status === 200) {
-                    return response.json()
-                } else {
-                    throw Error(response.statusText)
-                }
-            })
-            .then((data) => {
-                if ("token" in data.results) {
-                    this.setState(
-                        {
-                            admin: true,
-                            token: data.results.token
-                        }
-                    )
-
-                    localStorage.setItem('AdminToken', data.results.token);
-                }
-            })
-            .catch((err) => {
-                console.log("something went wrong ", err)
-            }
-            );
-    }
-
     handleLogoutClick = () => {
         this.setState(
             {
@@ -103,7 +62,7 @@ class AdminPage extends React.Component {
                 token: null
             }
         )
-        localStorage.removeItem('AdminToken');
+        localStorage.removeItem('UserLoginToken');
     }
 
     handleAddMatchesClick = () => {
@@ -137,34 +96,11 @@ class AdminPage extends React.Component {
     }
 
     render() {
-        let page = (
-            <Box container spacing={2} alignItems="center" sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                            Administration login
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Login
-                            handleEmail={this.handleEmail}
-                            handlePassword={this.handlePassword}
-                            handleLoginClick={this.handleLoginClick}
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                    </Grid>
-                </Grid>
-                
-            </Box>
+        let page; 
 
-        )
-
-
-
-        if (this.state.admin) {
+        if (this.state.admin)
+        console.log("User is admin.") 
+        {
             page = (
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
@@ -193,7 +129,7 @@ class AdminPage extends React.Component {
 
 
         //Sets the state for the Add Match Form page upon button press.
-        if (this.state.MatchesForm && this.state.admin) {
+        if (this.state.MatchesForm) {
             page = (
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
@@ -221,7 +157,7 @@ class AdminPage extends React.Component {
             )
         }
 
-        if (this.state.EventsForm && this.state.admin) {
+        if (this.state.EventsForm) {
             page = (
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
@@ -249,7 +185,7 @@ class AdminPage extends React.Component {
             )
         }
 
-        if (this.state.ManageTeamsPage && this.state.admin) {
+        if (this.state.ManageTeamsPage) {
             page = (
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
@@ -277,7 +213,8 @@ class AdminPage extends React.Component {
             )
         }
 
-        if (this.state.authenticated) {
+        else {
+            console.log("User isnt admin.")
             page = (
                 <div>
                     <h1>You arent supposed to be here!</h1>

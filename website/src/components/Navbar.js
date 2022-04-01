@@ -53,7 +53,7 @@ export default function ButtonAppBar() {
         authenticated = false;
         admin = false;
         localStorage.removeItem('UserLoginToken');
-        window.location.reload(false);
+        window.location.reload(true);
     }
 
     /**
