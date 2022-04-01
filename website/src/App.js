@@ -8,6 +8,28 @@ import ErrorPage from './components/ErrorPage'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginRegisterPage from './components/LoginRegisterPage';
 
+
+/**
+* App
+* 
+* Main class component for displaying content.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo
+*/
+
+
+/**
+* theme
+* 
+* Uses MUI to create a theme, this is used to give default styling to all MUI components 
+* throughout the website.
+*
+*/
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -36,6 +58,14 @@ const theme = createTheme({
     ].join(','),
   },
 });
+
+
+/**
+* App()
+* 
+* Main function for displaying the website.
+*/
+
 
 function App() {
   return (
