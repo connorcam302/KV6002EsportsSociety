@@ -1,5 +1,5 @@
 /**
- * Paper Class
+ * Team Class
  *
  * @author Harry Laws w19024957
  */

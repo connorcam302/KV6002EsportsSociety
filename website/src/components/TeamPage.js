@@ -1,5 +1,5 @@
 /**
- * Paper page
+ * Team page
  *
  * @author Harry Laws w19024957
  */
