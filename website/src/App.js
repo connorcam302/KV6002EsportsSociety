@@ -5,6 +5,7 @@ import AdminPage from './components/AdminPage'
 import RegisterPage from './components/RegisterPage'
 import LoginPage from './components/LoginPage'
 import ErrorPage from './components/ErrorPage'
+import TeamPage from './components/TeamPage'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginRegisterPage from './components/LoginRegisterPage';
 
@@ -52,6 +53,7 @@ function App() {
               <Route index element={<RegisterPage />} />
               <Route path="login" element={<LoginRegisterPage />} />
               <Route path="admin" element={<AdminPage />} />
+              <Route path="teams" element={<TeamPage />} />
               <Route path="*" element={<ErrorPage/>} />
             </Route>
           </Routes>

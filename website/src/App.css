@@ -106,3 +106,144 @@ button:hover {
   background-color: rgb#ffffff; /* Green */
   color: white;
 }
+
+/* Select Game Teams */
+
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(179, 179, 179);
+  border-radius: 4px;
+}
+
+/* Box Teams */
+
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.box {
+  border: solid 1px;
+  margin-bottom: 2em;
+  padding: 1.5em;
+      border-color: #e6e6e6;
+}
+
+left{
+  text-align: left;;
+}
+/* Post Teams*/
+
+.post {
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -moz-flex-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -moz-align-items: stretch;
+  -webkit-align-items: stretch;
+  -ms-align-items: stretch;
+  align-items: stretch;
+  margin-bottom: 2em;
+}
+
+  .post .content {
+    padding: 2.5em 2.5em 0.5em 2.5em ;
+    -moz-flex-grow: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-grow: 1;
+    flex-grow: 1;
+          background-color: transparent;
+      border: solid 1px #e6e6e6;
+  }
+
+
+/* Wrapper Teams */
+
+.wrapper {
+  padding: 4em 0 2em 0 ;
+  position: relative;
+}
+
+  .wrapper > .inner {
+    margin: 0 auto;
+    max-width: 90em;
+    width: 90%;
+  }
+
+  .wrapper + .wrapper {
+    border-top: solid 1px #e6e6e6;
+  }
+
+  .wrapper.major-pad {
+    padding: 6em 0 4em 0 ;
+  }
+
+  .wrapper.content-pad {
+    padding: 0;
+  }
+
+    .wrapper.content-pad .content {
+      padding: 4em 0 2em 0 ;
+    }
+
+
+  .wrapper.sidebar > .inner {
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -moz-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+    .wrapper.sidebar > .inner > header {
+      width: 100%;
+    }
+
+    .wrapper.sidebar > .inner > .content {
+      width: 75%;
+      padding: 0 4em 0 0;
+    }
+
+    .wrapper.sidebar > .inner > .sidebar {
+      width: 25%;
+    }
+
+  .wrapper.sidebar.left > .inner {
+    -moz-flex-direction: row-reverse;
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+
+    .wrapper.sidebar.left > .inner > .content {
+      padding: 0 0 0 4em;
+    }
+
+/* Table Teams */
+
+  table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+  td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+ }
+      
+  tr:nth-child(even) {
+  background-color: #dddddd;
+ }
