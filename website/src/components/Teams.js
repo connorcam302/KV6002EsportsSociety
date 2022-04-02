@@ -2,7 +2,7 @@
 class Teams{
 
     constructor(){
-        this.record = "working"
+
     }
 
     testFunc() {

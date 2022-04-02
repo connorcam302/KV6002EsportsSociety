@@ -6,6 +6,7 @@ import Homepage from './components/Homepage';
 import LoginRegisterPage from './components/LoginRegisterPage';
 import AdminPage from './components/AdminPage'
 import ErrorPage from './components/ErrorPage'
+import TeamPage from './components/TeamPage';
 
 /**
 * App
@@ -80,6 +81,7 @@ function App() {
               <Route index element={<Homepage/>} />
               <Route path="login" element={<LoginRegisterPage />} />
               <Route path="admin" element={<AdminPage />} />
+              <Route path="team" element={<TeamPage/>} />
               <Route path="*" element={<ErrorPage/>} />
             </Route>
           </Routes>

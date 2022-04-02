@@ -103,6 +103,13 @@ button {
 }
 
 button:hover {
-  background-color: rgb#ffffff; /* Green */
+/*  background-color: rgb#ffffff; Green */
   color: rgb(135, 135, 135);
+}
+
+.profliepic{
+  border-radius: 5%;
+  max-width: 40%;
+  max-height: 40%;
+  display: block; /* remove extra space below image */
 }
