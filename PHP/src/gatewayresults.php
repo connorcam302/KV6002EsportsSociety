@@ -47,12 +47,11 @@ class GatewayResults extends Gateway  {
      */
 
 
-    public function findTeam3Results($id)
+    public function findTeamResults($id)
     {
-        $this->sql .= " WHERE game.game_id = :id";
+        $this->sql .= " WHERE match_teamid = :id";
         $params = ["id" => $id];
         $this->addOrder();
-        $this->sql .= "LIMIT 3;";
         $result = $this->getDatabase()->executeSQL($this->sql, $params);
         $this->setResult($result);
     }

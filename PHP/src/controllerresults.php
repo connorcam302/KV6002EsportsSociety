@@ -28,7 +28,7 @@ class ControllerResults extends Controller {
         $id = $this->getRequest()->getParameter("team");
         
         if (!is_null($id)) {
-            $this->getGateway()->findTeam3Results($id);
+            $this->getGateway()->findTeamResults($id);
         } else {
             $this->getGateway()->findAll();
         }
