@@ -26,6 +26,9 @@ switch ($request->getPath()) {
     case 'api/player':
         $controller = new ControllerPlayer($request,$response);
             break;
+    case 'api/results':
+        $controller = new ControllerResults($request,$response);
+            break;
     default:
         if(is_a($response, "ResponseHTML")){
             $controller = new ControllerError($request, $response);

@@ -2,6 +2,7 @@ import React from "react";
 import ProfilePic from "../img/defaultprofilepicture.png"
 import { Tooltip, Grid, Box } from "@mui/material";
 
+
 export default class TeamPage extends React.Component {
 
     constructor(props){
@@ -47,8 +48,15 @@ export default class TeamPage extends React.Component {
 
         return(
             <div>
-                 <Box sx={{paddingTop:2, borderLeft:"3%",borderRight:"3%", display: 'flex', flexWrap: 'wrap', justifyContent: 'center',}}>
-                    {this.state.results.map( (player) => (<Tooltip title={player.user_ign}><img src={ProfilePic} className="profliepic"/></Tooltip>) )}
+                 <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center',}}>
+                    {this.state.results.map( (player) => (
+                    <Box sx={{width:"12%", padding:1,}}>
+                        <Tooltip title={player.user_ign}>
+                            <img src={ProfilePic} className="profilepic" style={{width:"100%", borderRadius: '5% 5% 5% 5%'}}/>
+                        </Tooltip>
+                    </Box>) 
+                )}
+                {noData}
                 </Box>
             </div>
         )
