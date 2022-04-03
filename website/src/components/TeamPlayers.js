@@ -17,11 +17,6 @@ export default class TeamPage extends React.Component {
         this.fetchData(url)
     }
 
-    componentDidUpdate(prevProps) {
-        let url = "http://localhost/KV6002/Assessment/api/player?team="
-        this.fetchData(url)
-    }
-
     fetchData = (url) => {
         url += this.props.teamid
         fetch(url)

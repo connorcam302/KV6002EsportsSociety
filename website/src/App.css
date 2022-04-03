@@ -111,3 +111,8 @@ button:hover {
   border-radius: 5%;
   display: block; /* remove extra space below image */
 }
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}

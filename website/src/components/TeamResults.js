@@ -21,11 +21,6 @@ componentDidMount() {
     this.fetchData(url)
 }
 
-componentDidUpdate(prevProps) {
-    let url = "http://localhost/KV6002/Assessment/api/results?team="
-    this.fetchData(url)
-}
-
 fetchData = (url) => {
     url += this.props.teamid
     fetch(url)

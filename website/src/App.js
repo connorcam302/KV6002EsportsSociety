@@ -7,6 +7,7 @@ import LoginRegisterPage from './components/LoginRegisterPage';
 import AdminPage from './components/AdminPage'
 import ErrorPage from './components/ErrorPage'
 import TeamPage from './components/TeamPage';
+import Router from './components/Router'
 
 /**
 * App
@@ -68,6 +69,7 @@ const theme = createTheme({
 
 
 function App() {
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -75,18 +77,7 @@ function App() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
-        <BrowserRouter>
-        <Navbar />
-          <Routes>
-            <Route path="/">
-              <Route index element={<Homepage/>} />
-              <Route path="login" element={<LoginRegisterPage />} />
-              <Route path="admin" element={<AdminPage />} />
-              <Route path="team" element={<TeamPage/>} />
-              <Route path="*" element={<ErrorPage/>} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <Router />
       </ThemeProvider>
     </div>
   );
