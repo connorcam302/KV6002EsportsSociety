@@ -1,18 +1,23 @@
-import React from "react";
+import * as React from "react";
+import Button from '@mui/material/Button';
 
 /**
- * Creates the Logout button to be used on the Viewlist Page, implementing the handleLogoutClick prop to the button to allow the logout function to be performed.
- * 
- * @author Ethan Borrill W18001798
- */
+* AdminButtons
+* 
+* This class creates the 4 buttons to be used on the admin page of the website, which will be used to navigate between the several forms available for administrators to update or upload content onto the website.
+*
+* @author Ethan Borrill W18001798
+*/
+
 class AdminButtons extends React.Component {
     render() {
         return (
             <div>
-                <ul><button onClick={this.props.handleEventsFormClick}>Add events</button></ul>
-                <ul><button onClick={this.props.handleManageTeamsClick}>Manage Teams</button></ul>
-                <ul><button onClick={this.props.handleAddMatchesClick}>Add matches</button></ul>
-                <ul><button onClick={this.props.handleLogoutClick}>Logout </button></ul>
+                <ul><Button onClick={this.props.handleEventsFormClick}>Add events</Button></ul>
+                <ul><Button onClick={this.props.handleManageTeamsClick}>Manage Teams</Button></ul>
+                <ul><Button onClick={this.props.handleAddMatchesClick}>Add matches</Button></ul>
+                <ul><Button onClick={this.props.handleTeamAccoladesClick}>Manage Team Accolades</Button></ul>
+                <ul><Button onClick={this.props.handleLogoutClick}>Logout </Button></ul>
             </div>
         );
     }

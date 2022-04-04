@@ -1,3 +1,4 @@
+
 /**
  * teams Class
  *
@@ -69,3 +70,16 @@ class Teams extends React.Component {
 }
 
 export default Teams;
+/** 
+
+class Teams{
+
+    constructor(){
+
+    }
+
+    testFunc() {
+        console.log(this.record);
+    }
+}
+>>>*/

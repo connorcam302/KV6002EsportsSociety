@@ -31,14 +31,12 @@ class ResponseJSON extends Response
         }
 
         if (is_null($this->message)) {
-            if (count($this->data) > 0) {
+            if (count($this->data) === 0) {
+                $this->message = "No content";
+                $this->setStatus(204);
+            } else {
                 $this->message = "OK";
                 $this->setStatus(200);
-                //If data has a length greater than 0, an okay message is returned.
-            } else {
-                $this->message = "Resource Not Found";
-                $this->setStatus(404);
-                //If there is no data available, a 'Resource Not Found' message will be returned with a 404 status code.
             }
         }
         http_response_code($this->statusCode);

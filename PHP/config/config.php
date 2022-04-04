@@ -1,5 +1,5 @@
 <?php
-define('BASEPATH', '/KV6002/Assessment/');
+define('BASEPATH', '/KV6002/Assessment/'); /**Sets the basename of the file. */
 define('DATABASE', 'db/esports.db');
 define ('DEVELOPMENT_MODE', true);
 define ('SECRET_KEY', '3F53682FA68DFCE82CCCDBD5F28D8'); //Implements the Secret key used to sign JSON Web Tokens.
@@ -12,7 +12,7 @@ include 'config/autoloader.php';
 spl_autoload_register("autoloader");
 
 //Connects the errorhandler.
-include 'config/errorHandler.php';
+include 'config/errorhandler.php';
 set_error_handler("errorHandler");
 
 //Connects the error handlers for both JSON and HTML Web Formats, setting the primary exception handler to JSON.

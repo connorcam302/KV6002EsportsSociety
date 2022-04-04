@@ -1,13 +1,34 @@
 import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Navbar from './components/Navbar.js';
-import AdminPage from './components/AdminPage'
-import RegisterPage from './components/RegisterPage'
-import LoginPage from './components/LoginPage'
-import ErrorPage from './components/ErrorPage'
-import TeamPage from './components/TeamPage'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from './components/Navbar.js';
+import Homepage from './components/Homepage';
 import LoginRegisterPage from './components/LoginRegisterPage';
+import AdminPage from './components/AdminPage'
+import ErrorPage from './components/ErrorPage'
+import TeamPage from './components/TeamPage';
+import Router from './components/Router'
+
+/**
+* App
+* 
+* Main class component for displaying content.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo
+*/
+
+
+/**
+* theme
+* 
+* Uses MUI to create a theme, this is used to give default styling to all MUI components 
+* throughout the website.
+*
+*/
+
 
 const theme = createTheme({
   palette: {
@@ -36,9 +57,19 @@ const theme = createTheme({
       '"Segoe UI Symbol"',
     ].join(','),
   },
+  
 });
 
+
+/**
+* App()
+* 
+* Main function for displaying the website.
+*/
+
+
 function App() {
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -46,18 +77,7 @@ function App() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
-        <BrowserRouter>
-        <Navbar />
-          <Routes>
-            <Route path="/">
-              <Route index element={<RegisterPage />} />
-              <Route path="login" element={<LoginRegisterPage />} />
-              <Route path="admin" element={<AdminPage />} />
-              <Route path="teams" element={<TeamPage />} />
-              <Route path="*" element={<ErrorPage/>} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <Router />
       </ThemeProvider>
     </div>
   );

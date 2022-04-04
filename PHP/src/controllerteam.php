@@ -4,9 +4,9 @@
  * Team Controller
  * 
  * This controller takes parameters from a "/api/team" request, and selected the appropriate gateway function based on the
- * parameters included in the request. 
+ * parameters included in the request. If a game is included in the request, the findByGame() function will be used.
  * 
- * @example If a game is included in the request, the findByGame() function will be used.
+ * @example If the request contains ?game=3, the teams that play game 3 will returned.
  * 
  * @author Connor Campbell W18003255
  */

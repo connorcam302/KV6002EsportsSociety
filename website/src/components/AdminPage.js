@@ -1,49 +1,64 @@
 import React from "react";
-import Login from "./Login.js";
 import AdminButtons from "./AdminButtons.js";
-import WeeklyEventsForm from "./WeeklyEventsForm.js";
-import ManageTeamsForm from "./ManageTeamsForm.js";
-import WeeklyMatchesForm from "./WeeklyMatchesForm.js";
+import jwt_decode from "jwt-decode";
+import FormWeeklyEvents from "./FormWeeklyEvents.js";
+import FormManageTeams from "./FormManageTeam.js";
+import FormWeeklyMatches from "./FormWeeklyMatches";
+import FormTeamAccolades from "./FormTeamAccolades.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
+import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 
+
+/**
+* AdminPage
+* 
+* This class is used to manage the functionalites and content seen within the Administrative pages of the application, which are only accessible by verified users in teh database.
+* To check this, the user's webtoken is decoded to check whether the isAdmin value retrieved in association with their account is a value of 1, which will allow them access.
+*
+* Within this pafe, users can access several forms related to the functions within the website, such as the weekly results page, events and teams - these forms are then used to update content shown on these pages.
+*
+* @author Ethan Borrill W18001798
+*/
 
 class AdminPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: false,
             admin: false,
+            authenticated: true,
             token: null,
             EventsForm: false,
             ManageTeamsPage: false,
             MatchesForm: false,
-            email: "",
-            password: ""
+            AccoladesForm: false,
         }
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
-        this.handleLoginClick = this.handleLoginClick.bind(this);
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleEventsFormClick = this.handleEventsFormClick.bind(this);
         this.handleManageTeamsClick = this.handleManageTeamsClick.bind(this);
         this.handleAddMatchesClick = this.handleAddMatchesClick.bind(this);
+        this.handleTeamAccoladesClick = this.handleTeamAccoladesClick.bind(this);
+        this.handleTeamAccoladeSelect = this.handleTeamAccoladeSelect.bind(this);
+        this.handleTeamSelect = this.handleTeamSelect.bind(this);
     }
 
-    componentDidMount() {
-        if (localStorage.getItem('AdminToken')) {
-            this.setState({
-                admin: true,
-                token: localStorage.getItem('AdminToken')
-            });
-        }
 
+    componentDidMount() {
         if (localStorage.getItem('UserLoginToken')) {
-            this.setState({
-                authenticated: true,
-                token: localStorage.getItem('UserLoginToken')
-            });
+            let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
+            if (decodedToken.user_isAdmin == 1) {
+                this.setState({
+                    admin: true
+                });
+            }
+            else if (decodedToken.user_isAdmin == 0) {
+                this.setState({
+                    admin: false
+                });
+            }
         }
     }
 
@@ -51,49 +66,9 @@ class AdminPage extends React.Component {
         this.setState({ password: e.target.value })
     }
 
-    /**
-     * Manages the email address input into the login form, which is then used within the authentication process.
-     * @param text e - stores the entered email address.
-     */
+    
     handleEmail = (e) => {
         this.setState({ email: e.target.value })
-    }
-
-    handleLoginClick = () => {
-        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/adminlogin"
-
-        let formData = new FormData();
-        formData.append('user_email', this.state.email);
-        formData.append('user_password', this.state.password);
-
-        fetch(url, {
-            method: 'POST',
-            headers: new Headers(),
-            body: formData
-        })
-            .then((response) => {
-                if (response.status === 200) {
-                    return response.json()
-                } else {
-                    throw Error(response.statusText)
-                }
-            })
-            .then((data) => {
-                if ("token" in data.results) {
-                    this.setState(
-                        {
-                            admin: true,
-                            token: data.results.token
-                        }
-                    )
-
-                    localStorage.setItem('AdminToken', data.results.token);
-                }
-            })
-            .catch((err) => {
-                console.log("something went wrong ", err)
-            }
-            );
     }
 
     handleLogoutClick = () => {
@@ -103,25 +78,16 @@ class AdminPage extends React.Component {
                 token: null
             }
         )
-        localStorage.removeItem('AdminToken');
-    }
-
-    handleAddMatchesClick = () => {
-        this.setState(
-            {
-                MatchesForm: true,
-                ManageTeamsPage: false,
-                EventsForm: false,
-            }
-        )
+        localStorage.removeItem('UserLoginToken');
     }
 
     handleEventsFormClick = () => {
         this.setState(
             {
                 EventsForm: true,
+                ManageTeamsPage: false,
                 MatchesForm: false,
-                ManageTeamsPage: false
+                AccoladesForm: false
             }
         )
     }
@@ -129,58 +95,205 @@ class AdminPage extends React.Component {
     handleManageTeamsClick = () => {
         this.setState(
             {
-                ManageTeamsPage: true,
                 EventsForm: false,
+                ManageTeamsPage: true,
                 MatchesForm: false,
+                AccoladesForm: false
             }
         )
     }
 
-    render() {
-        let page = (
-            <Box container spacing={2} alignItems="center" sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                            Administration login
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Login
-                            handleEmail={this.handleEmail}
-                            handlePassword={this.handlePassword}
-                            handleLoginClick={this.handleLoginClick}
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                    </Grid>
-                </Grid>
-                
-            </Box>
-
+    handleAddMatchesClick = () => {
+        this.setState(
+            {   
+                EventsForm: false,
+                ManageTeamsPage: false,
+                MatchesForm: true,
+                AccoladesForm: false
+            }
         )
+    }
 
+    handleTeamAccoladesClick = () => {
+        this.setState(
+            {
+                EventsForm: false,
+                ManageTeamsPage: false,
+                MatchesForm: false,
+                AccoladesForm: true
+            }
+        )
+    }
 
+    handleTeamSelect = (e) => {
+
+    }
+
+    handleTeamAccoladeSelect = (e) => {
+
+    }
+
+    render() {
+        let page;
 
         if (this.state.admin) {
+            console.log("User is admin.")
+            if (this.state.EventsForm) {
+                page = (
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                                    Add an event!
+                                </Typography>
+                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                    Enter the event's details down below!
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
+                                    handleEventsFormClick={this.handleEventsFormClick}
+                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
+                                    handleLogoutClick={this.handleLogoutClick} />
+                            </Grid>
+                            <Grid item xs={10}>
+                                <FormWeeklyEvents />
+                            </Grid>
+                            <Grid item xs={1}>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )
+            } else if (this.state.ManageTeamsPage) {
+                page = (
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                                    Manage Teams
+                                </Typography>
+                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                    Please use the table below to manage teams forms.
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <AdminButtons 
+                                    handleAddMatchesClick={this.handleAddMatchesClick}
+                                    handleEventsFormClick={this.handleEventsFormClick}
+                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
+                                    handleLogoutClick={this.handleLogoutClick} />
+                            </Grid>
+                            <Grid item xs={10}>
+                                <FormManageTeams />
+                            </Grid>
+                            <Grid item xs={1}>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )
+            } else if (this.state.MatchesForm) {
+                page = (
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                                    Add a match!
+                                </Typography>
+                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                    Enter the match's details down below!
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <AdminButtons 
+                                    handleAddMatchesClick={this.handleAddMatchesClick}
+                                    handleEventsFormClick={this.handleEventsFormClick}
+                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
+                                    handleLogoutClick={this.handleLogoutClick} />
+                            </Grid>
+                            <Grid item xs={10}>
+                                <FormWeeklyMatches />
+                            </Grid>
+                            <Grid item xs={1}>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )
+            } else if (this.state.AccoladesForm) {
+                page = (
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                                    Add an Accolade
+                                </Typography>
+                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                    Please select the team below and the accolades you wish to add!
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <AdminButtons 
+                                    handleAddMatchesClick={this.handleAddMatchesClick}
+                                    handleEventsFormClick={this.handleEventsFormClick}
+                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
+                                    handleLogoutClick={this.handleLogoutClick} />
+                            </Grid>
+                            <Grid item xs={10}>
+                                <FormTeamAccolades 
+                                    handleTeamAccoladeSelect={this.handleTeamAccoladeSelect}
+                                    handleTeamSelect={this.handleTeamSelect}/>
+                            </Grid>
+                            <Grid item xs={1}>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )
+            } else {
+                page = (
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                                    Administrative Options
+                                </Typography>
+                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                    Please select an option from the list on the left!
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <AdminButtons 
+                                    handleAddMatchesClick={this.handleAddMatchesClick}
+                                    handleEventsFormClick={this.handleEventsFormClick}
+                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
+                                    handleLogoutClick={this.handleLogoutClick} />
+                            </Grid>
+                            <Grid item xs={8}>
+                            </Grid>
+                            <Grid item xs={3}>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )
+            }
+        }
+        else {
+            console.log("User isnt admin.")
             page = (
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                Administrative Options
+                                You're not supposed to be here.
                             </Typography>
                             <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                Please select an option from the list on the left!
+                                You do not have access to this page.
                             </Typography>
                         </Grid>
                         <Grid item xs={1}>
-                            <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
-                                handleEventsFormClick={this.handleEventsFormClick}
-                                handleManageTeamsClick={this.handleManageTeamsClick}
-                                handleLogoutClick={this.handleLogoutClick} />
                         </Grid>
                         <Grid item xs={8}>
                         </Grid>
@@ -191,100 +304,7 @@ class AdminPage extends React.Component {
             )
         }
 
-
         //Sets the state for the Add Match Form page upon button press.
-        if (this.state.MatchesForm && this.state.admin) {
-            page = (
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                Add Matches
-                            </Typography>
-                            <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                Enter the match details down below!
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
-                                handleEventsFormClick={this.handleEventsFormClick}
-                                handleManageTeamsClick={this.handleManageTeamsClick}
-                                handleLogoutClick={this.handleLogoutClick} />
-                        </Grid>
-                        <Grid item xs={10}>
-                            <WeeklyMatchesForm />
-                        </Grid>
-                        <Grid item xs={1}>
-                        </Grid>
-                    </Grid>
-                </Box>
-            )
-        }
-
-        if (this.state.EventsForm && this.state.admin) {
-            page = (
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                        <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                Add an event!
-                            </Typography>
-                            <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                Enter the event's details down below!
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
-                                handleEventsFormClick={this.handleEventsFormClick}
-                                handleManageTeamsClick={this.handleManageTeamsClick}
-                                handleLogoutClick={this.handleLogoutClick} />
-                        </Grid>
-                        <Grid item xs={10}>
-                            <WeeklyEventsForm />
-                        </Grid>
-                        <Grid item xs={1}>
-                        </Grid>
-                    </Grid>
-                </Box>
-            )
-        }
-
-        if (this.state.ManageTeamsPage && this.state.admin) {
-            page = (
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                        <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                Manage Teams
-                            </Typography>
-                            <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                Please use the table below to manage teams forms.
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                            <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
-                                handleEventsFormClick={this.handleEventsFormClick}
-                                handleManageTeamsClick={this.handleManageTeamsClick}
-                                handleLogoutClick={this.handleLogoutClick} />
-                        </Grid>
-                        <Grid item xs={10}>
-                            <ManageTeamsForm />
-                        </Grid>
-                        <Grid item xs={1}>
-                        </Grid>
-                    </Grid>
-                </Box>
-            )
-        }
-
-        if (this.state.authenticated) {
-            page = (
-                <div>
-                    <h1>You arent supposed to be here!</h1>
-                    <h2>Please redirect yourself back to any other page on the website.</h2>
-                </div>
-            )
-        }
 
         return (
             <div>{page}</div>

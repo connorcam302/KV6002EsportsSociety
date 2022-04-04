@@ -18,7 +18,7 @@ class GatewayUser extends Gateway
      * @param string $email - Stores the email address collected from the database.
      */
     public function loginUser($email) {
-        $sql = " Select user_id, user_password, user_isAdmin from user where user_email = :user_email AND user_isAdmin = 0"; //This SQL selects the Id and password from the database based on a corresponding email address.
+        $sql = " Select user_id, user_password, user_isAdmin from user where user_email = :user_email"; //This SQL selects the Id and password from the database based on a corresponding email address.
         $params = [":user_email" => $email];
         $result = $this->getDatabase()->executeSQL($sql, $params);
         $this->setResult($result);
