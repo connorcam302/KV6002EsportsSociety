@@ -3,9 +3,9 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
-
+import ProfilePic from "../img/defaultprofilepicture.png"
 
 /**
 * Navbar
@@ -48,6 +48,8 @@ export default function ButtonAppBar() {
     
     let authenticated = false;
     let admin = false;
+    let pageLink;
+    let ign;
 
     const logout = () => {
         authenticated = false;
@@ -64,6 +66,8 @@ export default function ButtonAppBar() {
     if(localStorage.getItem("UserLoginToken")) {
         authenticated = true;
         let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
+        pageLink = "../player/" + decodedToken.user_id
+        ign = decodedToken.user_ign
         if(decodedToken.user_isAdmin == 1) {
             admin = true;
         }
@@ -78,7 +82,7 @@ export default function ButtonAppBar() {
         return (
         <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-            <Box container spacing={2} alignItems="center" sx={{ display: 'flex', flexDirection: 'row', paddingRight: 2 }}>
+            <Box container spacing={2} alignItems="center" sx={{maxHeight:"100%", display: 'flex', flexDirection: 'row', paddingRight: 2 }}>
                 <Typography sx={{ fontSize: 24, paddingLeft: 2, paddingRight: 2 }}>
                     NORTHUMBRIA VIKINGS
                 </Typography>
@@ -110,6 +114,15 @@ export default function ButtonAppBar() {
                 >
                     Admin
                 </Button>
+                <Link to={pageLink}>
+                    <Button
+                        key="logout"
+                        onClick={() => toPage({pageLink})}
+                        sx={{ color: 'white', display: 'block', }}
+                    >
+                        {ign}
+                    </Button>
+                </Link>
                 <Button
                     key="logout"
                     onClick={() => logout()}
@@ -158,10 +171,20 @@ export default function ButtonAppBar() {
                     >
                         Teams
                     </Button>
+                    <Box sx={{ color: 'white', display: 'block', marginLeft: "auto" }}>
+                        <Link to={pageLink} sx={{}}>
+                            <Button
+                                key="playerpage"
+                                sx={{ color: 'white', display: 'block', marginLeft: "auto" }}
+                            >
+                                {ign}
+                            </Button>
+                        </Link>
+                    </Box>
                     <Button
                         key="toLogin"
                         onClick={() => logout()}
-                        sx={{ color: 'white', display: 'block', marginLeft: "auto" }}
+                        sx={{ color: 'white', display: 'block'}}
                     >
                         Logout
                     </Button>
