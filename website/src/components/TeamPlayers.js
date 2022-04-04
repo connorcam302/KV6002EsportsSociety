@@ -1,6 +1,7 @@
 import React from "react";
 import ProfilePic from "../img/defaultprofilepicture.png"
 import { Tooltip, Grid, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 
 export default class TeamPage extends React.Component {
@@ -41,15 +42,22 @@ export default class TeamPage extends React.Component {
             noData = <p>No data</p>
         }
 
+        function makePlayerLink(id){
+            let link = "../player/" + id
+            return link
+        }
+
         return(
             <div>
                  <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center',}}>
                     {this.state.results.map( (player) => (
-                    <Box sx={{width:"12%", padding:1,}}>
-                        <Tooltip title={player.user_ign}>
-                            <img src={ProfilePic} className="profilepic" style={{width:"100%", borderRadius: '5% 5% 5% 5%'}}/>
-                        </Tooltip>
-                    </Box>) 
+                        <Box sx={{width:"12%", padding:1,}}>
+                            <Link to={makePlayerLink(player.user_id)}>
+                                <Tooltip title={player.user_ign}>
+                                    <img src={ProfilePic} className="profilepic" style={{width:"100%", borderRadius: '5% 5% 5% 5%'}}/>
+                                </Tooltip>
+                            </Link>
+                        </Box>)
                 )}
                 {noData}
                 </Box>

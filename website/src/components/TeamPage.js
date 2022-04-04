@@ -1,85 +1,3 @@
-
-/**
- * Team page
- *
- * @author Harry Laws w19024957
- */
-import React from "react";
-import Teams from "./Teams.js";
-import SearchBox from "./SearchBox.js";
-
-class TeamPage extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			name:"",
-			
-		}
-		
-		this.handleSearch = this.handleSearch.bind(this);
-		
-	}
-
-	handleSearch = (e) => {
-		this.setState({search:e.target.value})
-	}
-    render(){
-        return (
-            <div class="wrapper sidebar right">
-                    <div class="inner">
-                        <header >
-                            <h2>Teams</h2>
-                        </header>
-                            <div class="content">
-                                <div class="inner">
-								<Teams search={this.state.search}/>  
-                                </div>
-                            </div>
-                            <div class="sidebar">
-							<section>
-								<div>
-									<SearchBox 
-             						search={this.state.search} 
-             						handleSearch={this.handleSearch}/>
-								</div>
-                            <h2>Create a new Team</h2>
-								<form method="post" action="#">
-									<div class="row uniform">
-										<div >
-											<label>Team Name</label>
-										<input
-                    					type='text'
-                    					value={this.props.team_name}
-                    					onChange={this.props.team_name}
-                						/>
-									</div>
-										<label>Game</label>
-											<div >
-												<select value={this.props.game_id}>
-    											<option value="1">Dota 2</option>
-    											<option value="2">League of Legends</option>
-   												<option value="3">Rainbow 6 Siege</option>
-    											<option value="4">Rocket League</option>
-												<option value="5">Valorant</option>
-												<option value="6">Overwatch</option>
-  												</select>
-											</div>
-									<div>
-										<input type="submit" value="Send for approval" class="special" />
-									</div>
-									</div>
-								</form>
-                            </section>
-                            </div>
-					</div>
-        
-			</div>
-        );
-     }
-    }
-
-export default TeamPage;
-/** 
 import React from "react";
 import TeamPlayers from "./TeamPlayers"
 import TeamResults from "./TeamResults";
@@ -87,6 +5,7 @@ import TeamStats from "./TeamStats"
 import TeamAccolades from "./TeamAccolades"
 import { Box, Grid, Typography, Button } from "@mui/material";
 import ProfilePic from "../img/defaultprofilepicture.png"
+import jwt_decode from "jwt-decode";
 
 
 export default class TeamPage extends React.Component {
@@ -122,11 +41,28 @@ export default class TeamPage extends React.Component {
     }
 
 
+
     render() {
         let teamName;
         let teamGame;
+        let teamLead;
+        let editButton = ""
         this.state.results.map( (team) => teamName = team.team_name)
         this.state.results.map( (team) => teamGame = team.game_name)
+        this.state.results.map( (team) => teamLead = team.team_lead)
+
+        if(localStorage.getItem("UserLoginToken")) {
+            let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
+            if(decodedToken.user_isAdmin == 1 || decodedToken.user_id == teamLead) {
+                editButton = (
+                    <Button size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block'}}>                        
+                        <Typography variant="h6">
+                            Edit Page
+                        </Typography>
+                    </Button>
+                )
+            }
+        }
 
         return(
             <Box sx={{marginBottom:2, paddingLeft:3,paddingRight:3,marginLeft: 10,marginRight:10, paddingTop:2, paddingBottom:4,}}>
@@ -142,11 +78,7 @@ export default class TeamPage extends React.Component {
                         </Typography>
                     </Box>
                     <Box sx={{display: 'block', marginLeft: "auto", marginRight: 2}}>
-                        <Button size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block'}}>                        
-                            <Typography variant="h6">
-                                Edit Page
-                            </Typography>
-                        </Button>
+                        {editButton}
                     </Box>
                 </Grid>
             </Box>
@@ -178,15 +110,5 @@ export default class TeamPage extends React.Component {
         )
     }
 }
-*/
-/* <Grid container spacing={2}>
-<Grid item sx={8}>
-    <Box>
-        <TeamPlayers teamid="7"/>
-    </Box>
-</Grid>
-<Grid item sx={2}>
-    <Box xs={{width:"100%", backgroundColor:"red"}}>testtse</Box>
-</Grid>
-</Grid> */
+
 

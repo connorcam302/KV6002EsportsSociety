@@ -14,6 +14,7 @@ import AdminPage from './AdminPage'
 import ErrorPage from './ErrorPage'
 import TeamPage from './TeamPage';
 import PlayerPage from './PlayerPage'
+import AllTeamsPage from './AllTeamsPage'
 
 export default class Router extends React.Component {
 
@@ -88,6 +89,7 @@ export default class Router extends React.Component {
                   <Route index element={<Homepage/>} />
                   <Route path="login" element={<LoginRegisterPage />} />
                   <Route path="admin" element={<AdminPage />} />
+                  <Route path="team" element={<AllTeamsPage />} />
                   {this.state.teamResults.map( (team) => ( <Route path={this.makeTeamPath(team.team_id)} element={<TeamPage teamid={team.team_id}/>} /> ))}
                   {this.state.playerResults.map( (player) => ( <Route path={this.makePlayerPath(player.user_id)} element={<PlayerPage playerid={player.user_id}/>} /> ))}
                   <Route path="*" element={<ErrorPage/>} />

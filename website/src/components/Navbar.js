@@ -98,7 +98,7 @@ export default function ButtonAppBar() {
                 </Button>
                 <Button
                     key="toTeams"
-                    onClick={() => toPage("teams")}
+                    onClick={() => toPage("team")}
                     sx={{ color: 'white', display: 'block' }}
                 >
                     Teams
@@ -111,7 +111,7 @@ export default function ButtonAppBar() {
                     Admin
                 </Button>
                 <Button
-                    key="toLogin"
+                    key="logout"
                     onClick={() => logout()}
                     sx={{ color: 'white', display: 'block', }}
                 >
@@ -153,7 +153,7 @@ export default function ButtonAppBar() {
                     </Button>
                     <Button
                         key="toTeams"
-                        onClick={() => toPage("teams")}
+                        onClick={() => toPage("team")}
                         sx={{ color: 'white', display: 'block' }}
                     >
                         Teams
@@ -198,7 +198,7 @@ export default function ButtonAppBar() {
                     </Button>
                     <Button
                         key="toTeams"
-                        onClick={() => toPage("teams")}
+                        onClick={() => toPage("team")}
                         sx={{ color: 'white', display: 'block' }}
                     >
                         Teams
