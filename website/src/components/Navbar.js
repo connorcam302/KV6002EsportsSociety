@@ -112,7 +112,7 @@ export default function ButtonAppBar() {
                 </Button>
                 <Button
                     key="toLogin"
-                    onClick={() => toPage("login")}
+                    onClick={() => logout()}
                     sx={{ color: 'white', display: 'block', }}
                 >
                     Logout

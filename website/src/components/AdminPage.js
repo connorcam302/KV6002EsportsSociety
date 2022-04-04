@@ -4,9 +4,11 @@ import jwt_decode from "jwt-decode";
 import FormWeeklyEvents from "./FormWeeklyEvents.js";
 import FormManageTeams from "./FormManageTeam.js";
 import FormWeeklyMatches from "./FormWeeklyMatches";
+import FormTeamAccolades from "./FormTeamAccolades.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
+import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 
 
 /**
@@ -30,8 +32,7 @@ class AdminPage extends React.Component {
             EventsForm: false,
             ManageTeamsPage: false,
             MatchesForm: false,
-            email: "",
-            password: ""
+            AccoladesForm: false,
         }
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
@@ -39,6 +40,9 @@ class AdminPage extends React.Component {
         this.handleEventsFormClick = this.handleEventsFormClick.bind(this);
         this.handleManageTeamsClick = this.handleManageTeamsClick.bind(this);
         this.handleAddMatchesClick = this.handleAddMatchesClick.bind(this);
+        this.handleTeamAccoladesClick = this.handleTeamAccoladesClick.bind(this);
+        this.handleTeamAccoladeSelect = this.handleTeamAccoladeSelect.bind(this);
+        this.handleTeamSelect = this.handleTeamSelect.bind(this);
     }
 
 
@@ -77,22 +81,13 @@ class AdminPage extends React.Component {
         localStorage.removeItem('UserLoginToken');
     }
 
-    handleAddMatchesClick = () => {
-        this.setState(
-            {
-                MatchesForm: true,
-                ManageTeamsPage: false,
-                EventsForm: false,
-            }
-        )
-    }
-
     handleEventsFormClick = () => {
         this.setState(
             {
                 EventsForm: true,
+                ManageTeamsPage: false,
                 MatchesForm: false,
-                ManageTeamsPage: false
+                AccoladesForm: false
             }
         )
     }
@@ -100,11 +95,42 @@ class AdminPage extends React.Component {
     handleManageTeamsClick = () => {
         this.setState(
             {
-                ManageTeamsPage: true,
                 EventsForm: false,
+                ManageTeamsPage: true,
                 MatchesForm: false,
+                AccoladesForm: false
             }
         )
+    }
+
+    handleAddMatchesClick = () => {
+        this.setState(
+            {   
+                EventsForm: false,
+                ManageTeamsPage: false,
+                MatchesForm: true,
+                AccoladesForm: false
+            }
+        )
+    }
+
+    handleTeamAccoladesClick = () => {
+        this.setState(
+            {
+                EventsForm: false,
+                ManageTeamsPage: false,
+                MatchesForm: false,
+                AccoladesForm: true
+            }
+        )
+    }
+
+    handleTeamSelect = (e) => {
+
+    }
+
+    handleTeamAccoladeSelect = (e) => {
+
     }
 
     render() {
@@ -128,6 +154,7 @@ class AdminPage extends React.Component {
                                 <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
@@ -151,9 +178,11 @@ class AdminPage extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
+                                <AdminButtons 
+                                    handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
@@ -164,8 +193,7 @@ class AdminPage extends React.Component {
                         </Grid>
                     </Box>
                 )
-            }
-            else if (this.state.MatchesForm) {
+            } else if (this.state.MatchesForm) {
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
@@ -178,9 +206,11 @@ class AdminPage extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
+                                <AdminButtons 
+                                    handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
@@ -191,8 +221,37 @@ class AdminPage extends React.Component {
                         </Grid>
                     </Box>
                 )
-            }
-            else {
+            } else if (this.state.AccoladesForm) {
+                page = (
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                                    Add an Accolade
+                                </Typography>
+                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                    Please select the team below and the accolades you wish to add!
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <AdminButtons 
+                                    handleAddMatchesClick={this.handleAddMatchesClick}
+                                    handleEventsFormClick={this.handleEventsFormClick}
+                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
+                                    handleLogoutClick={this.handleLogoutClick} />
+                            </Grid>
+                            <Grid item xs={10}>
+                                <FormTeamAccolades 
+                                    handleTeamAccoladeSelect={this.handleTeamAccoladeSelect}
+                                    handleTeamSelect={this.handleTeamSelect}/>
+                            </Grid>
+                            <Grid item xs={1}>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )
+            } else {
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
@@ -205,9 +264,11 @@ class AdminPage extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
+                                <AdminButtons 
+                                    handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={8}>
