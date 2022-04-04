@@ -14,7 +14,6 @@ import { Box } from "@mui/system";
 *
 * @author Ethan Borrill W18001798
 */
-
 class LoginRegisterPage extends React.Component {
 
     constructor(props) {
@@ -25,11 +24,11 @@ class LoginRegisterPage extends React.Component {
             registered: false,
             registerpage: false,
             token: null,
-            email: "",
-            password: "",
-            userign: "",
-            userFirst: "",
-            userLast: "",
+            email: null,
+            password: null,
+            userign: null,
+            userFirst: null,
+            userLast: null,
             error: "",
         }
         this.handleEmail = this.handleEmail.bind(this);
@@ -43,6 +42,13 @@ class LoginRegisterPage extends React.Component {
         this.handleLoginState = this.handleLoginState.bind(this);
     }
 
+    
+    /**
+    * componentDidMount
+    * 
+    * This function is used within this file to check if there is a token within the local storage of the web browser. If there is one, the user value will be set to true, resulting in the login page being set to display a welcome page
+    * Which will prevent the user from logging in again.
+    */
     componentDidMount() {
         if (localStorage.getItem('UserLoginToken')) {
             let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
@@ -50,11 +56,6 @@ class LoginRegisterPage extends React.Component {
                 user: true,
                 token: localStorage.getItem('myReadingListToken')
             })
-            if (decodedToken.user_isAdmin = 1) {
-                this.setState({
-                    admin: true,
-                });
-            }
         }
     }
 
@@ -65,7 +66,6 @@ class LoginRegisterPage extends React.Component {
     * Handles the input and change of text within the email field used with the register and login pages.
     *
     */
-
     handleEmail = (e) => {
         this.setState({ email: e.target.value })
     }
@@ -78,7 +78,6 @@ class LoginRegisterPage extends React.Component {
     * Handles the input and change of text within the password field used within the register and login pages.
     *
     */
-
     handlePassword = (e) => {
         this.setState({ password: e.target.value })
     }
@@ -90,7 +89,6 @@ class LoginRegisterPage extends React.Component {
     * Handles the input and change of text within the 'First Name' field used within the register page.
     *
     */
-
     handlefirstName = (e) => {
         this.setState({ userFirst: e.target.value })
     }
@@ -102,7 +100,6 @@ class LoginRegisterPage extends React.Component {
     * Handles the input and change of text within the 'Last Name' field used within the register page.
     *
     */
-
     handlelastName = (e) => {
         this.setState({ userLast: e.target.value })
     }
@@ -114,7 +111,6 @@ class LoginRegisterPage extends React.Component {
     * Handles the input and change of text within the 'User IGN' field used within the register page.
     *
     */
-
     handleUserIGN = (e) => {
         this.setState({ userign: e.target.value })
     }
@@ -125,7 +121,6 @@ class LoginRegisterPage extends React.Component {
     * Changes the state of the webpage to display the register form when the user presses the register button on the Login page.
     *
     */
-
     handleRegisterState = () => {
         this.setState(
             {
@@ -142,7 +137,6 @@ class LoginRegisterPage extends React.Component {
     * Changes the state of the webpage to display the login form when the user presses the login button on the Register page.
     *
     */
-
     handleLoginState = () => {
         this.setState(
             {
@@ -162,7 +156,6 @@ class LoginRegisterPage extends React.Component {
     * In the event the details entered are incorrect, this will be flagged within an error message and prevent the user from logging in.
     * @param [type] $[var]   [Description]
     */
-
     handleLoginClick = () => {
         let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/userlogin"
 
@@ -178,6 +171,12 @@ class LoginRegisterPage extends React.Component {
             .then((response) => {
                 if (response.status === 200) { //If the status code of the webpage is 200, perform the login function from the API.
                     return response.json()
+                } else if ((this.state.email === null) && (this.state.password === null)) {
+                    this.setState({ error: "Please enter your email address & password  before attempting to login." })
+                } else if (this.state.email === null) {
+                    this.setState({ error: "Please enter your email address." })
+                } else if (this.state.password === null) {
+                    this.setState({ error: "Please enter your password." })
                 } else if (response.status === 401) { //If the status code of the webpage is 401, display an error saying the details collected are incorrect.
                     this.setState({ error: "The email address or password you have entered are not correct, please try again!" })
                 }
@@ -210,7 +209,6 @@ class LoginRegisterPage extends React.Component {
     * This is used to move users to the secondary login page for users to login immediately after registering.
     *
     */
-
     handleRegisterClick = () => {
         let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/register"
 
@@ -233,14 +231,22 @@ class LoginRegisterPage extends React.Component {
                         }
                     )
                     return response.json()
+                } else if ((this.state.email === null) && (this.state.password === null) && (this.state.userign === null) && (this.state.userFirst === null) && (this.state.userLast === null)) {
+                    this.setState({ error: "Please answer all fields within the form before submitting." })
+                } else if (this.state.email === null) {
+                    this.setState({ error: "Please enter an email." })
+                } else if (this.state.password === null) {
+                    this.setState({ error: "Please enter a password (8-16 characters )." })
+                } else if (this.state.userign === null) {
+                    this.setState({ error: "Please enter your In-Game Name" })
+                } else if (this.state.userFirst === null) {
+                    this.setState({ error: "Please enter your first name." })
+                } else if (this.state.userLast === null) {
+                    this.setState({ error: "Please enter your last name." })
                 } else if (response.status === 406) {
                     this.setState({ error: "The email address or password you have entered is not acceptable." })
-                }
-                else if (response.status === 403) {
+                } else if (response.status === 403) {
                     this.setState({ error: "The email address you have entered already exists, please try another email address." })
-                }
-                if (this.state.email == ' ') {
-                    this.setState({ error: "." })
                 }
             })
             .catch((err) => {
@@ -253,7 +259,6 @@ class LoginRegisterPage extends React.Component {
      * 
      * @returns {Page} - Will display the rendered page content based on the conditions required.
      */
-
     render() {
         let errorMessage = this.state.error
 
@@ -361,7 +366,7 @@ class LoginRegisterPage extends React.Component {
         /**
          * Content to be displayed if a user has successfully logged into their account.
          */
-        if (this.state.user && this.state.admin) {
+        if (this.state.user) {
             page = (
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>

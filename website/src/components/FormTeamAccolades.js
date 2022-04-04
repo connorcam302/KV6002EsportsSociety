@@ -1,6 +1,17 @@
 import * as React from "react";
 import Button from '@mui/material/Button';
 
+
+/**
+* FormTeamAccolades
+* 
+* This class is used to display the Form needed to update the accolades associated with teams currently available on the service.
+*
+* @author Ethan Borrill W18001798
+* 
+* 
+*/
+
 class FormTeamAccolades extends React.Component {
     render(){
         return (

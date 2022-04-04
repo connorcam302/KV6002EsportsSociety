@@ -8,7 +8,6 @@ import FormTeamAccolades from "./FormTeamAccolades.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
-import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 
 
 /**
@@ -46,6 +45,14 @@ class AdminPage extends React.Component {
     }
 
 
+    /**
+    * componentDidMount
+    * 
+    * This function collects any webtoken stored within the browser made when logging into the site, this is then decoded to check the is_admin value stored within.
+    * Should the value of the is_admin be 1, admin access is granted - otherwise the unauthorised webpage will be displayed to prevent unwanted access.
+    *
+    * @param [type] $[var]   [Description]
+    */
     componentDidMount() {
         if (localStorage.getItem('UserLoginToken')) {
             let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
@@ -62,15 +69,33 @@ class AdminPage extends React.Component {
         }
     }
 
+    /**
+    * handlePassword(e)
+    * 
+    * Handles the input and change of text within the password field used within the register and login pages.
+    *
+    */
     handlePassword = (e) => {
         this.setState({ password: e.target.value })
     }
 
-    
+    /**
+    * handleEmail(e)
+    * 
+    * Handles the input and change of text within the email field used with the register and login pages.
+    *
+    */
     handleEmail = (e) => {
         this.setState({ email: e.target.value })
     }
 
+    /**
+    * handleLogoutClick
+    * 
+    * Functionality to handle a users logout click within the collection of buttons on the left hand side, will remove the token from local storage - essentially logging the user out.
+    *
+    * @param [type] $[var]   [Description]
+    */
     handleLogoutClick = () => {
         this.setState(
             {
@@ -81,6 +106,13 @@ class AdminPage extends React.Component {
         localStorage.removeItem('UserLoginToken');
     }
 
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
     handleEventsFormClick = () => {
         this.setState(
             {
@@ -92,6 +124,13 @@ class AdminPage extends React.Component {
         )
     }
 
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
     handleManageTeamsClick = () => {
         this.setState(
             {
@@ -103,9 +142,16 @@ class AdminPage extends React.Component {
         )
     }
 
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
     handleAddMatchesClick = () => {
         this.setState(
-            {   
+            {
                 EventsForm: false,
                 ManageTeamsPage: false,
                 MatchesForm: true,
@@ -114,6 +160,13 @@ class AdminPage extends React.Component {
         )
     }
 
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
     handleTeamAccoladesClick = () => {
         this.setState(
             {
@@ -125,14 +178,36 @@ class AdminPage extends React.Component {
         )
     }
 
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
     handleTeamSelect = (e) => {
 
     }
 
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
     handleTeamAccoladeSelect = (e) => {
 
     }
 
+    
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
     render() {
         let page;
 
@@ -178,7 +253,7 @@ class AdminPage extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <AdminButtons 
+                                <AdminButtons
                                     handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
@@ -206,7 +281,7 @@ class AdminPage extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <AdminButtons 
+                                <AdminButtons
                                     handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
@@ -234,7 +309,7 @@ class AdminPage extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <AdminButtons 
+                                <AdminButtons
                                     handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
@@ -242,9 +317,9 @@ class AdminPage extends React.Component {
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
-                                <FormTeamAccolades 
+                                <FormTeamAccolades
                                     handleTeamAccoladeSelect={this.handleTeamAccoladeSelect}
-                                    handleTeamSelect={this.handleTeamSelect}/>
+                                    handleTeamSelect={this.handleTeamSelect} />
                             </Grid>
                             <Grid item xs={1}>
                             </Grid>
@@ -264,7 +339,7 @@ class AdminPage extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <AdminButtons 
+                                <AdminButtons
                                     handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
@@ -281,16 +356,16 @@ class AdminPage extends React.Component {
             }
         }
         else {
-            console.log("User isnt admin.")
             page = (
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                You're not supposed to be here.
+                                Unauthorised access!
                             </Typography>
                             <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                You do not have access to this page.
+                                Unfortunately, you do not have the required level of access to enter this page!
+                                <br></br>Please leave this page and return to the rest of the site.
                             </Typography>
                         </Grid>
                         <Grid item xs={1}>
