@@ -1,5 +1,17 @@
 <?php
 
+/**
+* App
+* 
+* The index page for routing users to the correct endpoint of the API.
+*
+* @author Ethan Borrill W18001798
+* @collab Connor Campbell W18003255
+*
+* @todo
+*/
+
+
 include "config/config.php";
 
 $request = new Request();
@@ -28,6 +40,9 @@ switch ($request->getPath()) {
             break;
     case 'api/results':
         $controller = new ControllerResults($request,$response);
+            break;
+    case 'api/accolades':
+        $controller = new ControllerAccolades($request,$response);
             break;
     default:
         if(is_a($response, "ResponseHTML")){

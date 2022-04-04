@@ -4,9 +4,9 @@
  * Player Controller
  * 
  * This controller takes parameters from a "/api/player" request, and selected the appropriate gateway function based on the
- * parameters included in the request. 
+ * parameters included in the request. If a team is included in the request, the findByTeam() function will be used.
  * 
- * @example If a team is included in the request, the findByTeam() function will be used.
+ * @example If the request contains ?team=2, the players of team 2 will be returned.
  * 
  * @author Connor Campbell W18003255
  */
