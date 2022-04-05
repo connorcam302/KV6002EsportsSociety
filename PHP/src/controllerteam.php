@@ -27,11 +27,14 @@ class ControllerTeam extends Controller {
 
         $id = $this->getRequest()->getParameter("id");
         $game = $this->getRequest()->getParameter("game");
+        $player = $this->getRequest()->getParameter("player");
         
         if (!is_null($id)) {
             $this->getGateway()->findOne($id);
         } elseif (!is_null($game)){
             $this->getGateway()->findByGame($game);
+        }elseif (!is_null($player)){
+            $this->getGateway()->findByPlayer($player);
         } else {
             $this->getGateway()->findAll();
         }

@@ -1,5 +1,5 @@
 import { TwitchEmbed } from "react-twitch-embed";
-
+import React from "react";
 
 /**
 * Twitch Player
@@ -13,7 +13,7 @@ import { TwitchEmbed } from "react-twitch-embed";
 */
 
 
-export default class RegisterPage extends React.Component {
+export default class TwitchPlayer extends React.Component {
     render() {
         return(
             <TwitchEmbed

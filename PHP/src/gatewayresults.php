@@ -24,7 +24,7 @@ class GatewayResults extends Gateway  {
      */
 
     public function addOrder(){
-      $this->sql .= " ORDER BY match_date";
+      $this->sql .= " ORDER BY match_date DESC";
     }
 
     /**
@@ -50,6 +50,16 @@ class GatewayResults extends Gateway  {
     public function findTeamResults($id)
     {
         $this->sql .= " WHERE match_teamid = :id";
+        $params = ["id" => $id];
+        $this->addOrder();
+        $result = $this->getDatabase()->executeSQL($this->sql, $params);
+        $this->setResult($result);
+    }
+
+    public function findPlayerResults($id)
+    {
+        $this->sql .= " JOIN userTeam ON team.team_id = userTeam.userTeam_id
+                        WHERE userTeam.user_id = :id";
         $params = ["id" => $id];
         $this->addOrder();
         $result = $this->getDatabase()->executeSQL($this->sql, $params);

@@ -3,13 +3,19 @@ import TeamPlayers from "./TeamPlayers"
 import TeamResults from "./TeamResults";
 import TeamStats from "./TeamStats"
 import TeamAccolades from "./TeamAccolades"
+import PlayerResults from "./PlayerResults"
+import PlayerStats from "./PlayerStats"
+import PlayerTeams from "./PlayerTeams"
+import PlayerAccolades from "./PlayerAccolades"
 import { Box, Grid, Typography, Button } from "@mui/material";
 import ProfilePic from "../img/defaultprofilepicture.png"
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { FaInstagram, FaTwitter, FaTwitch } from "react-icons/fa";
-import { TwitchPlayer } from "react-twitch-embed";
 import { Link } from "react-router-dom";
+import { TwitchEmbed } from "react-twitch-embed";
+import { TwitterTimelineEmbed } from "react-twitter-embed";
+import jwt_decode from "jwt-decode";
 
 
 export default class PlayerPage extends React.Component {
@@ -52,9 +58,15 @@ export default class PlayerPage extends React.Component {
         let playerTwitter;
         let playerInstagram;
 
+        let twitchPopout;
+        let twitterPopout;
+        let instagramPopout;
+
         let twitter;
         let twitch;
         let instagram;
+
+        let editButton = ""
 
         this.state.results.map( (player) => playerIGN = player.user_ign)
         this.state.results.map( (player) => playerName = (player.user_firstName + " " + player.user_lastName))
@@ -64,6 +76,13 @@ export default class PlayerPage extends React.Component {
 
         if(playerTwitter) {
             let twitterlink = "https://www.twitter.com/" + playerTwitter + "/";
+            twitterPopout = (
+                <TwitterTimelineEmbed
+                sourceType="profile"
+                screenName={playerTwitter}
+                options={{height: 480, width: "100%"}}
+            />
+            )
             twitter = (
                 <a href={twitterlink} target="_blank">
                     <Typography variant="h4">
@@ -75,6 +94,15 @@ export default class PlayerPage extends React.Component {
 
         if(playerTwitch) {
             let twitchlink = "https://www.twitch.tv/" + playerTwitch + "/";
+            twitchPopout = (
+                <TwitchEmbed
+                width="100%"
+                height = "480px"
+                channel={playerTwitch}
+                id={playerTwitch}
+                theme="dark"
+                muted />
+            )
             twitch = (
                 <a href={twitchlink} target="_blank">
                     <Typography variant="h4">
@@ -97,6 +125,19 @@ export default class PlayerPage extends React.Component {
             )
         }
 
+        if(localStorage.getItem("UserLoginToken")) {
+            let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
+            if(decodedToken.user_isAdmin == 1 || decodedToken.user_id == this.props.playerid) {
+                editButton = (
+                    <Button size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block'}}>                        
+                        <Typography variant="h6">
+                            Edit Page
+                        </Typography>
+                    </Button>
+                )
+            }
+        }
+
         return(
             <Box sx={{marginBottom:2, paddingLeft:3,paddingRight:3,marginLeft: 10,marginRight:10, paddingTop:2, paddingBottom:4,}}>
             <Box sx={{paddingTop:2,paddingBottom:3}}>
@@ -111,11 +152,9 @@ export default class PlayerPage extends React.Component {
                         </Typography>
                     </Box>
                     <Box sx={{display: 'block', marginLeft: "auto", marginRight: 2}}>
-                        <Button size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block', marginLeft: "auto",}}>                        
-                            <Typography variant="h6">
-                                Edit Page
-                            </Typography>
-                        </Button>
+                        <Box sx={{display: 'block', marginLeft: "auto", marginRight: 2}}>
+                            {editButton}
+                        </Box>
                         <List>
                             <ListItem>
                                 {twitter}
@@ -126,7 +165,6 @@ export default class PlayerPage extends React.Component {
                             <ListItem>
                                 {instagram}
                             </ListItem>
-
                         </List>
                     </Box>
                 </Grid>
@@ -139,21 +177,30 @@ export default class PlayerPage extends React.Component {
                 </Grid>
                 <Grid item xs={4}>
                 <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
-                    <TeamResults teamid={this.props.teamid}/>
-                </Box>
-                </Grid>
-                <Grid item xs={2}/>
-                <Grid item xs={4}>
-                <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
-                    <TeamStats teamid={this.props.teamid}/>
+                    <PlayerResults playerid={this.props.playerid}/>
                 </Box>
                 </Grid>
                 <Grid item xs={4}>
+                    <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
+                        <PlayerTeams playerid={this.props.playerid}/>
+                    </Box>
+                </Grid>
+                <Grid item xs={4}>
                 <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
-                    <TeamAccolades teamid={this.props.teamid}/>
+                    <PlayerStats playerid={this.props.playerid}/>
                 </Box>
                 </Grid>
-                <Grid item xs={2}/>
+                <Grid item xs={4}>
+                <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
+                    <PlayerAccolades playerid={this.props.playerid}/>
+                </Box>
+                </Grid>
+                <Grid item xs={8}>
+                    {twitchPopout}
+                </Grid>
+                <Grid item xs={4}>
+                    {twitterPopout}
+                </Grid>
             </Grid>
             </Box>
         )

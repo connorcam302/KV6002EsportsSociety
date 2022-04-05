@@ -114,15 +114,14 @@ export default function ButtonAppBar() {
                 >
                     Admin
                 </Button>
-                <Link to={pageLink}>
+                <a href={pageLink}>
                     <Button
                         key="logout"
-                        onClick={() => toPage({pageLink})}
                         sx={{ color: 'white', display: 'block', }}
                     >
                         {ign}
                     </Button>
-                </Link>
+                </a>
                 <Button
                     key="logout"
                     onClick={() => logout()}
@@ -172,14 +171,14 @@ export default function ButtonAppBar() {
                         Teams
                     </Button>
                     <Box sx={{ color: 'white', display: 'block', marginLeft: "auto" }}>
-                        <Link to={pageLink} sx={{}}>
+                        <a href={pageLink}>
                             <Button
                                 key="playerpage"
                                 sx={{ color: 'white', display: 'block', marginLeft: "auto" }}
                             >
                                 {ign}
                             </Button>
-                        </Link>
+                        </a>
                     </Box>
                     <Button
                         key="toLogin"

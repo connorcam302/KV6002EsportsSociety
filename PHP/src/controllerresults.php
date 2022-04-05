@@ -25,10 +25,13 @@ class ControllerResults extends Controller {
 
     protected function processRequest() {
 
-        $id = $this->getRequest()->getParameter("team");
-        
-        if (!is_null($id)) {
-            $this->getGateway()->findTeamResults($id);
+        $teamid = $this->getRequest()->getParameter("team");
+        $playerid = $this->getRequest()->getParameter("player");
+
+        if (!is_null($teamid)) {
+            $this->getGateway()->findTeamResults($teamid);
+        } elseif (!is_null($playerid)) {
+                $this->getGateway()->findPlayerResults($playerid);
         } else {
             $this->getGateway()->findAll();
         }

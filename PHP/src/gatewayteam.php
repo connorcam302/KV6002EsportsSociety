@@ -61,4 +61,12 @@ class GatewayTeam extends Gateway  {
         $result = $this->getDatabase()->executeSQL($this->sql, $params);
         $this->setResult($result);
     }
+
+    public function findByPlayer($id) {
+        $this->sql .= " JOIN userTeam ON userTeam.userTeam_id = team_id
+                        WHERE user_id = :id";
+        $params = ["id" => $id];
+        $result = $this->getDatabase()->executeSQL($this->sql, $params);
+        $this->setResult($result);
+    }
 }

@@ -12,13 +12,16 @@ export default class TeamResults extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            results : []
+            results : [],
+            accoladeResults : []
         }
     }
 
     componentDidMount() {
         let url = "http://localhost/KV6002/Assessment/api/results?team="
         this.fetchData(url)
+        let accoladesurl = "http://localhost/KV6002/Assessment/api/accolades?teambest="
+        this.fetchAccoladeData(accoladesurl)
     }
     
     fetchData = (url) => {
@@ -39,11 +42,29 @@ export default class TeamResults extends React.Component {
         });
     }
 
+    fetchAccoladeData = (url) => {
+        url += this.props.teamid
+        fetch(url)
+        .then( (response) => {
+            if (response.status === 200) {
+                return response.json() 
+            } else {
+                throw Error(response.statusText);
+            }
+        })
+        .then( (data) => {
+            this.setState({accoladeResults:data.results})
+        })
+        .catch ((err) => { 
+            console.log("something went wrong ", err) 
+        });
+    }
+
     render() {
-        let matchWinCount = 0;
-        let matchLossCount = 0;
         let seriesWinCount = 0;
         let seriesLossCount = 0;
+        let longestSeriesLength = 0;
+        let longestSeries = "";
 
 
         function evaluateSeries(match) {
@@ -51,29 +72,31 @@ export default class TeamResults extends React.Component {
             let home = match.slice(0,divider)
             let away = match.slice(divider+1, match.length)
             let result = home - away
+            let length = home + away
 
             if(result>0){
                 seriesWinCount++
             } else seriesLossCount++
+
+            if(length > longestSeriesLength) {
+                longestSeries = match;
+                longestSeriesLength = length
+            }
         }
-
-        function evaluateMatch(match){
-            let divider = match.lastIndexOf("-")
-            let home = match.slice(0,divider)
-            let away = match.slice(divider+1, match.length)
-
-            matchWinCount += Number(home)
-            matchLossCount += Number(away)
-        }
-
 
         this.state.results.map((result) => evaluateSeries(result.match_outcome))
-        this.state.results.map((result) => evaluateMatch(result.match_outcome))
 
-        let matchCount = matchLossCount + matchWinCount
+
+        let bestAccolade
+
+        this.state.accoladeResults.map((accolade) => bestAccolade = accolade.accolade_name)
+
+        if(bestAccolade == null){
+            bestAccolade = seriesWinCount + " Series Wins"
+        }
+        
         let seriesCount = seriesLossCount + seriesWinCount
         let seriesWinRate = String(Math.floor((seriesWinCount/seriesCount)*100)+"%");
-        let matchWinRate = String(Math.floor((matchWinCount/matchCount)*100)+"%");
 
         return(
             <div>
@@ -81,8 +104,8 @@ export default class TeamResults extends React.Component {
                 <Table>
                     <TableBody>
                         <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                            <TableCell align="left"><Typography>Matches Played</Typography></TableCell>
-                            <TableCell align="right"><Typography>{matchCount}</Typography></TableCell>
+                            <TableCell align="left"><Typography>Series Played</Typography></TableCell>
+                            <TableCell align="right"><Typography>{seriesCount}</Typography></TableCell>
                         </TableRow>
                         <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                             <TableCell align="left"><Typography>Series Wins</Typography></TableCell>
@@ -93,12 +116,12 @@ export default class TeamResults extends React.Component {
                             <TableCell align="right"><Typography>{seriesWinRate}</Typography></TableCell>
                         </TableRow>
                         <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                            <TableCell align="left"><Typography>Match Wins</Typography></TableCell>
-                            <TableCell align="right"><Typography>{matchWinCount}</Typography></TableCell>
+                            <TableCell align="left"><Typography>Longest Series</Typography></TableCell>
+                            <TableCell align="right"><Typography>{longestSeries}</Typography></TableCell>
                         </TableRow>
                         <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                            <TableCell align="left"><Typography>Match Win Rate</Typography></TableCell>
-                            <TableCell align="right"><Typography>{matchWinRate}</Typography></TableCell>
+                            <TableCell align="left"><Typography>Best Accolade</Typography></TableCell>
+                            <TableCell align="right"><Typography>{bestAccolade}</Typography></TableCell>
                         </TableRow>
                     </TableBody>
                  </Table>

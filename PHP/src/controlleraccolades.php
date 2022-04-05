@@ -25,11 +25,20 @@ class ControllerAccolades extends Controller {
 
     protected function processRequest() {
 
-        $id = $this->getRequest()->getParameter("team");
-        
-        if (!is_null($id)) {
-            $this->getGateway()->findByTeam($id);
-        } else {
+        $teamid = $this->getRequest()->getParameter("team");
+        $playerid = $this->getRequest()->getParameter("player");
+        $teamidbest = $this->getRequest()->getParameter("teambest");
+        $playeridbest = $this->getRequest()->getParameter("playerbest");
+
+        if (!is_null($teamid)) {
+            $this->getGateway()->findByTeam($teamid);
+        } elseif (!is_null($playerid)) {
+            $this->getGateway()->findByPlayer($playerid);
+        } elseif (!is_null($teamidbest)) {
+            $this->getGateway()->findTeamBest($teamidbest);
+        } elseif (!is_null($playeridbest)) {
+            $this->getGateway()->findPlayerBest($playeridbest);
+        }else {
             $this->getGateway()->findAll();
         }
         
