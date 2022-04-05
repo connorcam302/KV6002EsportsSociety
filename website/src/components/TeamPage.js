@@ -6,6 +6,7 @@ import TeamAccolades from "./TeamAccolades"
 import { Box, Grid, Typography, Button } from "@mui/material";
 import ProfilePic from "../img/defaultprofilepicture.png"
 import jwt_decode from "jwt-decode";
+import { Link } from "react-router-dom";
 
 
 
@@ -41,7 +42,9 @@ export default class TeamPage extends React.Component {
         });
     }
 
-
+    makeEditPath = (id) => {
+        return "../editteam/" + id
+    }
     
     render() {
         let teamName;
@@ -51,16 +54,20 @@ export default class TeamPage extends React.Component {
         this.state.results.map( (team) => teamName = team.team_name)
         this.state.results.map( (team) => teamGame = team.game_name)
         this.state.results.map( (team) => teamLead = team.team_lead)
+        
+
 
         if(localStorage.getItem("UserLoginToken")) {
             let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
             if(decodedToken.user_isAdmin == 1 || decodedToken.user_id == teamLead) {
                 editButton = (
-                    <Button size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block'}}>                        
-                        <Typography variant="h6">
-                            Edit Page
-                        </Typography>
-                    </Button>
+                    <Link to={this.makeEditPath(this.props.teamid)}>
+                        <Button size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block'}}>                        
+                            <Typography variant="h6">
+                                Edit Page
+                            </Typography>
+                        </Button>
+                    </Link>
                 )
             }
         }
@@ -71,10 +78,10 @@ export default class TeamPage extends React.Component {
                 <Grid container spacing={2} sx={{paddingLeft:2}}>
                     <img src={ProfilePic} className="profliepic" style={{width:"20%", borderRadius: '5% 5% 5% 5%'}}/>
                     <Box sx={{paddingTop: "2.5%", paddingLeft: 2, textAlign:"left", display: "block"}}>
-                        <Typography variant="h3">
+                        <Typography variant="h1">
                             {teamName}
                         </Typography>
-                        <Typography variant="h4">
+                        <Typography variant="h2">
                             {teamGame}
                         </Typography>
                     </Box>
@@ -83,24 +90,24 @@ export default class TeamPage extends React.Component {
                     </Box>
                 </Grid>
             </Box>
-            <Grid container spacing={2}>
-                <Grid item xs={10}>
+            <Grid container spacing={5}>
+                <Grid item xs={8}>
                     <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%"}}>
                         <TeamPlayers teamid={this.props.teamid}/>
                     </Box>
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item xs={4}>
                 <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", width: "100%", paddingLeft:1, paddingRight:1,}}>
                     <TeamResults teamid={this.props.teamid}/>
                 </Box>
                 </Grid>
-               
-                <Grid item xs={5}>
+                <Grid item xs={2}/>
+                <Grid item xs={4}>
                 <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", width: "100%",paddingLeft:1, paddingRight:1,}}>
                     <TeamStats teamid={this.props.teamid}/>
                 </Box>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={4}>
                 <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
                     <TeamAccolades teamid={this.props.teamid}/>
                 </Box>
