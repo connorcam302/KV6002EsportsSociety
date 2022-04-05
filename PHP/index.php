@@ -21,6 +21,7 @@ if(substr($request->getpath(),0,3)=== "api"){
 }
 else{
     set_exception_handler("exceptionHandlerHTML");
+    print_r("html response");
     $response = new ResponseHTML();
 }
 
@@ -43,6 +44,12 @@ switch ($request->getPath()) {
             break;
     case 'api/accolades':
         $controller = new ControllerAccolades($request,$response);
+            break;
+    case 'api/editplayer':
+        $controller = new ControllerEditPlayer($request,$response);
+            break;
+    case 'api/editteam':
+        $controller = new ControllerEditTeam($request,$response);
             break;
     default:
         if(is_a($response, "ResponseHTML")){
