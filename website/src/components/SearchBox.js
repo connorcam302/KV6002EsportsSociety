@@ -10,8 +10,10 @@ class SearchBox extends React.Component {
     render() {
         return (
             <label>
-                Search
+                <label>Search</label>
+                <div>
                 <input type='text' placeholder='Team Name' value={this.props.search} onChange={this.props.handleSearch} />
+                </div>
             </label>
         )
     }

@@ -19,7 +19,7 @@ class Teams extends React.Component {
     }
     
     componentDidMount() {
-        const url = "http://unn-w19024957.newnumyspace.co.uk/KV6002/Assessment/api/team"
+        const url = "http://localhost/KV6002/Assessment/api/team"
 
         let formData = new FormData();
         formData.append('team_name', this.state.team_name);

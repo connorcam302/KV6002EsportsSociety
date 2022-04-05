@@ -7,6 +7,7 @@
 
  import React from "react";
  import Teams from "./Teams.js";
+ import TeamPage from "./TeamPage.js";
  import SearchBox from "./SearchBox.js";
  
  class AllTeamsPage extends React.Component {
@@ -33,7 +34,7 @@
                          </header>
                              <div class="content">
                                  <div class="inner">
-                                 <Teams search={this.state.search}/>  
+                                  <Teams search={this.state.search}/>  
                                  </div>
                              </div>
                              <div class="sidebar">
@@ -43,23 +44,26 @@
                                       search={this.state.search} 
                                       handleSearch={this.handleSearch}/>
                                  </div>
+                                 
                              <h2>Create a new Team</h2>
                                  <form method="post" action="#">
                                      <div class="row uniform">
                                          <div >
-                                             <label>Team Name</label>
+                                        <label>Team Name</label>
+                                        <div>
                                          <input
                                          type='text'
                                          value={this.props.team_name}
                                          onChange={this.props.team_name}
                                          />
+                                         </div>
                                      </div>
                                          <label>Game</label>
                                              <div >
                                                  <select value={this.props.game_id}>
                                                  <option value="1">Dota 2</option>
                                                  <option value="2">League of Legends</option>
-                                                    <option value="3">Rainbow 6 Siege</option>
+                                                 <option value="3">Rainbow 6 Siege</option>
                                                  <option value="4">Rocket League</option>
                                                  <option value="5">Valorant</option>
                                                  <option value="6">Overwatch</option>
