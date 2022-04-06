@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This class contains the header code required to display webpages in a HTML format.
+ * 
+ * @author Ethan Borrill W18001798
+ */
 class ResponseHTML extends Response
 {
     protected function headers() {

@@ -1,13 +1,30 @@
 <?php
 
-use Firebase\JWT\JWT; //Implements the FireBase JWT Class.
+use Firebase\JWT\JWT;
 
+/**
+ * This Controller oversees the process which allows for the login process to occur, should the entered details be correct - the User's ID and admin status are stored in a web token.
+ * Also included in this token is an expiration date for the token.
+ * 
+ * @author Ethan Borrill W18001798
+ */
 class ControllerAuthenticateApi extends Controller
 {
 
     protected function setGateway() {
         $this->gateway = new GatewayUser();
     }
+
+
+    /**
+     * Process request below will collect the parameters 'email' and 'password' and determines whether the password entered matches the email address provided.
+     * If it does match, the password is then hashed/encrypted using the secret key in Config.php. A web token is then produced with the corresponding user_id, user_isAdmin and an expiration date for the token.
+     * This is then encoded using the JWT class from firebase to encode the token for use of the webpage.
+     * 
+     * If the password does not match the connected email address, a 401 (Unauthorised) is returned, 404 (Resource Not Found), or in the case a GET method is used a 405 will display.
+     * 
+     * @return mixed $data - The data produced by the controller.
+     */
     protected function processRequest() {
         $data = [];
 
@@ -29,7 +46,7 @@ class ControllerAuthenticateApi extends Controller
 
                         $payload = array(
                             "user_id" => $this->getGateway()->getResult()[0]['user_id'], //Assigns the user_id in the token to be the same as the id collected when checking the email address and password.
-                            "user_isAdmin" => $this->getGateway()->getResult()[0]['user_isAdmin'],
+                            "user_isAdmin" => $this->getGateway()->getResult()[0]['user_isAdmin'], //Assigns the user_isAdmin value into the token, used to check the Admin status to gain access to the admin page.
                             "exp" => time() + 2592000 //Set to 30 days till expiration.
                         );
 
