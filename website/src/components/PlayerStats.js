@@ -3,11 +3,22 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Typography } from "@mui/material";
 
-export default class TeamResults extends React.Component {
+/**
+* PlayerStats
+* 
+* Creates a list of player stats and returns it in component format. Uses the 'api/accolades' and the 'api/results' 
+* endpoints to get results and accolades.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo
+*/
+
+export default class PlayerStats extends React.Component {
 
     constructor(props){
         super(props)
@@ -16,13 +27,26 @@ export default class TeamResults extends React.Component {
             accoladeResults : []
         }
     }
+    
+    /**
+    * componentDidMount()
+    * 
+    * Ran when the page is initially loaded. In this case, data from the 'api/accolades' and 'api/results' regarding 
+    * the playerid supplied in props will be returned.
+    */
 
     componentDidMount() {
-        let url = "http://localhost/KV6002/Assessment/api/results?player="
+        let url = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/results?player="
         this.fetchData(url)
-        let accoladesurl = "http://localhost/KV6002/Assessment/api/accolades?playerbest="
+        let accoladesurl = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/accolades?playerbest="
         this.fetchAccoladeData(accoladesurl)
     }
+    
+    /**
+    * fetchData(url)
+    * 
+    * Fetches API data from a given URL with a player ID appended. The data is stored in state.
+    */
     
     fetchData = (url) => {
         url += this.props.playerid
@@ -41,6 +65,12 @@ export default class TeamResults extends React.Component {
             console.log("something went wrong ", err) 
         });
     }
+
+    /**
+    * fetchAccoladeData(url)
+    * 
+    * Fetches specifically accolade API data with a player ID appended. The data is stored in state.
+    */
 
     fetchAccoladeData = (url) => {
         url += this.props.playerid
@@ -66,6 +96,15 @@ export default class TeamResults extends React.Component {
         let longestSeriesLength = 0;
         let longestSeries = "";
 
+        /**
+        * evaluateSeries(match)
+        * 
+        * Takes a match and evaluates if the match was a win or a loss adding to their respective totals, then
+        * checks if the match is longer than the longest match and if it is, stores it.
+        *
+        * @param Obj match   An object containing match data.
+        */
+        
 
         function evaluateSeries(match) {
             let divider = match.lastIndexOf("-")
@@ -86,11 +125,13 @@ export default class TeamResults extends React.Component {
 
         this.state.results.map((result) => evaluateSeries(result.match_outcome))
 
-
         let bestAccolade
 
         this.state.accoladeResults.map((accolade) => bestAccolade = accolade.accolade_name)
 
+        /*
+        * If the player does not have any accolades, their total number of wins will be displayed in accolades instead.
+        */
         if(bestAccolade == null){
             bestAccolade = seriesWinCount + " Series Wins"
         }

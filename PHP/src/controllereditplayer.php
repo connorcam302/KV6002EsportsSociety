@@ -34,11 +34,11 @@ class ControllerEditPlayer extends Controller {
             $instagram = $this->getRequest()->getParameter("instagram");
             $id = $this->getRequest()->getParameter("id");
         
-            if (!is_null($email) && !is_null($ign) && !is_null($first) && !is_null($last) && !is_null($id)) {
-                $this->getGateway()->editPlayer($email,$ign,$first,$last,$twitch,$twitter,$instagram,$id);
-            } elseif (is_null($email) || is_null($ign) || is_null($first) || is_null($last) || is_null($id)) {
+            if (is_null($email) || is_null($ign) || is_null($first) || is_null($last) || is_null($id)) {
                 $this->getResponse()->setMessage("Ensure that all mandatory fields are not null.");
                 $this->getResponse()->setStatusCode(410);
+            } elseif (!is_null($email) && !is_null($ign) && !is_null($first) && !is_null($last) && !is_null($id)) {
+                $this->getGateway()->editPlayer($email,$ign,$first,$last,$twitch,$twitter,$instagram,$id);
             } else {
                 $this->getResponse()->setMessage("Error was encountered.");
                 $this->getResponse()->setStatusCode(505);

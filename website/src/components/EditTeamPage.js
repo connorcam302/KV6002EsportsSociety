@@ -1,9 +1,18 @@
 import React from "react";
 import { Typography } from "@mui/material";
 import jwt_decode from "jwt-decode";
-import { TextField, Box, Button } from "@mui/material";
-import { Link } from "react-router-dom";
 import EditTeamForm from "./EditTeamForm";
+
+/**
+* EditTeamPage
+* 
+* This page will submit team data to the database to allow team leads to edit team details.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo -Fix bug with the teams's current info not being added to the fields by default.
+*/
 
 export default class EditTeamPage extends React.Component {
 
@@ -29,13 +38,27 @@ export default class EditTeamPage extends React.Component {
                 isAdmin: decodedToken.user_isAdmin
             })
         }
-        let url = "http://localhost/KV6002/Assessment/api/team?id="
+        let url = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/team?id="
         this.fetchData(url)
     }
+
+    /**
+    * handle--
+    * 
+    * Used to submit form data to the state for future use.
+    */
+    
 
     handleName = (e) => {
         this.setState({ name: e.target.value })
     }    
+
+    /**
+    * handleSubmitClick()
+    * 
+    * When the submit button is clicked, the state data is taken and submitted to the 'api/editteam' endpoint in order to update the
+    * team data with data from the state.
+    */
     
     handleSubmitClick = () => {
         let url = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/editteam"
@@ -44,10 +67,10 @@ export default class EditTeamPage extends React.Component {
         formData.append('id', this.props.teamid);
         formData.append('name', this.state.name);
         
-
-        console.log(formData)
-
-        fetch(url, {
+        if (this.state.name === null){
+            this.setState({ message: "Please fill all required fields." })
+        } else {
+            fetch(url, {
             method: 'POST',
             headers: new Headers(),
             body: formData
@@ -56,7 +79,8 @@ export default class EditTeamPage extends React.Component {
                 if ((response.status === 200) || (response.status === 204)) {
                     this.setState(
                         {
-                            success: true
+                            success: true,
+                            message: "Details Successfully Updated"
                         }
                     )
                     console.log("Team Name Changed.")
@@ -68,7 +92,14 @@ export default class EditTeamPage extends React.Component {
                 console.log("something went wrong ", err)
             }
             );
+        }
     }
+
+    /**
+    * fetchData(url)
+    * 
+    * Fetches API data from a given URL with a team ID appended. The data is stored in state.
+    */
 
     fetchData = (url) => {
         url += this.props.teamid
@@ -91,11 +122,15 @@ export default class EditTeamPage extends React.Component {
    render() {
     let teamLead;
     let teamName;
-    let errorMessage = this.state.error
+    let message = this.state.message;
 
     this.state.results.map( (team) => teamLead = team.team_lead)
     this.state.results.map( (team) => teamName = team.team_name)
 
+        /*
+        * Checks if the user is the leader of the team attemting to be editted, or is an admin. If 
+        * they are neither, they will not be able to interact with the page.
+        */
        if(this.state.user_id == teamLead || this.state.isAdmin == 1){
         return(
             <div>
@@ -111,6 +146,7 @@ export default class EditTeamPage extends React.Component {
                     handleName={this.handleName}
                     handleSubmitClick={this.handleSubmitClick}
                 />
+                {message}
             </div>
         )
        } else {

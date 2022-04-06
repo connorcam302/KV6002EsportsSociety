@@ -16,6 +16,7 @@ import TeamPage from './TeamPage';
 import PlayerPage from './PlayerPage'
 import AllTeamsPage from './AllTeamsPage'
 import EditTeamPage from "./EditTeamPage";
+import EditPlayerPage from "./EditPlayerPage";
 
 export default class Router extends React.Component {
 
@@ -38,7 +39,7 @@ export default class Router extends React.Component {
     // }
 
     fetchPlayerData = () => {
-        let playerUrl = "http://localhost/KV6002/Assessment/api/player"
+        let playerUrl = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/player"
         fetch(playerUrl)
         .then( (response) => {
             if (response.status === 200) {
@@ -56,7 +57,7 @@ export default class Router extends React.Component {
     }
 
     fetchTeamData = () => {
-        let teamUrl = "http://localhost/KV6002/Assessment/api/team"
+        let teamUrl = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/team"
         fetch(teamUrl)
         .then( (response) => {
             if (response.status === 200) {
@@ -81,8 +82,12 @@ export default class Router extends React.Component {
         return "player/" + id
     }
 
-    makeEditPath = (id) => {
+    makeEditTeamPath = (id) => {
         return "editteam/" + id
+    }
+
+    makeEditPlayerPath = (id) => {
+        return "editplayer/" + id
     }
 
     render() {
@@ -95,10 +100,10 @@ export default class Router extends React.Component {
                   <Route path="login" element={<LoginRegisterPage />} />
                   <Route path="admin" element={<AdminPage />} />
                   <Route path="team" element={<AllTeamsPage />} />
-                  <Route path="editteam" element={<EditTeamPage teamid="4"/>} />
                   {this.state.teamResults.map( (team) => ( <Route path={this.makeTeamPath(team.team_id)} element={<TeamPage teamid={team.team_id}/>} /> ))}
-                  {this.state.teamResults.map( (team) => ( <Route path={this.makeEditPath(team.team_id)} element={<EditTeamPage teamid={team.team_id}/>} /> ))}
+                  {this.state.teamResults.map( (team) => ( <Route path={this.makeEditTeamPath(team.team_id)} element={<EditTeamPage teamid={team.team_id}/>} /> ))}
                   {this.state.playerResults.map( (player) => ( <Route path={this.makePlayerPath(player.user_id)} element={<PlayerPage playerid={player.user_id}/>} /> ))}
+                  {this.state.playerResults.map( (player) => ( <Route path={this.makeEditPlayerPath(player.user_id)} element={<EditPlayerPage playerid={player.user_id}/>} /> ))}
                   <Route path="*" element={<ErrorPage/>} />
                 </Route>
               </Routes>

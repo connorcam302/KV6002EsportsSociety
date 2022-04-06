@@ -2,6 +2,17 @@ import React from "react";
 import { TextField, Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
+/**
+* EditTeamForm
+* 
+* Returns a form for entering team data, this data is returned back to the parent state.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo - Fix bug with default values not showing.
+*/
+
 export default class EditTeamForm extends React.Component {
 
     makeTeamPath = (id) => {

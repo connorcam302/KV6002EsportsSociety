@@ -1,8 +1,5 @@
 import React from "react";
 import TeamPlayers from "./TeamPlayers"
-import TeamResults from "./TeamResults";
-import TeamStats from "./TeamStats"
-import TeamAccolades from "./TeamAccolades"
 import PlayerResults from "./PlayerResults"
 import PlayerStats from "./PlayerStats"
 import PlayerTeams from "./PlayerTeams"
@@ -18,6 +15,20 @@ import { TwitterTimelineEmbed } from "react-twitter-embed";
 import jwt_decode from "jwt-decode";
 
 
+/**
+* PlayerPage
+* 
+* Creates a player page and returns it in component format. Uses a playerid supplied in props to create a profile
+* for the player. Uses the 'api/player' endpoint to get information on the player, and the PlayerResults, PlayerStats
+* PlayerTeams and PlayerAccolades components to display information.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo
+*/
+
+
 export default class PlayerPage extends React.Component {
 
     constructor(props){
@@ -27,10 +38,23 @@ export default class PlayerPage extends React.Component {
         }
     }
 
+    /**
+    * componentDidMount()
+    * 
+    * Ran when the page is initially loaded. In this case, data from the 'api/player' regarding 
+    * the playerid supplied in props will be returned.
+    */
+
     componentDidMount() {
-        let url = "http://localhost/KV6002/Assessment/api/player?id="
+        let url = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/player?id="
         this.fetchData(url)
     }
+
+    /**
+    * fetchData(url)
+    * 
+    * Fetches API data from a given URL with a player ID appended. The data is stored in state.
+    */
 
     fetchData = (url) => {
         url += this.props.playerid
@@ -50,6 +74,9 @@ export default class PlayerPage extends React.Component {
         });
     }
 
+    makeEditPath = (id) => {
+        return "../editplayer/" + id
+    }
 
     render() {
         let playerIGN;
@@ -73,6 +100,12 @@ export default class PlayerPage extends React.Component {
         this.state.results.map( (player) => playerTwitch = player.user_twitch)
         this.state.results.map( (player) => playerTwitter = player.user_twitter)
         this.state.results.map( (player) => playerInstagram = player.user_instagram)
+
+        /*
+        * Checking for player socials, if they have them links to them will be provided in the top right
+        * of the page. If the website has a popout component available, such as twitch and twitter, these
+        * will also be included.
+        */
 
         if(playerTwitter) {
             let twitterlink = "https://www.twitter.com/" + playerTwitter + "/";
@@ -125,15 +158,22 @@ export default class PlayerPage extends React.Component {
             )
         }
 
+        /*
+        * Checks if the player is on their own page or an admin, if either of these is true an edit page
+        * button will be displayed linking to the page for editing user profiles.
+        */
+
         if(localStorage.getItem("UserLoginToken")) {
             let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
             if(decodedToken.user_isAdmin == 1 || decodedToken.user_id == this.props.playerid) {
                 editButton = (
-                    <Button size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block'}}>                        
-                        <Typography variant="h6">
-                            Edit Page
-                        </Typography>
-                    </Button>
+                    <Link to={this.makeEditPath(this.props.playerid)}>
+                        <Button size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block'}}>                        
+                            <Typography variant="h6">
+                                Edit Page
+                            </Typography>
+                        </Button>
+                    </Link>
                 )
             }
         }

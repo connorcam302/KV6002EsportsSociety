@@ -8,7 +8,18 @@ import ProfilePic from "../img/defaultprofilepicture.png"
 import jwt_decode from "jwt-decode";
 import { Link } from "react-router-dom";
 
-
+/**
+* TeamPage 
+* 
+* Creates a team page and returns it in component format. Uses a teamid supplied in props to create a profile
+* for the team. Uses the 'api/team' endpoint to get information on the player, and the TeamResults, TeamStats
+* TeamPlayers and TeamAccolades components to display information.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo
+*/
 
 export default class TeamPage extends React.Component {
 
@@ -19,10 +30,23 @@ export default class TeamPage extends React.Component {
         }
     }
 
+    /**
+    * componentDidMount()
+    * 
+    * Ran when the page is initially loaded. In this case, data from the 'api/team' regarding 
+    * the teamid supplied in props will be returned.
+    */
+
     componentDidMount() {
-        let url = "http://localhost/KV6002/Assessment/api/team?id="
+        let url = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/team?id="
         this.fetchData(url)
     }
+
+    /**
+    * fetchData(url)
+    * 
+    * Fetches API data from a given URL with a team ID appended. The data is stored in state.
+    */
 
     fetchData = (url) => {
         url += this.props.teamid
@@ -55,7 +79,10 @@ export default class TeamPage extends React.Component {
         this.state.results.map( (team) => teamGame = team.game_name)
         this.state.results.map( (team) => teamLead = team.team_lead)
         
-
+        /*
+        * Checks if the user is the team lead or an admin, if either of these is true an edit page
+        * button will be displayed linking to the page for editing user profiles.
+        */
 
         if(localStorage.getItem("UserLoginToken")) {
             let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
