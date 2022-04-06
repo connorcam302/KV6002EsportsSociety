@@ -9,7 +9,6 @@ import Teams from './Teams'
 *
 * @author Ethan Borrill W18001798
 */
-
 class FormWeeklyEvents extends React.Component {
     render() {
         return (

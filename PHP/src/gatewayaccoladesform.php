@@ -1,7 +1,7 @@
 <?php
 
 
-class GatewayAccoladeForm extends Gateway
+class GatewayAccoladesForm extends Gateway
 {
     public function __construct()
     {
@@ -9,7 +9,7 @@ class GatewayAccoladeForm extends Gateway
     }
 
 
-    public function registerUser($teamid, $accoladeid)
+    public function AddAccolade($teamid, $accoladeid)
     {
         $sql = "INSERT into teamAccolades (userTeam_id,accolade_id) 
                        values(:TeamID,:AccoladeID)";

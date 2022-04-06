@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 *
 * @author Ethan Borrill W18001798
 */
-
 class FormRegister extends React.Component {
     render() {
         return (

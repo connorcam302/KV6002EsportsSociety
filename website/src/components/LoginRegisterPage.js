@@ -42,7 +42,7 @@ class LoginRegisterPage extends React.Component {
         this.handleLoginState = this.handleLoginState.bind(this);
     }
 
-    
+
     /**
     * componentDidMount
     * 

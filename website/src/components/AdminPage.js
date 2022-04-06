@@ -3,7 +3,6 @@ import AdminButtons from "./AdminButtons.js";
 import jwt_decode from "jwt-decode";
 import FormWeeklyEvents from "./FormWeeklyEvents.js";
 import FormManageTeams from "./FormManageTeam.js";
-import FormWeeklyMatches from "./FormWeeklyMatches";
 import FormTeamAccolades from "./FormTeamAccolades.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
@@ -22,6 +21,15 @@ import Grid from '@mui/material/Grid';
 */
 
 class AdminPage extends React.Component {
+
+
+    /**
+    * Constructor
+    * 
+    * This function initialises several critical components needed for this file to run.
+    *
+    */
+
     constructor(props) {
         super(props);
         this.state = {
@@ -29,7 +37,7 @@ class AdminPage extends React.Component {
             authenticated: true,
             token: null,
             error: "",
-            
+
             EventsForm: false,
             ManageTeamsForm: false,
             AccoladesForm: false,
@@ -40,10 +48,8 @@ class AdminPage extends React.Component {
             EventDate: null,
 
             TeamDropDown: null,
-            AccoladesDropDown: null
+            AccoladesDropDown: null,
         }
-        this.handleEmail = this.handleEmail.bind(this);
-        this.handlePassword = this.handlePassword.bind(this);
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleEventsFormClick = this.handleEventsFormClick.bind(this);
         this.handleManageTeamsClick = this.handleManageTeamsClick.bind(this);
@@ -84,8 +90,8 @@ class AdminPage extends React.Component {
                 });
             }
         }
-    
-}
+
+    }
 
     /**
     * handlePassword(e)
@@ -125,11 +131,10 @@ class AdminPage extends React.Component {
     }
 
     /**
-    * [Function Name]
+    * handleEventsFormClick
     * 
-    * [Function Description]
+    * This is used on the Events form button, will set the state needed for the Events form to be displayed to be true.
     *
-    * @param [type] $[var]   [Description]
     */
     handleEventsFormClick = () => {
         this.setState(
@@ -142,22 +147,56 @@ class AdminPage extends React.Component {
         )
     }
 
+
+    /**
+    * handleEventTitle(e)
+    * 
+    * Handles the input and change of text within the 'Event Title' field used within the Events form page.
+    *
+    */
     handleEventTitle = (e) => {
         this.setState({ EventTitle: e.target.value })
     }
 
+    /**
+    * handleEventDesc(e)
+    * 
+    * Handles the input and change of text within the 'Event Description' field used within the Events form page.
+    *
+    */
     handleEventDesc = (e) => {
         this.setState({ EventDesc: e.target.value })
     }
 
+    /**
+    * handleEventTitle(e)
+    * 
+    * Handles the input and change of text within the 'Event Image' field used within the Events form page.
+    *
+    */
     handleEventImage = (e) => {
         this.setState({ EventImage: e.target.value })
     }
 
+
+    /**
+    * handleEventDate(e)
+    * 
+    * Handles the input and change of text within the 'Event Date' field used within the Events form page.
+    *
+    */
     handleEventDate = (e) => {
         this.setState({ EventDate: e.target.value })
     }
 
+
+    /**
+    * handleEventSubmit
+    * 
+    * This function is used on the Submission button present on the Events form page. 
+    * Upon pressing the button, The contents entered within each field is checked to not be empty - if not the details are submitted to the Events table in the database.
+    *
+    */
     handleEventSubmit = () => {
         let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/eventsform"
 
@@ -173,11 +212,7 @@ class AdminPage extends React.Component {
         })
             .then((response) => {
                 if ((response.status === 200) || (response.status === 204)) {
-                    this.setState(
-                        {
-                            EventCreated:true
-                        }
-                    )
+                    this.setState({ error: "Event has been successfully created and uploaded!" })
                     return response.json()
                 } else if ((this.state.EventTitle === null) && (this.state.EventDesc === null) && (this.state.EventImage === null) && (this.state.EventDate === null)) {
                     this.setState({ error: "Please answer all fields within the form before submitting." })
@@ -202,11 +237,10 @@ class AdminPage extends React.Component {
     }
 
     /**
-    * [Function Name]
+    * handleManageTeamsClick
     * 
-    * [Function Description]
+    * This is used on the ManageTeams form button, will set the state needed for the Team management form to be displayed to be true.
     *
-    * @param [type] $[var]   [Description]
     */
     handleManageTeamsClick = () => {
         this.setState(
@@ -220,11 +254,10 @@ class AdminPage extends React.Component {
     }
 
     /**
-    * [Function Name]
+    * handleTeamAccoladesClick
     * 
-    * [Function Description]
+    * This is used on the Accolades form button, will set the state needed for the Accolades form to be displayed to be true.
     *
-    * @param [type] $[var]   [Description]
     */
     handleTeamAccoladesClick = () => {
         this.setState(
@@ -238,35 +271,39 @@ class AdminPage extends React.Component {
     }
 
     /**
-    * [Function Name]
+    * handleTeamSelect
     * 
-    * [Function Description]
+    * This function handles updating the option selected within the Teams dropdown used by the Accolades form, this is done so that the correct ID is collected and sent during submission.
     *
-    * @param [type] $[var]   [Description]
     */
     handleTeamSelect = (e) => {
-        this.setState({TeamDropDown:e.target.value})
+        this.setState({ TeamDropDown: e.target.value })
     }
 
     /**
-    * [Function Name]
+    * handleTeamAccolade Select
     * 
-    * [Function Description]
+    * This function handles updating the option selected within the Accolades dropdown used by the Accolades form, this is done so that the correct ID is collected and sent during submission.
     *
-    * @param [type] $[var]   [Description]
     */
     handleTeamAccoladeSelect = (e) => {
-        this.setState({AccoladesDropDown:e.target.value})
+        this.setState({ AccoladesDropDown: e.target.value })
     }
 
+
+    /**
+    * handleAccoladeSubmit
+    * 
+    * This function is used with the Submission button shown on the accolade page, upon pressing this button a check is performed. This check determines if the dropdowns used have an option selected within them,
+    * If a team has been selected and the accolade ID have been selected - the ID of these 2 components are inserted into the teamAccolades table within the database.
+    */
+
     handleAccoladeSubmit = () => {
-        let url = ""
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/accoladesform"
 
         let formData = new FormData();
-        formData.append('event_name', this.state.EventTitle);
-        formData.append('event_description', this.state.EventDesc);
-        formData.append('event_img', this.state.EventImage);
-        formData.append('event_date', this.state.EventDate);
+        formData.append('userTeam_id', this.state.TeamDropDown);
+        formData.append('accolade_id', this.state.AccoladesDropDown);
         fetch(url, {
             method: 'POST',
             headers: new Headers(),
@@ -274,11 +311,7 @@ class AdminPage extends React.Component {
         })
             .then((response) => {
                 if ((response.status === 200) || (response.status === 204)) {
-                    this.setState(
-                        {
-                            registered: true
-                        }
-                    )
+                    this.setState({ error: "Accolade has been successfully Assigned!" })
                     return response.json()
                 } else if (response.status === 406) {
                     this.setState({ error: "The event details you have entered cannot be used!" })
@@ -294,11 +327,12 @@ class AdminPage extends React.Component {
 
 
     /**
-    * [Function Name]
+    * render
     * 
-    * [Function Description]
+    * This function will create and display the required functionalities for the Adminpage to operate as intended, this consists of several states created by clicking the buttons presented to the left of the page.
+    * Upon pressing these buttons the relevant forms and inputs will be displayed to update certain data displayed on the webpage.
     *
-    * @param [type] $[var]   [Description]
+    * @returns {Page} - Will display the rendered page content based on the conditions required.
     */
     render() {
         let page;
@@ -318,7 +352,7 @@ class AdminPage extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <AdminButtons 
+                                <AdminButtons
                                     handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
@@ -327,11 +361,11 @@ class AdminPage extends React.Component {
                             </Grid>
                             <Grid item xs={10}>
                                 <FormWeeklyEvents
-                                handleEventTitle={this.handleEventTitle}
-                                handleEventDesc={this.handleEventDesc}
-                                handleEventImage={this.handleEventImage}
-                                handleEventDate={this.handleEventDate}
-                                handleEventSubmit={this.handleEventSubmit} />
+                                    handleEventTitle={this.handleEventTitle}
+                                    handleEventDesc={this.handleEventDesc}
+                                    handleEventImage={this.handleEventImage}
+                                    handleEventDate={this.handleEventDate}
+                                    handleEventSubmit={this.handleEventSubmit} />
                                 <ul><p className="errorMessage">{errorMessage}</p></ul>
                             </Grid>
                             <Grid item xs={1}>
@@ -391,9 +425,9 @@ class AdminPage extends React.Component {
                             <Grid item xs={10}>
                                 <FormTeamAccolades
                                     handleTeamAccoladeSelect={this.handleTeamAccoladeSelect}
-                                    handleTeamSelect={this.handleTeamSelect} />
-                                    handleAccoladeSubmit={this.handleAccoladeSubmit}
-                                    <ul><p className="errorMessage">{errorMessage}</p></ul>
+                                    handleTeamSelect={this.handleTeamSelect}
+                                    handleAccoladeSubmit={this.handleAccoladeSubmit} />
+                                <ul><p className="errorMessage">{errorMessage}</p></ul>
                             </Grid>
                             <Grid item xs={1}>
                             </Grid>
@@ -452,8 +486,6 @@ class AdminPage extends React.Component {
                 </Box>
             )
         }
-
-        //Sets the state for the Add Match Form page upon button press.
 
         return (
             <div>{page}</div>

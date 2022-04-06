@@ -13,83 +13,124 @@ import AdminPage from "./AdminPage";
 * 
 * 
 */
-
 class FormTeamAccolades extends React.Component {
-   
-   
-    componentDidMount() {
-        let url1 = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/accolades"
-        this.fetchData1(url1)
-        
-        let url2 = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/team"
-        this.fetchData2(url2)
-        }
 
+
+
+    /**
+    * componentDidMount
+    * 
+    * Component did mount for this class collects the data from the accolades and teams APIS, these are then assigned to values URL1 and URL2 to be used in the dropdown boxes.
+    *
+    */
+
+    componentDidMount() {
+        let urlAccolade = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/accolades"
+        this.fetchDataAccolade(urlAccolade)
+
+        let urlTeam = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/team"
+        this.fetchDataTeam(urlTeam)
+    }
+
+
+
+    /**
+    * Constructor
+    * 
+    * Used within this class to initialise several values used within the file, such as an empty data array for accolades and teams.
+    *
+    */
 
     constructor(props) {
         super(props);
         this.state = {
-            results :[],
+            results: [],
             accolades: [],
             teams: [],
         }
     }
-    
-    fetchData1 = (url1) => {
-        url1 
-    fetch(url1)
-        .then((response) => {
-            if (response.status === 200) {
-                return response.json()
-            } else {
-                throw Error(response.statusText)
-            }
-        })
-        .then((data) => {
-            this.setState({ accolades: data.results })
-        })
-        .catch((err) => {
-            console.log("something has gone wrong ", err)
-        });
+
+
+    /**
+    * fetchDataAccolade
+    * 
+    * Function retrieves the data collected from the Accolade API URL and sets the value of 'accolades' to be the relevant data.
+    *
+    */
+
+    fetchDataAccolade = (urlAccolade) => {
+        urlAccolade
+        fetch(urlAccolade)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json()
+                } else {
+                    throw Error(response.statusText)
+                }
+            })
+            .then((data) => {
+                this.setState({ accolades: data.results })
+            })
+            .catch((err) => {
+                console.log("something has gone wrong ", err)
+            });
     }
-    
-    fetchData2 = (url2) => {
-        url2
-    fetch(url2)
-        .then((response) => {
-            if (response.status === 200) {
-                return response.json()
-            } else {
-                throw Error(response.statusText)
-            }
-        })
-        .then((data) => {
-            this.setState({ teams: data.results })
-        })
-        .catch((err) => {
-            console.log("something has gone wrong ", err)
-        });
+
+
+    /**
+    * fetchDataTeam
+    * 
+    * Function retrieves the data collected from the Teams API URL and sets the value of 'teams' to be the relevant data.
+    *
+    */
+
+    fetchDataTeam = (urlTeam) => {
+        urlTeam
+        fetch(urlTeam)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json()
+                } else {
+                    throw Error(response.statusText)
+                }
+            })
+            .then((data) => {
+                this.setState({ teams: data.results })
+            })
+            .catch((err) => {
+                console.log("something has gone wrong ", err)
+            });
     }
-    
-    render(){
+
+
+
+    /**
+    * Render
+    * 
+    * Function will render the Dropdown menus and Buttons used in the form to update accolade details. These dropdowns will also contain the data of the accolades and teams from their respective API.
+    * This includes the ID and Name of both the teams and accolades.
+    *
+    * @returns {Page} - Will display the rendered page content.
+    */
+    render() {
         return (
             <div>
-            <ul>
-            <label>
-                <select value={this.props.accolade_id} onChange={this.props.handleTeamAccoladeSelect}>
-                <option value="">Select an Accolade here</option>        
-                {this.state.accolades.map( (accolade) => <option value={accolade.accolade_id}>{accolade.accolade_name}</option>)}
-                </select>
-            </label>
-            </ul>
-            <ul>
-            <label>
-                <select value={this.props.team_id} onChange={this.props.handleTeamSelect}>
-                <option value="">Select a team here</option>
-                {this.state.teams.map( (team) => <option value={team.team_id}>{team.team_name}</option>)}
-                </select>
-            </label>
-            </ul>
+                <ul>
+                    <label>
+                        <select value={this.props.accolade_id} onChange={this.props.handleTeamAccoladeSelect}>
+                            <option value="">Select an Accolade here</option>
+                            {this.state.accolades.map((accolade) => <option value={accolade.accolade_id}>{accolade.accolade_name}</option>)}
+                        </select>
+                    </label>
+                </ul>
+                <ul>
+                    <label>
+                        <select value={this.props.team_id} onChange={this.props.handleTeamSelect}>
+                            <option value="">Select a team here</option>
+                            {this.state.teams.map((team) => <option value={team.team_id}>{team.team_name}</option>)}
+                        </select>
+                    </label>
+                </ul>
 
                 <ul><Button onClick={this.props.handleAccoladeSubmit}>Submit Accolade</Button></ul>
             </div>
