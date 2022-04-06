@@ -30,8 +30,13 @@ class ControllerAccolades extends Controller {
         $teamidbest = $this->getRequest()->getParameter("teambest");
         $playeridbest = $this->getRequest()->getParameter("playerbest");
 
-        if (!is_null($teamid)) {
+        
+        if ($teamid == "all") {
+            $this->getGateway()->findAll();
+        } elseif (!is_null($teamid)) {
             $this->getGateway()->findByTeam($teamid);
+        } elseif ($playerid == "all") {
+            $this->getGateway()->findAll();
         } elseif (!is_null($playerid)) {
             $this->getGateway()->findByPlayer($playerid);
         } elseif (!is_null($teamidbest)) {
@@ -39,7 +44,7 @@ class ControllerAccolades extends Controller {
         } elseif (!is_null($playeridbest)) {
             $this->getGateway()->findPlayerBest($playeridbest);
         }else {
-            $this->getGateway()->findAll();
+            $this->getGateway()->findAllPossible();
         }
         
         return $this->getGateway()->getResult();

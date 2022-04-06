@@ -45,6 +45,9 @@ switch ($request->getPath()) {
     case 'api/accolades':
         $controller = new ControllerAccolades($request,$response);
             break;
+    case 'api/eventsform':
+        $controller = new ControllerEventFormApi($request,$response);
+            break;        
     case 'api/editplayer':
         $controller = new ControllerEditPlayer($request,$response);
             break;

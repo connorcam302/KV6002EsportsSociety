@@ -28,20 +28,37 @@ class AdminPage extends React.Component {
             admin: false,
             authenticated: true,
             token: null,
+            error: "",
+            
             EventsForm: false,
-            ManageTeamsPage: false,
-            MatchesForm: false,
+            ManageTeamsForm: false,
             AccoladesForm: false,
+
+            EventTitle: null,
+            EventDesc: null,
+            EventImage: null,
+            EventDate: null,
+
+            TeamDropDown: null,
+            AccoladesDropDown: null
         }
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleEventsFormClick = this.handleEventsFormClick.bind(this);
         this.handleManageTeamsClick = this.handleManageTeamsClick.bind(this);
-        this.handleAddMatchesClick = this.handleAddMatchesClick.bind(this);
+
         this.handleTeamAccoladesClick = this.handleTeamAccoladesClick.bind(this);
         this.handleTeamAccoladeSelect = this.handleTeamAccoladeSelect.bind(this);
         this.handleTeamSelect = this.handleTeamSelect.bind(this);
+        this.handleAccoladeSubmit = this.handleAccoladeSubmit.bind(this);
+
+        this.handleEventTitle = this.handleEventTitle.bind(this);
+        this.handleEventDesc = this.handleEventDesc.bind(this);
+        this.handleEventImage = this.handleEventImage.bind(this);
+        this.handleEventDate = this.handleEventDate.bind(this);
+        this.handleEventSubmit = this.handleEventSubmit.bind(this);
+
     }
 
 
@@ -67,7 +84,8 @@ class AdminPage extends React.Component {
                 });
             }
         }
-    }
+    
+}
 
     /**
     * handlePassword(e)
@@ -117,11 +135,70 @@ class AdminPage extends React.Component {
         this.setState(
             {
                 EventsForm: true,
-                ManageTeamsPage: false,
+                ManageTeamsForm: false,
                 MatchesForm: false,
                 AccoladesForm: false
             }
         )
+    }
+
+    handleEventTitle = (e) => {
+        this.setState({ EventTitle: e.target.value })
+    }
+
+    handleEventDesc = (e) => {
+        this.setState({ EventDesc: e.target.value })
+    }
+
+    handleEventImage = (e) => {
+        this.setState({ EventImage: e.target.value })
+    }
+
+    handleEventDate = (e) => {
+        this.setState({ EventDate: e.target.value })
+    }
+
+    handleEventSubmit = () => {
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/eventsform"
+
+        let formData = new FormData();
+        formData.append('event_name', this.state.EventTitle);
+        formData.append('event_description', this.state.EventDesc);
+        formData.append('event_img', this.state.EventImage);
+        formData.append('event_date', this.state.EventDate);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+            .then((response) => {
+                if ((response.status === 200) || (response.status === 204)) {
+                    this.setState(
+                        {
+                            EventCreated:true
+                        }
+                    )
+                    return response.json()
+                } else if ((this.state.EventTitle === null) && (this.state.EventDesc === null) && (this.state.EventImage === null) && (this.state.EventDate === null)) {
+                    this.setState({ error: "Please answer all fields within the form before submitting." })
+                } else if (this.state.EventTitle === null) {
+                    this.setState({ error: "Please enter a Title for the event." })
+                } else if (this.state.EventDesc === null) {
+                    this.setState({ error: "Please enter a description for the event." })
+                } else if (this.state.EventImage === null) {
+                    this.setState({ error: "Please provide an Image to be shown with the event" })
+                } else if (this.state.EventDate === null) {
+                    this.setState({ error: "Please enter a date for the event." })
+                } else if (response.status === 406) {
+                    this.setState({ error: "The event details you have entered cannot be used!" })
+                } else if (response.status === 403) {
+                    this.setState({ error: "Sorry, an event with this name already exists!" })
+                }
+            })
+            .catch((err) => {
+                console.log("something went wrong ", err)
+            }
+            );
     }
 
     /**
@@ -135,26 +212,8 @@ class AdminPage extends React.Component {
         this.setState(
             {
                 EventsForm: false,
-                ManageTeamsPage: true,
+                ManageTeamsForm: true,
                 MatchesForm: false,
-                AccoladesForm: false
-            }
-        )
-    }
-
-    /**
-    * [Function Name]
-    * 
-    * [Function Description]
-    *
-    * @param [type] $[var]   [Description]
-    */
-    handleAddMatchesClick = () => {
-        this.setState(
-            {
-                EventsForm: false,
-                ManageTeamsPage: false,
-                MatchesForm: true,
                 AccoladesForm: false
             }
         )
@@ -171,7 +230,7 @@ class AdminPage extends React.Component {
         this.setState(
             {
                 EventsForm: false,
-                ManageTeamsPage: false,
+                ManageTeamsForm: false,
                 MatchesForm: false,
                 AccoladesForm: true
             }
@@ -186,7 +245,7 @@ class AdminPage extends React.Component {
     * @param [type] $[var]   [Description]
     */
     handleTeamSelect = (e) => {
-
+        this.setState({TeamDropDown:e.target.value})
     }
 
     /**
@@ -197,10 +256,43 @@ class AdminPage extends React.Component {
     * @param [type] $[var]   [Description]
     */
     handleTeamAccoladeSelect = (e) => {
-
+        this.setState({AccoladesDropDown:e.target.value})
     }
 
-    
+    handleAccoladeSubmit = () => {
+        let url = ""
+
+        let formData = new FormData();
+        formData.append('event_name', this.state.EventTitle);
+        formData.append('event_description', this.state.EventDesc);
+        formData.append('event_img', this.state.EventImage);
+        formData.append('event_date', this.state.EventDate);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+            .then((response) => {
+                if ((response.status === 200) || (response.status === 204)) {
+                    this.setState(
+                        {
+                            registered: true
+                        }
+                    )
+                    return response.json()
+                } else if (response.status === 406) {
+                    this.setState({ error: "The event details you have entered cannot be used!" })
+                } else if (response.status === 403) {
+                    this.setState({ error: "Sorry, an event with this name already exists!" })
+                }
+            })
+            .catch((err) => {
+                console.log("something went wrong ", err)
+            }
+            );
+    }
+
+
     /**
     * [Function Name]
     * 
@@ -210,9 +302,9 @@ class AdminPage extends React.Component {
     */
     render() {
         let page;
+        let errorMessage = this.state.error
 
         if (this.state.admin) {
-            console.log("User is admin.")
             if (this.state.EventsForm) {
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
@@ -226,21 +318,28 @@ class AdminPage extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
-                                <AdminButtons handleAddMatchesClick={this.handleAddMatchesClick}
+                                <AdminButtons 
+                                    handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleManageTeamsClick={this.handleManageTeamsClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
-                                <FormWeeklyEvents />
+                                <FormWeeklyEvents
+                                handleEventTitle={this.handleEventTitle}
+                                handleEventDesc={this.handleEventDesc}
+                                handleEventImage={this.handleEventImage}
+                                handleEventDate={this.handleEventDate}
+                                handleEventSubmit={this.handleEventSubmit} />
+                                <ul><p className="errorMessage">{errorMessage}</p></ul>
                             </Grid>
                             <Grid item xs={1}>
                             </Grid>
                         </Grid>
                     </Box>
                 )
-            } else if (this.state.ManageTeamsPage) {
+            } else if (this.state.ManageTeamsForm) {
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
@@ -262,34 +361,7 @@ class AdminPage extends React.Component {
                             </Grid>
                             <Grid item xs={10}>
                                 <FormManageTeams />
-                            </Grid>
-                            <Grid item xs={1}>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                )
-            } else if (this.state.MatchesForm) {
-                page = (
-                    <Box sx={{ flexGrow: 1 }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                    Add a match!
-                                </Typography>
-                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                    Enter the match's details down below!
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={1}>
-                                <AdminButtons
-                                    handleAddMatchesClick={this.handleAddMatchesClick}
-                                    handleEventsFormClick={this.handleEventsFormClick}
-                                    handleManageTeamsClick={this.handleManageTeamsClick}
-                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
-                                    handleLogoutClick={this.handleLogoutClick} />
-                            </Grid>
-                            <Grid item xs={10}>
-                                <FormWeeklyMatches />
+                                <ul><p className="errorMessage">{errorMessage}</p></ul>
                             </Grid>
                             <Grid item xs={1}>
                             </Grid>
@@ -320,6 +392,8 @@ class AdminPage extends React.Component {
                                 <FormTeamAccolades
                                     handleTeamAccoladeSelect={this.handleTeamAccoladeSelect}
                                     handleTeamSelect={this.handleTeamSelect} />
+                                    handleAccoladeSubmit={this.handleAccoladeSubmit}
+                                    <ul><p className="errorMessage">{errorMessage}</p></ul>
                             </Grid>
                             <Grid item xs={1}>
                             </Grid>

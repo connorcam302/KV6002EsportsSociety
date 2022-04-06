@@ -51,12 +51,12 @@ class LoginRegisterPage extends React.Component {
     */
     componentDidMount() {
         if (localStorage.getItem('UserLoginToken')) {
-            let decodedToken = jwt_decode(localStorage.getItem("UserLoginToken"))
             this.setState({
                 user: true,
-                token: localStorage.getItem('myReadingListToken')
+                token: localStorage.getItem('UserLoginToken')
             })
         }
+
     }
 
 

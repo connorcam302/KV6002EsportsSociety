@@ -30,14 +30,7 @@ class GatewayAccolades extends Gateway  {
         $result = $this->getDatabase()->executeSQL($this->sql);
         $this->setResult($result);
     }
-
-    /**
-     * Returns a team's 3 latest results.
-     *
-     * @return   array
-     */
-
-
+    
     public function findByTeam($id)
     {
         $this->sql .= " WHERE team.team_id = :id";
@@ -73,6 +66,13 @@ class GatewayAccolades extends Gateway  {
                         LIMIT 1";
         $params = ["id" => $id];
         $result = $this->getDatabase()->executeSQL($this->sql, $params);
+        $this->setResult($result);
+    }
+
+    public function findAllPossible()
+    {
+        $sql = "select * from accolades";
+        $result = $this->getDatabase()->executeSQL($sql);
         $this->setResult($result);
     }
 

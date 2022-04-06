@@ -21,13 +21,6 @@ class FormWeeklyEvents extends React.Component {
                     onChange={this.props.handleEventTitle}
                 /></ul>
 
-                <ul><input
-                    type='text'
-                    placeholder='Game being played'
-                    value={this.props.eventDesc}
-                    onChange={this.props.handleEventGame}
-                /></ul>
-
                 <ul><textarea
                     type='text'
                     placeholder='Description of event'
@@ -37,9 +30,16 @@ class FormWeeklyEvents extends React.Component {
 
                 <ul><input
                     type='text'
+                    placeholder='Image used in Event'
+                    value={this.props.eventDesc}
+                    onChange={this.props.handleEventImage}
+                /></ul>
+
+                <ul><input
+                    type='date'
                     placeholder='Date & Time of event'
                     value={this.props.eventDesc}
-                    onChange={this.props.handleEventTime}
+                    onChange={this.props.handleEventDate}
                 /></ul>
 
                 <ul><Button onClick={this.props.handleEventSubmit}>Submit Event</Button></ul>
