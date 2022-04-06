@@ -34,14 +34,14 @@ class ControllerEditTeam extends Controller {
                 $this->getGateway()->editTeam($name,$id);
             } elseif (is_null($name) || is_null($id)) {
                 $this->getResponse()->setMessage("Ensure that all mandatory fields are not null.");
-                $this->getResponse()->setStatusCode(410);
+                $this->getResponse()->setStatus(410);
             } else {
                 $this->getResponse()->setMessage("Error was encountered.");
-                $this->getResponse()->setStatusCode(505);
+                $this->getResponse()->setStatus(505);
             }
         } else {
             $this->getResponse()->setMessage("Method not allowed");
-            $this->getResponse()->setStatusCode(405);
+            $this->getResponse()->setStatus(405);
         }
     }
 }

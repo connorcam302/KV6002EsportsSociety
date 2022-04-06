@@ -20,11 +20,7 @@ class ControllerRegisterApi extends Controller {
 
                 if (!is_null($email) && !is_null($password) && !is_null($userign)  && !is_null($userFirst)  && !is_null($userLast)) {
 
-                    if (strpos($email, '@gmail.com') 
-                        || strpos($email, '@outlook.com') 
-                        || strpos($email, '@yahoo.com') 
-                        && strlen($password)>8 
-                        && strlen($password)<=16)
+                    if (strpos($email,'@')&& strlen($password)>8) 
                     {
 
                         $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
@@ -32,21 +28,21 @@ class ControllerRegisterApi extends Controller {
                 
                     } else {
                         $this->getResponse()->setMessage("The password or email you have entered cannot be used.");
-                        $this->getResponse()->setStatusCode(406);
+                        $this->getResponse()->setStatus(406);
                     }
                 } else {
                     $this->getResponse()->setMessage("The password or email you have entered cannot be used.");
-                    $this->getResponse()->setStatusCode(406);
+                    $this->getResponse()->setStatus(406);
                 }
             } else {
                 //if the user is registered prompt a corresponding message
                 //set status code to 403 forbidden
                 $this->getResponse()->setMessage("Sorry, this email address is already in use!");
-                $this->getResponse()->setStatusCode(403);
+                $this->getResponse()->setStatus(403);
             }
         } else {
             $this->getResponse()->setMessage("Method not allowed");
-            $this->getResponse()->setStatusCode(405);
+            $this->getResponse()->setStatus(405);
         }
     }
 }
