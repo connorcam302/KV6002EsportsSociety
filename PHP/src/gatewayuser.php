@@ -18,7 +18,7 @@ class GatewayUser extends Gateway
      * 
      */
     public function loginUser($email) {
-        $sql = " Select user_id, user_password, user_isAdmin from user where user_email = :user_email";
+        $sql = " Select user_id, user_password,user_ign, user_isAdmin from user where user_email = :user_email";
         $params = [":user_email" => $email];
         $result = $this->getDatabase()->executeSQL($sql, $params);
         $this->setResult($result);

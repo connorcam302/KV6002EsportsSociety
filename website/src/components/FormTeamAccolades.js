@@ -59,7 +59,6 @@ class FormTeamAccolades extends React.Component {
     */
 
     fetchDataAccolade = (urlAccolade) => {
-        urlAccolade
         fetch(urlAccolade)
             .then((response) => {
                 if (response.status === 200) {

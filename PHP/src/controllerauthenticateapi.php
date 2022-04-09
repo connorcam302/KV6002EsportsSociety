@@ -47,6 +47,7 @@ class ControllerAuthenticateApi extends Controller
                         $payload = array(
                             "user_id" => $this->getGateway()->getResult()[0]['user_id'], //Assigns the user_id in the token to be the same as the id collected when checking the email address and password.
                             "user_isAdmin" => $this->getGateway()->getResult()[0]['user_isAdmin'], //Assigns the user_isAdmin value into the token, used to check the Admin status to gain access to the admin page.
+                            "user_ign" => $this->getGateway()->getResult()[0]['user_ign'], //Assigns the user_isAdmin value into the token, used to check the Admin status to gain access to the admin page.
                             "exp" => time() + 2592000 //Set to 30 days till expiration.
                         );
 
