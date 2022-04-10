@@ -127,6 +127,9 @@ class LoginRegisterPage extends React.Component {
                 registerpage: true
             }
         )
+        if (this.state.registered){
+            this.setState({ error: "You cannot re-register your account from here, please use the details you created to log in." })
+        }
     }
 
 
@@ -223,14 +226,7 @@ class LoginRegisterPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if ((response.status === 200) || (response.status === 204)) {
-                    this.setState(
-                        {
-                            registered: true
-                        }
-                    )
-                    return response.json()
-                } else if ((this.state.email === null) && (this.state.password === null) && (this.state.userign === null) && (this.state.userFirst === null) && (this.state.userLast === null)) {
+                if ((this.state.email === null) && (this.state.password === null) && (this.state.userign === null) && (this.state.userFirst === null) && (this.state.userLast === null)) {
                     this.setState({ error: "Please answer all fields within the form before submitting." })
                 } else if (this.state.email === null) {
                     this.setState({ error: "Please enter an email." })
@@ -246,6 +242,13 @@ class LoginRegisterPage extends React.Component {
                     this.setState({ error: "The email address or password you have entered is not acceptable." })
                 } else if (response.status === 403) {
                     this.setState({ error: "The email address you have entered already exists, please try another email address." })
+                } else if ((response.status === 200) || (response.status === 204)) {
+                    this.setState(
+                        {
+                            registered: true
+                        }
+                    )
+                    return response.json()
                 }
             })
             .catch((err) => {
@@ -352,6 +355,7 @@ class LoginRegisterPage extends React.Component {
                                 handleEmail={this.handleEmail}
                                 handlePassword={this.handlePassword}
                                 handleLoginClick={this.handleLoginClick}
+                                handleRegisterState={this.handleRegisterState}
                             />
                             <ul><p className="errorMessage">{errorMessage}</p></ul>
                         </Grid>

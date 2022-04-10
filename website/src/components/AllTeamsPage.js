@@ -1,101 +1,168 @@
+import React from "react";
+import Teams from "./Teams.js";
+import TeamSubmissionForm from "./TeamSubmissionForm.js";
+import SearchBox from "./SearchBox.js";
 
 /**
  * Team page
  *
  * @author Harry Laws w19024957
+ * @collab Ethan Borrill W18001798 - Worked on the Team Submission form functionality.
  */
 
- import React from "react";
- import Teams from "./Teams.js";
- import TeamPage from "./TeamPage.js";
- import SearchBox from "./SearchBox.js";
- import NewTeam from "./NewTeam.js";
- class AllTeamsPage extends React.Component {
-     constructor(props) {
-         super(props)
-         this.state = {
-             name:"",
-             
-         }
-         
-         this.handleSearch = this.handleSearch.bind(this);
-         this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
-         this.handleTeamName = this.handleTeamName.bind(this);
-         this.handleGameSelect = this.handleGameSelect.bind(this);
-         
-     }
+class AllTeamsPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            TeamName: null,
+            GamesDropDown: "",
+            TeamsDropDown: "",
+            error: "",
+        }
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleTeamName = this.handleTeamName.bind(this);
+        this.handleGameSelect = this.handleGameSelect.bind(this);
+        this.handleTeamSelect = this.handleTeamSelect.bind(this);
+        this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
+    }
 
-     handleTeamSubmit = () => {
-        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/pendingteams"
+    //Functionality for the Team Submission Form
+
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
+    handleTeamName = (e) => {
+        this.setState({ TeamName: e.target.value })
+    }
+
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
+    handleGameSelect = (e) => {
+        this.setState({ GamesDropDown: e.target.value })
+    }
+
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
+    handleTeamSelect = (e) => {
+        this.setState({ TeamsDropDown: e.target.value })
+    }
+
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
+
+    handleTeamSubmit = () => {
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/teamsform"
 
         let formData = new FormData();
-        formData.append('team_id', this.state.team_id);
-        formData.append('team_name', this.state.team_name);
-        formData.append('game_id', this.state.game_id);
-        formData.append('team_lead', this.state.team_lead);
+        formData.append('team_name', this.state.TeamName);
+        formData.append('game_id', this.state.GamesDropDown);
+        formData.append('team_lead', this.state.TeamsDropDown);
         fetch(url, {
             method: 'POST',
             headers: new Headers(),
             body: formData
         })
-        
-        .then( (data) => {
-            this.setState({results:data.results})
-          })
-          .catch ((err) => { 
-            console.log("something went wrong ", err) 
-          });
+            .then((response) => {
+                if ((this.state.TeamName === null) && (this.state.GamesDropDown === "") && (this.state.TeamsDropDown === "")) {
+                    this.setState({ error: "Please complete your form before submitting!" })
+                } else if (this.state.TeamName === null) {
+                    this.setState({ error: "Please enter a team name!" })
+                } else if (this.state.GamesDropDown === "") {
+                    this.setState({ error: "Please select a game your team will play!" })
+                } else if (this.state.TeamsDropDown === "") {
+                    this.setState({ error: "Please provide a team leader!" })
+                } else if (response.status === 403) {
+                    this.setState({ error: "This team name has already been submitted for approval, please try another name." })
+                } else if ((response.status === 200) || (response.status === 204)) {
+                    this.setState({ error: "This team application has been submitted, please wait for approval." })
+                    return response.json()
+                }
+            })
+            .catch((err) => {
+                console.log("something went wrong ", err)
+                console.warn(xhr.responseText) 
+            }
+            );
     }
-    
 
-        
-        handleGameSelect = (e) => {
-        this.setState({ game_id: e.target.value })
-        }
-        handleTeamName = (e) => {
-                this.setState({ team_name: e.target.value })
-        }
- 
-        handleSearch = (e) => {
-         this.setState({search:e.target.value})
-        }
 
-     
-     render(){
-         return (
-             <div class="wrapper sidebar right">
-                     <div class="inner">
-                         <header >
-                             <h2>Teams</h2>
-                         </header>
-                             <div class="content">
-                                 <div class="inner">
-                                  <Teams search={this.state.search}/>  
-                                 </div>
-                             </div>
-                             <div class="sidebar">
-                             <section>
-                                 <div>
-                                     <SearchBox 
-                                      search={this.state.search} 
-                                      handleSearch={this.handleSearch}/>
-                                 </div>
-                                 
-                             <h2>Create a new Team</h2>
-                                 <form method="post" action="#">
-                                     <NewTeam
-                                     handleTeamName={this.handleTeamName}
-                                     handleGameSelect={this.handleGameSelect}
-                                     handleTeamSubmit={this.handleTeamSubmit}/>
-                                 </form>
-                             </section>
-                             </div>
-                     </div>
-         
-             </div>
-         );
-      }
-     }
 
- 
- export default AllTeamsPage;
+    /**
+       * [Function Name]
+       * 
+       * [Function Description]
+       *
+       * @param [type] $[var]   [Description]
+       */
+    handleSearch = (e) => {
+        this.setState({ search: e.target.value })
+    }
+
+
+    /**
+    * [Function Name]
+    * 
+    * [Function Description]
+    *
+    * @param [type] $[var]   [Description]
+    */
+    render() {
+        let page;
+        let errorMessage = this.state.error
+        page = (
+            <div class="wrapper sidebar right">
+                <div class="inner">
+                    <header >
+                        <h2>Teams</h2>
+                    </header>
+                    <div class="content">
+                        <div class="inner">
+                            <Teams search={this.state.search} />
+                        </div>
+                    </div>
+                    <div class="sidebar">
+                        <section>
+                            <SearchBox
+                                search={this.state.search}
+                                handleSearch={this.handleSearch} />
+
+                            <TeamSubmissionForm
+                                handleTeamName={this.handleTeamName}
+                                handleTeamSelect={this.handleTeamSelect}
+                                handleGameSelect={this.handleGameSelect}
+                                handleTeamSubmit={this.handleTeamSubmit} />
+                            <ul><p className="errorMessage">{errorMessage}</p></ul>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+        );
+
+        return (
+            <div>{page}</div>
+        )
+    }
+}
+
+
+export default AllTeamsPage;

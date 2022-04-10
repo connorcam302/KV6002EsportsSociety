@@ -10,8 +10,8 @@
  */         
 
 class GatewayGetPendingTeams extends Gateway  {
-    private $sql = "SELECT pendingTeams.team_id, team_name, game.game_name, team_lead FROM pendingTeams
-                    JOIN game ON pendingTeams.game_id = game.game_id";
+    private $sql = "SELECT pendingTeams.team_id, team_name, game.game_name, user_ign FROM pendingTeams
+                    JOIN game ON pendingTeams.game_id = game.game_id JOIN user ON pendingTeams.team_lead = user.user_id";
     
     public function __construct() {
         $this->setDatabase(DATABASE);

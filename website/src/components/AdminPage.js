@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
 
-
 /**
 * AdminPage
 * 
@@ -213,10 +212,7 @@ class AdminPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if (response.status === 200) {
-                    this.setState({ error: "Event has been successfully created and uploaded!" })
-                    return response.json()
-                } else if ((this.state.EventTitle === null) && (this.state.EventDesc === null) && (this.state.EventImage === null) && (this.state.EventDate === null)) {
+                if ((this.state.EventTitle === null) && (this.state.EventDesc === null) && (this.state.EventImage === null) && (this.state.EventDate === null)) {
                     this.setState({ error: "Please answer all fields within the form before submitting." })
                 } else if (this.state.EventTitle === null) {
                     this.setState({ error: "Please enter a Title for the event." })
@@ -230,6 +226,9 @@ class AdminPage extends React.Component {
                     this.setState({ error: "The event details you have entered cannot be used!" })
                 } else if (response.status === 403) {
                     this.setState({ error: "Sorry, an event with this name already exists!" })
+                } else if ((response.status === 200) || (response.status === 204)) {
+                    this.setState({ error: "Event has been successfully created and uploaded!" })
+                    return response.json()
                 }
             })
             .catch((err) => {

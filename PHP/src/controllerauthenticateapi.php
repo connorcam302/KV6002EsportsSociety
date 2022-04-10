@@ -12,7 +12,7 @@ class ControllerAuthenticateApi extends Controller
 {
 
     protected function setGateway() {
-        $this->gateway = new GatewayUser();
+        $this->gateway = new GatewayLogin();
     }
 
 

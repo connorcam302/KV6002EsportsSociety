@@ -33,7 +33,6 @@ class FormManageTeams extends React.Component {
         super(props);
         this.state = {
             results: [],
-            Teams: [],
         }
     }
 

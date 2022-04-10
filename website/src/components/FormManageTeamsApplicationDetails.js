@@ -26,7 +26,7 @@ class FormManageTeamsApplicationDetails extends React.Component {
                         Team Leader:
                         </Typography>
                         <Typography sx={{ fontSize: 20, fontWeight: 250 }}>
-                        {this.props.pendingTeams.team_lead}
+                        {this.props.pendingTeams.user_ign}
                         </Typography>
                         <br></br>
                       </div>

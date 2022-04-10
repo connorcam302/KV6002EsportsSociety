@@ -13,7 +13,7 @@ class ControllerCreateTeamForm extends Controller
 {
     protected function setGateway()
     {
-        $this->gateway = new GatewayRegister();
+        $this->gateway = new GateWayCreateTeamForm();
     }
 
     protected function processRequest()
@@ -25,7 +25,7 @@ class ControllerCreateTeamForm extends Controller
         if ($this->getRequest()->getRequestMethod() === "POST") {
             if (!$this->getGateway()->teamPending($teamname)) {
                 if (!is_null($teamname) && !is_null($gameid) && !is_null($teamlead)) {
-                    $this->getGateway()->registerUser($teamname, $gameid, $teamlead);
+                    $this->getGateway()->submitTeam($teamname, $gameid, $teamlead);
                 } else {
                     $this->getResponse()->setMessage("The password or email you have entered cannot be used.");
                     $this->getResponse()->setStatus(406);
