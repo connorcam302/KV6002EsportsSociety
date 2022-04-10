@@ -9,7 +9,7 @@
  import Teams from "./Teams.js";
  import TeamPage from "./TeamPage.js";
  import SearchBox from "./SearchBox.js";
- 
+ import NewTeam from "./NewTeam.js";
  class AllTeamsPage extends React.Component {
      constructor(props) {
          super(props)
@@ -19,12 +19,48 @@
          }
          
          this.handleSearch = this.handleSearch.bind(this);
+         this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
+         this.handleTeamName = this.handleTeamName.bind(this);
+         this.handleGameSelect = this.handleGameSelect.bind(this);
          
      }
+
+     handleTeamSubmit = () => {
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/pendingteams"
+
+        let formData = new FormData();
+        formData.append('team_id', this.state.team_id);
+        formData.append('team_name', this.state.team_name);
+        formData.append('game_id', this.state.game_id);
+        formData.append('team_lead', this.state.team_lead);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+        
+        .then( (data) => {
+            this.setState({results:data.results})
+          })
+          .catch ((err) => { 
+            console.log("something went wrong ", err) 
+          });
+    }
+    
+
+        
+        handleGameSelect = (e) => {
+        this.setState({ game_id: e.target.value })
+        }
+        handleTeamName = (e) => {
+                this.setState({ team_name: e.target.value })
+        }
  
-     handleSearch = (e) => {
+        handleSearch = (e) => {
          this.setState({search:e.target.value})
-     }
+        }
+
+     
      render(){
          return (
              <div class="wrapper sidebar right">
@@ -47,32 +83,10 @@
                                  
                              <h2>Create a new Team</h2>
                                  <form method="post" action="#">
-                                     <div class="row uniform">
-                                         <div >
-                                        <label>Team Name</label>
-                                        <div>
-                                         <input
-                                         type='text'
-                                         value={this.props.team_name}
-                                         onChange={this.props.team_name}
-                                         />
-                                         </div>
-                                     </div>
-                                         <label>Game</label>
-                                             <div >
-                                                 <select value={this.props.game_id}>
-                                                 <option value="1">Dota 2</option>
-                                                 <option value="2">League of Legends</option>
-                                                 <option value="3">Rainbow 6 Siege</option>
-                                                 <option value="4">Rocket League</option>
-                                                 <option value="5">Valorant</option>
-                                                 <option value="6">Overwatch</option>
-                                                   </select>
-                                             </div>
-                                     <div>
-                                         <input type="submit" value="Send for approval" class="special" />
-                                     </div>
-                                     </div>
+                                     <NewTeam
+                                     handleTeamName={this.handleTeamName}
+                                     handleGameSelect={this.handleGameSelect}
+                                     handleTeamSubmit={this.handleTeamSubmit}/>
                                  </form>
                              </section>
                              </div>
@@ -82,5 +96,6 @@
          );
       }
      }
+
  
  export default AllTeamsPage;

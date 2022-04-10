@@ -84,7 +84,7 @@ class FormTeamAccolades extends React.Component {
     */
 
     fetchDataTeam = (urlTeam) => {
-        urlTeam
+        
         fetch(urlTeam)
             .then((response) => {
                 if (response.status === 200) {
