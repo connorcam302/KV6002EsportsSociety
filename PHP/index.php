@@ -51,6 +51,17 @@ switch ($request->getPath()) {
     case 'api/accoladesform':
         $controller = new ControllerAccoladesFormApi($request,$response);
         break;    
+    case 'api/teamsform':
+        $controler = new ControllerCreateTeamForm($request,$response);
+    case 'api/pendingteams':
+        $controller = new ControllerGetPendingTeams($request,$response);
+        break; 
+    case 'api/pendingteamsremove':
+        $controller = new ControllerPendingTeamsFormRemove($request,$response);
+        break;
+    case 'api/pendingteamsapprove':
+        $controller = new ControllerPendingTeamFormApprove($request,$response);
+        break;  
     case 'api/editplayer':
         $controller = new ControllerEditPlayer($request,$response);
             break;
