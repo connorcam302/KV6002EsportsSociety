@@ -71,7 +71,6 @@ class LoginRegisterPage extends React.Component {
     }
 
 
-
     /**
     * handlePassword(e)
     * 

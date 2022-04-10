@@ -32,7 +32,7 @@ class ControllerRegisterApi extends Controller {
 
                 if (!is_null($email) && !is_null($password) && !is_null($userign)  && !is_null($userFirst)  && !is_null($userLast)) {
 
-                    if (strpos($email,'@')&& strlen($password)>8) 
+                    if (strpos($email,'@') && strlen($password)>=8) 
                     {
 
                         $hashedpassword = password_hash($password, PASSWORD_DEFAULT);

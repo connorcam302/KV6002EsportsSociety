@@ -5,7 +5,7 @@ import FormManageTeamsApplicationDetails from "./FormManageTeamsApplicationDetai
 /**
 * FormManageTeams
 * 
-* This class is used to create the form necessary to handle applications to create teams to be displayed on the Teams page of the website.
+* This class is used to create the form necessary to handle applications to create teams, this form is used on the 'Team applications' page of the Admin page.
 *
 * @author Ethan Borrill W18001798
 */
@@ -15,7 +15,7 @@ class FormManageTeams extends React.Component {
     /**
     * componentDidMount
     * 
-    * Component did mount for this class collects the data from the accolades and teams APIS, these are then assigned to values URL1 and URL2 to be used in the dropdown boxes.
+    * Component did mount for this class collects the data from the pendingTeams API, this is then used within the dropdown box by being assigned to the URL variable.
     *
     */
     componentDidMount() {
@@ -29,7 +29,6 @@ class FormManageTeams extends React.Component {
     * Used within this class to initialise several values used within the file, such as an empty data array for accolades and teams.
     *
     */
-
       constructor(props) {
         super(props);
         this.state = {
@@ -42,7 +41,6 @@ class FormManageTeams extends React.Component {
         if (this.props.team_id !== undefined && this.props.team_id !== "") {
             url += "?id=" + this.props.team_id
         }
-
         fetch(urlPendingTeams)
             .then((response) => {
                 if (response.status === 200) {

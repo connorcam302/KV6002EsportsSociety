@@ -47,9 +47,9 @@ class AdminPage extends React.Component {
             EventImage: null,
             EventDate: null,
 
-            TeamDropDown: null,
-            AccoladesDropDown: null,
-            TeamApplicationsDropDown: null,
+            TeamDropDown: "",
+            AccoladesDropDown: "",
+            TeamApplicationsDropDown: "",
         }
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleEventsFormClick = this.handleEventsFormClick.bind(this);
@@ -133,7 +133,7 @@ class AdminPage extends React.Component {
         )
         localStorage.removeItem('UserLoginToken');
     }
-
+    //FUNCTIONALITY FOR THE WEEKLY EVENTS FORM.
     /**
     * handleEventsFormClick
     * 
@@ -150,7 +150,6 @@ class AdminPage extends React.Component {
             }
         )
     }
-
 
     /**
     * handleEventTitle(e)
@@ -181,7 +180,6 @@ class AdminPage extends React.Component {
     handleEventImage = (e) => {
         this.setState({ EventImage: e.target.value })
     }
-
 
     /**
     * handleEventDate(e)
@@ -215,7 +213,7 @@ class AdminPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if ((response.status === 200) || (response.status === 204)) {
+                if (response.status === 200) {
                     this.setState({ error: "Event has been successfully created and uploaded!" })
                     return response.json()
                 } else if ((this.state.EventTitle === null) && (this.state.EventDesc === null) && (this.state.EventImage === null) && (this.state.EventDate === null)) {
@@ -240,6 +238,7 @@ class AdminPage extends React.Component {
             );
     }
 
+    //FUNCTIONALITY FOR THE TEAM MANAGEMENT PAGE.
     /**
     * handleManageTeamsClick
     * 
@@ -257,10 +256,23 @@ class AdminPage extends React.Component {
         )
     }
 
+    /**
+    * handleTeamSubmissionsSelect
+    * 
+    * This function handles the updating of the dropdown box used on the 'Teams Application' page, which is essential for navigating applications via updating the ID used in the dropdown box to identify each item.
+    *
+    */
     handleTeamSubmissionsSelect = (e) => {
-        this.setState({ TeamApplicationsDropDown: e.target.value})
+        this.setState({ TeamApplicationsDropDown: e.target.value })
     }
 
+    /**
+    * handleTeamsFormApprove
+    * 
+    * This function handles the Approval of a team application from the pendingTeams list, this is assigned to the 'Approve application' button on the Team Applications.
+    * The form is managed using the dropdown box, which displays the name of the Team in accordance with the list of applications displayed above the dropdown.
+    *
+    */
     handleTeamsFormApprove = () => {
         let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/pendingteamsapprove"
 
@@ -272,10 +284,13 @@ class AdminPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if ((response.status === 200) || (response.status === 204)) {
+                if ((this.state.TeamApplicationsDropDown === "")){
+                    this.setState({ error: "Please select an application before approving!" })
+                }
+                else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "This team submission has been approved!" })
                     return response.json()
-                }
+                } 
             })
             .catch((err) => {
                 console.log("something went wrong ", err)
@@ -283,6 +298,13 @@ class AdminPage extends React.Component {
             );
     }
 
+    /**
+    * handleTeamsFormDecline
+    * 
+    * This function handles the deletion of a team application from the pendingTeams list, this is assigned to the Decline application button on the Team Applications.
+    * The form is managed using the dropdown box, which displays the name of the Team in accordance with the list of applications displayed above the dropdown.
+    *
+    */
     handleTeamsFormDecline = () => {
         let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/pendingteamsremove"
 
@@ -294,7 +316,9 @@ class AdminPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if ((response.status === 200) || (response.status === 204)) {
+                if (this.state.TeamApplicationsDropDown === ""){
+                    this.setState({ error: "Please select an application before attempting to delete!" })
+                } else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "This team application has been successfully deleted!" })
                     return response.json()
                 }
@@ -305,6 +329,7 @@ class AdminPage extends React.Component {
             );
     }
 
+    //FUNCTIONALITY FOR THE ACCOLADES PAGE.
     /**
     * handleTeamAccoladesClick
     * 
@@ -342,14 +367,12 @@ class AdminPage extends React.Component {
         this.setState({ AccoladesDropDown: e.target.value })
     }
 
-
     /**
     * handleAccoladeSubmit
     * 
     * This function is used with the Submission button shown on the accolade page, upon pressing this button a check is performed. This check determines if the dropdowns used have an option selected within them,
     * If a team has been selected and the accolade ID have been selected - the ID of these 2 components are inserted into the teamAccolades table within the database.
     */
-
     handleAccoladeSubmit = () => {
         let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/accoladesform"
 
@@ -362,13 +385,18 @@ class AdminPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if ((response.status === 200) || (response.status === 204)) {
+                if ((this.state.TeamDropDown === "") && (this.state.AccoladesDropDown === "")){
+                    this.setState({ error: "Please provide both an Team and Accolade before submitting." })
+                }
+                else if (this.state.TeamDropDown === ""){
+                    this.setState({ error: "Please enter a team to provide this accolade to!" })
+                }
+                else if (this.state.AccoladesDropDown === ""){
+                    this.setState({ error: "Please enter an accolade for this team!" })
+                }
+                else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "Accolade has been successfully Assigned!" })
                     return response.json()
-                } else if (response.status === 406) {
-                    this.setState({ error: "The event details you have entered cannot be used!" })
-                } else if (response.status === 403) {
-                    this.setState({ error: "Sorry, an event with this name already exists!" })
                 }
             })
             .catch((err) => {
@@ -376,7 +404,6 @@ class AdminPage extends React.Component {
             }
             );
     }
-
 
     /**
     * render
@@ -391,7 +418,7 @@ class AdminPage extends React.Component {
         let errorMessage = this.state.error
 
         if (this.state.admin) {
-            if (this.state.EventsForm) {
+            if (this.state.EventsForm) { //EVENTS FORM STATE
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
@@ -425,16 +452,16 @@ class AdminPage extends React.Component {
                         </Grid>
                     </Box>
                 )
-            } else if (this.state.ManageTeamsForm) {
+            } else if (this.state.ManageTeamsForm) { //MANAGE TEAM FORM STATE
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                    Manage Teams
+                                    Team Applications
                                 </Typography>
                                 <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                    Please use the table below to manage teams forms.
+                                    Please use the dropdown box to approve or delete applications.
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
@@ -446,7 +473,7 @@ class AdminPage extends React.Component {
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
-                                <FormManageTeams 
+                                <FormManageTeams
                                     handleTeamSubmissionsSelect={this.handleTeamSubmissionsSelect}
                                     handleTeamsFormApprove={this.handleTeamsFormApprove}
                                     handleTeamsFormDecline={this.handleTeamsFormDecline} />
@@ -457,7 +484,7 @@ class AdminPage extends React.Component {
                         </Grid>
                     </Box>
                 )
-            } else if (this.state.AccoladesForm) {
+            } else if (this.state.AccoladesForm) { //ACCOLADES FORM STATE
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
@@ -489,7 +516,7 @@ class AdminPage extends React.Component {
                         </Grid>
                     </Box>
                 )
-            } else {
+            } else { //LANDING PAGE STATE.
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
@@ -517,8 +544,7 @@ class AdminPage extends React.Component {
                     </Box>
                 )
             }
-        }
-        else {
+        } else { //Unauthorised ACCESS STATE
             page = (
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
