@@ -21,8 +21,6 @@ class NewTeam extends React.Component {
     }
 
     
-
-
     fetchDataTeam = (urlTeam) => {
         
         fetch(urlTeam)

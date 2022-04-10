@@ -49,6 +49,7 @@ class AdminPage extends React.Component {
 
             TeamDropDown: null,
             AccoladesDropDown: null,
+            TeamApplicationsDropDown: null,
         }
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleEventsFormClick = this.handleEventsFormClick.bind(this);
@@ -65,6 +66,9 @@ class AdminPage extends React.Component {
         this.handleEventDate = this.handleEventDate.bind(this);
         this.handleEventSubmit = this.handleEventSubmit.bind(this);
 
+        this.handleTeamSubmissionsSelect = this.handleTeamSubmissionsSelect.bind(this);
+        this.handleTeamsFormApprove = this.handleTeamsFormApprove.bind(this);
+        this.handleTeamsFormDecline = this.handleTeamsFormDecline.bind(this);
     }
 
 
@@ -253,6 +257,54 @@ class AdminPage extends React.Component {
         )
     }
 
+    handleTeamSubmissionsSelect = (e) => {
+        this.setState({ TeamApplicationsDropDown: e.target.value})
+    }
+
+    handleTeamsFormApprove = () => {
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/pendingteamsapprove"
+
+        let formData = new FormData();
+        formData.append('team_id', this.state.TeamApplicationsDropDown);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+            .then((response) => {
+                if ((response.status === 200) || (response.status === 204)) {
+                    this.setState({ error: "This team submission has been approved!" })
+                    return response.json()
+                }
+            })
+            .catch((err) => {
+                console.log("something went wrong ", err)
+            }
+            );
+    }
+
+    handleTeamsFormDecline = () => {
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/pendingteamsremove"
+
+        let formData = new FormData();
+        formData.append('team_id', this.state.TeamApplicationsDropDown);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+            .then((response) => {
+                if ((response.status === 200) || (response.status === 204)) {
+                    this.setState({ error: "This team application has been successfully deleted!" })
+                    return response.json()
+                }
+            })
+            .catch((err) => {
+                console.log("something went wrong ", err)
+            }
+            );
+    }
+
     /**
     * handleTeamAccoladesClick
     * 
@@ -394,7 +446,10 @@ class AdminPage extends React.Component {
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
-                                <FormManageTeams />
+                                <FormManageTeams 
+                                    handleTeamSubmissionsSelect={this.handleTeamSubmissionsSelect}
+                                    handleTeamsFormApprove={this.handleTeamsFormApprove}
+                                    handleTeamsFormDecline={this.handleTeamsFormDecline} />
                                 <ul><p className="errorMessage">{errorMessage}</p></ul>
                             </Grid>
                             <Grid item xs={1}>
