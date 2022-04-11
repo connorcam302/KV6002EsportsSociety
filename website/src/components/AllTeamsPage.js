@@ -2,6 +2,9 @@ import React from "react";
 import Teams from "./Teams.js";
 import TeamSubmissionForm from "./TeamSubmissionForm.js";
 import SearchBox from "./SearchBox.js";
+import Typography from '@mui/material/Typography';
+import { Box } from "@mui/system";
+import Grid from '@mui/material/Grid';
 
 /**
  * Team page
@@ -128,33 +131,31 @@ class AllTeamsPage extends React.Component {
         let page;
         let errorMessage = this.state.error
         page = (
-            <div class="wrapper sidebar right">
-                <div class="inner">
-                    <header >
-                        <h2>Teams</h2>
-                    </header>
-                    <div class="content">
-                        <div class="inner">
-                            <Teams search={this.state.search} />
-                        </div>
-                    </div>
-                    <div class="sidebar">
-                        <section>
-                            <SearchBox
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                            Teams
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={1}>
+                    </Grid>
+                    <Grid item xs={9}>
+                    <Teams search={this.state.search} />
+                    </Grid>
+                    <Grid item xs={2}>
+                    <SearchBox
                                 search={this.state.search}
                                 handleSearch={this.handleSearch} />
-
                             <TeamSubmissionForm
                                 handleTeamName={this.handleTeamName}
                                 handleTeamSelect={this.handleTeamSelect}
                                 handleGameSelect={this.handleGameSelect}
                                 handleTeamSubmit={this.handleTeamSubmit} />
                             <ul><p className="errorMessage">{errorMessage}</p></ul>
-                        </section>
-                    </div>
-                </div>
-
-            </div>
+                    </Grid>
+                </Grid>
+            </Box>
         );
 
         return (

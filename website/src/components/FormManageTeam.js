@@ -1,6 +1,6 @@
 import * as React from "react";
 import Button from '@mui/material/Button';
-import FormManageTeamsApplicationDetails from "./FormManageTeamsApplicationDetails";
+import FormManageTeamDetails from "./FormManageTeamDetails";
 
 /**
 * FormManageTeams
@@ -9,7 +9,7 @@ import FormManageTeamsApplicationDetails from "./FormManageTeamsApplicationDetai
 *
 * @author Ethan Borrill W18001798
 */
-class FormManageTeams extends React.Component {
+class FormManageTeam extends React.Component {
     
 
     /**
@@ -19,8 +19,8 @@ class FormManageTeams extends React.Component {
     *
     */
     componentDidMount() {
-        let urlPendingTeams = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/pendingteams"
-        this.fetchDataPendingTeams(urlPendingTeams)
+        let urlTeams = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/teams"
+        this.fetchDataTeams(urlTeams)
     }
 
      /**
@@ -36,11 +36,11 @@ class FormManageTeams extends React.Component {
         }
     }
 
-    fetchDataPendingTeams = (urlPendingTeams) => {
+    fetchDataTeams = (urlTeams) => {
         if (this.props.team_id !== undefined && this.props.team_id !== "") {
             url += "?id=" + this.props.team_id
         }
-        fetch(urlPendingTeams)
+        fetch(urlTeams)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
@@ -61,7 +61,7 @@ class FormManageTeams extends React.Component {
 
         return (
             <div>
-                {this.state.results.map((pendingTeams, i) => (<FormManageTeamsApplicationDetails key ={i} pendingTeams={pendingTeams}/>))}
+                {this.state.results.map((teams, i) => (<FormManageTeamDetails key ={i} teams={teams}/>))}
                 
                 <ul>
                     <label>
@@ -80,4 +80,4 @@ class FormManageTeams extends React.Component {
     }
 }
 
-export default FormManageTeams;
+export default FormManageTeam;

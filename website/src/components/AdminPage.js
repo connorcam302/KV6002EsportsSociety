@@ -2,7 +2,7 @@ import React from "react";
 import AdminButtons from "./AdminButtons.js";
 import jwt_decode from "jwt-decode";
 import FormWeeklyEvents from "./FormWeeklyEvents.js";
-import FormManageTeams from "./FormManageTeam.js";
+import FormTeamApplication from "./FormTeamApplication.js";
 import FormTeamAccolades from "./FormTeamAccolades.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
@@ -472,7 +472,7 @@ class AdminPage extends React.Component {
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
-                                <FormManageTeams
+                                <FormTeamApplication
                                     handleTeamSubmissionsSelect={this.handleTeamSubmissionsSelect}
                                     handleTeamsFormApprove={this.handleTeamsFormApprove}
                                     handleTeamsFormDecline={this.handleTeamsFormDecline} />

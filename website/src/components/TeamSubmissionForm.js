@@ -118,7 +118,7 @@ class TeamSubmissionForm extends React.Component {
                 <ul>
                     <label>
                         <select value={this.props.game_id} onChange={this.props.handleGameSelect}>
-                            <option value="">Select a game your team will play</option>
+                            <option value="">Select a game</option>
                             {this.state.games.map((game) => <option value={game.game_id}>{game.game_name}</option>)}
                         </select>
                     </label>
@@ -127,7 +127,7 @@ class TeamSubmissionForm extends React.Component {
                 <ul>
                     <label>
                         <select value={this.props.team_id} onChange={this.props.handleTeamSelect}>
-                            <option value="">Who will be your team captain?</option>
+                            <option value="">Team captain</option>
                             {this.state.players.map((player) => <option value={player.user_id}>{player.user_ign}</option>)}
                         </select>
                     </label>
