@@ -3,8 +3,26 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
+/**
+* TeamSubmissionForm
+* 
+* This form is displayed on the Teams page of the webpage,allowing users to submit their own team for approval by admins,
+* Users are required to submit a team name, the games the team will be playing and the leader of the team.
+*
+* @author Ethan Borrill W18001798
+* @collab
+*
+* @todo
+*/
+
 class TeamSubmissionForm extends React.Component {
 
+    /**
+    * componentDidMount
+    * 
+    * Component did mount for this class collects the data from the Games and Players APIS, these are then assigned to values urlGames and urlPlayers to be used in the dropdown boxes.
+    *
+    */
     componentDidMount() {
         let urlGames = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/games"
         this.fetchDataGames(urlGames)
@@ -14,6 +32,12 @@ class TeamSubmissionForm extends React.Component {
     }
 
 
+    /**
+    * Constructor
+    * 
+    * Used within this class to initialise several values used within the file, such as an empty data array for accolades and teams.
+    *
+    */
     constructor(props) {
         super(props);
         this.state = {
@@ -23,6 +47,12 @@ class TeamSubmissionForm extends React.Component {
         }
     }
 
+    /**
+    * fetchDataGames
+    * 
+    * Function retrieves the data collected from the Games API URL and sets the value of 'games' to be the relevant data.
+    *
+    */
     fetchDataGames = (urlGames) => {
         fetch(urlGames)
             .then((response) => {
@@ -40,6 +70,12 @@ class TeamSubmissionForm extends React.Component {
             });
     }
 
+    /**
+    * fetchDataPlayers
+    * 
+    * Function retrieves the data collected from the Players API URL and sets the value of 'players' to be the relevant data.
+    *
+    */
     fetchDataPlayers = (urlPlayers) => {
         fetch(urlPlayers)
             .then((response) => {
@@ -58,12 +94,19 @@ class TeamSubmissionForm extends React.Component {
     }
 
 
-
+    /**
+    * Render
+    * 
+    * Function will render the Text input used to enter the team names, dropdown menus and buttons used in the form to upload a Team Submission. These dropdowns will also contain the data of the Players and Games from their respective API.
+    * This includes the ID and Name of both the Games and Players.
+    *
+    * @returns {Page} - Will display the rendered page content.
+    */
     render() {
         return (
             <div class="row uniform">
                 <ul><Typography sx={{ fontSize: 24, fontWeight: 600 }}>
-                Create a new Team
+                    Create a new Team
                 </Typography></ul>
                 <ul><input
                     type='text'

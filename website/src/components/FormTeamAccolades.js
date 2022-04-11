@@ -20,10 +20,9 @@ class FormTeamAccolades extends React.Component {
     /**
     * componentDidMount
     * 
-    * Component did mount for this class collects the data from the accolades and teams APIS, these are then assigned to values URL1 and URL2 to be used in the dropdown boxes.
+    * Component did mount for this class collects the data from the accolades and teams APIS, these are then assigned to values urlAccolade and urlTeam to be used in the dropdown boxes.
     *
     */
-
     componentDidMount() {
         let urlAccolade = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/accolades"
         this.fetchDataAccolade(urlAccolade)
@@ -40,7 +39,6 @@ class FormTeamAccolades extends React.Component {
     * Used within this class to initialise several values used within the file, such as an empty data array for accolades and teams.
     *
     */
-
     constructor(props) {
         super(props);
         this.state = {
@@ -57,7 +55,6 @@ class FormTeamAccolades extends React.Component {
     * Function retrieves the data collected from the Accolade API URL and sets the value of 'accolades' to be the relevant data.
     *
     */
-
     fetchDataAccolade = (urlAccolade) => {
         fetch(urlAccolade)
             .then((response) => {
@@ -82,7 +79,6 @@ class FormTeamAccolades extends React.Component {
     * Function retrieves the data collected from the Teams API URL and sets the value of 'teams' to be the relevant data.
     *
     */
-
     fetchDataTeam = (urlTeam) => {
         
         fetch(urlTeam)

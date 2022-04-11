@@ -29,46 +29,45 @@ class AllTeamsPage extends React.Component {
     //Functionality for the Team Submission Form
 
     /**
-    * [Function Name]
+    * handleTeamName(e)
     * 
-    * [Function Description]
+    * Handles the input and change of text within the 'Team name' field used within the Team Submission form on the Teams Page.
     *
-    * @param [type] $[var]   [Description]
+    * Ethan Borrill W18001798
     */
     handleTeamName = (e) => {
         this.setState({ TeamName: e.target.value })
     }
 
     /**
-    * [Function Name]
+    * handleGameSelect(e)
     * 
-    * [Function Description]
+    * Applies functionality to the dropdown box needed to show Games the team will be playing in their team for the team application form.
     *
-    * @param [type] $[var]   [Description]
+    * Ethan Borrill W18001798
     */
     handleGameSelect = (e) => {
         this.setState({ GamesDropDown: e.target.value })
     }
 
     /**
-    * [Function Name]
+    * handleTeamSelect(e)
     * 
-    * [Function Description]
+    * Applies functionality to the dropdown box needed to show Users who will be the leader of the team being sent for application.
     *
-    * @param [type] $[var]   [Description]
+    * Ethan Borrill W18001798
     */
     handleTeamSelect = (e) => {
         this.setState({ TeamsDropDown: e.target.value })
     }
 
     /**
-    * [Function Name]
+    * handleTeamSubmit
     * 
-    * [Function Description]
+    * Provides functionality to the 'Submit application' Button at the end of the Team Application Form, this includes checks for if any fields are empty - resulting in error codes being displayed.
     *
-    * @param [type] $[var]   [Description]
+    * Ethan Borrill W18001798
     */
-
     handleTeamSubmit = () => {
         let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/teamsform"
 
@@ -107,23 +106,23 @@ class AllTeamsPage extends React.Component {
 
 
     /**
-       * [Function Name]
-       * 
-       * [Function Description]
-       *
-       * @param [type] $[var]   [Description]
-       */
+    * handleSearch(e)
+    * 
+    * Applies the functionality for the search box.
+    *
+    */
     handleSearch = (e) => {
         this.setState({ search: e.target.value })
     }
 
 
     /**
-    * [Function Name]
+    * render
     * 
-    * [Function Description]
+    * This function will create and display the required functionalities for the Teams page to operate as intended, This consists of several other components required to make it work as intended -
+    * including the Search box, team details and the team application form.
     *
-    * @param [type] $[var]   [Description]
+    * @returns {Page} - Will display the rendered page content based on the conditions required.
     */
     render() {
         let page;
