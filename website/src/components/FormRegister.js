@@ -1,6 +1,6 @@
 import React from "react";
 import Button from '@mui/material/Button';
-
+import { Tooltip,Box } from "@mui/material";
 /**
 * FormLRegister
 * 
@@ -19,12 +19,15 @@ class FormRegister extends React.Component {
                     value={this.props.email}
                     onChange={this.props.handleEmail}
                 /></ul>
-                <ul><input
+                <ul>
+                <Tooltip title="Please create a strong password with 8 or more characters." Password Tips>
+                    <input
                     type='password'
                     placeholder='Password'
                     value={this.props.password}
                     onChange={this.props.handlePassword}
-                /></ul>
+                    />
+                </Tooltip></ul>
                 <ul><input
                     type='text'
                     placeholder='User IGN'
