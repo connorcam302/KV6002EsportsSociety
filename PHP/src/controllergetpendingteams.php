@@ -28,9 +28,7 @@ class ControllerGetPendingTeams extends Controller {
         
         if (!is_null($id)) {
             $this->getGateway()->filterTeams($id);
-        }   
-        
-        else {
+        }else {
             $this->getGateway()->findAll();
         }
         
