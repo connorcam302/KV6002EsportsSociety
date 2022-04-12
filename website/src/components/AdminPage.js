@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import FormWeeklyEvents from "./FormWeeklyEvents.js";
 import FormTeamApplication from "./FormTeamApplication.js";
 import FormTeamAccolades from "./FormTeamAccolades.js";
+import FormJoinTeamApplication from "./FormJoinTeamApplication.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
@@ -38,7 +39,8 @@ class AdminPage extends React.Component {
             error: "",
 
             EventsForm: false,
-            ManageTeamsForm: false,
+            TeamApplicationForm: false,
+            MemberApplicationForm: false,
             AccoladesForm: false,
 
             EventTitle: null,
@@ -49,12 +51,14 @@ class AdminPage extends React.Component {
             TeamDropDown: "",
             AccoladesDropDown: "",
             TeamApplicationsDropDown: "",
+            MemberApplicationDropDown: "",
         }
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleEventsFormClick = this.handleEventsFormClick.bind(this);
-        this.handleManageTeamsClick = this.handleManageTeamsClick.bind(this);
-
+        this.handleTeamApplicationsClick = this.handleTeamApplicationsClick.bind(this);
         this.handleTeamAccoladesClick = this.handleTeamAccoladesClick.bind(this);
+        this.handleMembersApplicationClick = this.handleMembersApplicationClick.bind(this);
+
         this.handleTeamAccoladeSelect = this.handleTeamAccoladeSelect.bind(this);
         this.handleTeamSelect = this.handleTeamSelect.bind(this);
         this.handleAccoladeSubmit = this.handleAccoladeSubmit.bind(this);
@@ -68,6 +72,10 @@ class AdminPage extends React.Component {
         this.handleTeamSubmissionsSelect = this.handleTeamSubmissionsSelect.bind(this);
         this.handleTeamsFormApprove = this.handleTeamsFormApprove.bind(this);
         this.handleTeamsFormDecline = this.handleTeamsFormDecline.bind(this);
+
+        this.handleMemberSubmissionsSelect = this.handleMemberSubmissionsSelect.bind(this);
+        this.handleMemberFormDecline = this.handleMemberFormDecline.bind(this);
+        this.handleMemberFormApprove = this.handleMemberFormApprove.bind(this);
     }
 
 
@@ -143,8 +151,8 @@ class AdminPage extends React.Component {
         this.setState(
             {
                 EventsForm: true,
-                ManageTeamsForm: false,
-                MatchesForm: false,
+                TeamApplicationForm: false,
+                MemberApplicationForm: false,
                 AccoladesForm: false
             }
         )
@@ -239,17 +247,17 @@ class AdminPage extends React.Component {
 
     //FUNCTIONALITY FOR THE TEAM MANAGEMENT PAGE.
     /**
-    * handleManageTeamsClick
+    * handleTeamApplicationsClick
     * 
     * This is used on the ManageTeams form button, will set the state needed for the Team management form to be displayed to be true.
     *
     */
-    handleManageTeamsClick = () => {
+    handleTeamApplicationsClick = () => {
         this.setState(
             {
                 EventsForm: false,
-                ManageTeamsForm: true,
-                MatchesForm: false,
+                TeamApplicationForm: true,
+                MemberApplicationForm: false,
                 AccoladesForm: false
             }
         )
@@ -283,13 +291,13 @@ class AdminPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if ((this.state.TeamApplicationsDropDown === "")){
+                if ((this.state.TeamApplicationsDropDown === "")) {
                     this.setState({ error: "Please select an application before approving!" })
                 }
                 else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "This team submission has been approved!" })
                     return response.json()
-                } 
+                }
             })
             .catch((err) => {
                 console.log("something went wrong ", err)
@@ -315,7 +323,7 @@ class AdminPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if (this.state.TeamApplicationsDropDown === ""){
+                if (this.state.TeamApplicationsDropDown === "") {
                     this.setState({ error: "Please select an application before attempting to delete!" })
                 } else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "This team application has been successfully deleted!" })
@@ -339,8 +347,8 @@ class AdminPage extends React.Component {
         this.setState(
             {
                 EventsForm: false,
-                ManageTeamsForm: false,
-                MatchesForm: false,
+                TeamApplicationForm: false,
+                MemberApplicationForm: false,
                 AccoladesForm: true
             }
         )
@@ -384,13 +392,13 @@ class AdminPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if ((this.state.TeamDropDown === "") && (this.state.AccoladesDropDown === "")){
+                if ((this.state.TeamDropDown === "") && (this.state.AccoladesDropDown === "")) {
                     this.setState({ error: "Please provide both an Team and Accolade before submitting." })
                 }
-                else if (this.state.TeamDropDown === ""){
+                else if (this.state.TeamDropDown === "") {
                     this.setState({ error: "Please enter a team to provide this accolade to!" })
                 }
-                else if (this.state.AccoladesDropDown === ""){
+                else if (this.state.AccoladesDropDown === "") {
                     this.setState({ error: "Please enter an accolade for this team!" })
                 }
                 else if ((response.status === 200) || (response.status === 204)) {
@@ -403,6 +411,99 @@ class AdminPage extends React.Component {
             }
             );
     }
+
+    
+    /**
+    * handleMembersApplicationClick
+    * 
+    * Manages the functionality on the 'Member applications' button on the left hand side of the page. Will change the state of the page to display the Members applications form.
+    *
+    */
+    handleMembersApplicationClick = () => {
+        this.setState(
+            {
+                EventsForm: false,
+                TeamApplicationForm: false,
+                MemberApplicationForm: true,
+                AccoladesForm: false
+            }
+        )
+    }
+
+    
+    /**
+    * handleMemberSubmissionsSelect
+    * 
+    * Will update the dropdown menu used on the Member applications page.
+    *
+    */
+    handleMemberSubmissionsSelect = (e) => {
+        this.setState({ MemberApplicationDropDown: e.target.value })
+    }
+
+    /**
+    * handleMemberFormApprove
+    * 
+    * This function handles the Approval of a member application from the pendingMembers list, this is assigned to the 'Approve application' button on the Members Applications.
+    * The form is managed using the dropdown box, which displays the name of the User in accordance with the list of applications displayed above the dropdown.
+    *
+    */
+    handleMemberFormApprove = () => {
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/pendingmembersapprove"
+
+        let formData = new FormData();
+        formData.append('user_id', this.state.MemberApplicationDropDown);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+            .then((response) => {
+                if ((this.state.MemberApplicationDropDown === "")) {
+                    this.setState({ error: "Please select an application before approving!" })
+                }
+                else if ((response.status === 200) || (response.status === 204)) {
+                    this.setState({ error: "This users application has been approved!" })
+                    return response.json()
+                }
+            })
+            .catch((err) => {
+                console.log("something went wrong ", err)
+            }
+            );
+    }
+
+    /**
+    * handleMemberFormApprove
+    * 
+    * This function handles the Deletion of a member application from the pendingMembers list, this is assigned to the 'Decline application' button on the Members Applications.
+    * The form is managed using the dropdown box, which displays the name of the User in accordance with the list of applications displayed above the dropdown.
+    *
+    */
+    handleMemberFormDecline = () => {
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/pendingmembersdisapprove"
+
+        let formData = new FormData();
+        formData.append('user_id', this.state.MemberApplicationDropDown);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+            .then((response) => {
+                if (this.state.MemberApplicationDropDown === "") {
+                    this.setState({ error: "Please select an application before attempting to delete!" })
+                } else if ((response.status === 200) || (response.status === 204)) {
+                    this.setState({ error: "This users application has been declined and deleted!" })
+                    return response.json()
+                }
+            })
+            .catch((err) => {
+                console.log("something went wrong ", err)
+            }
+            );
+    }
+
 
     /**
     * render
@@ -431,9 +532,9 @@ class AdminPage extends React.Component {
                             </Grid>
                             <Grid item xs={1}>
                                 <AdminButtons
-                                    handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
-                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamApplicationsClick={this.handleTeamApplicationsClick}
+                                    handleMembersApplicationClick={this.handleMembersApplicationClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
@@ -451,7 +552,7 @@ class AdminPage extends React.Component {
                         </Grid>
                     </Box>
                 )
-            } else if (this.state.ManageTeamsForm) { //MANAGE TEAM FORM STATE
+            } else if (this.state.TeamApplicationForm) { //TEAM APPLICATION STATE
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
@@ -460,14 +561,14 @@ class AdminPage extends React.Component {
                                     Team Applications
                                 </Typography>
                                 <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                    Please use the dropdown box to approve or delete applications.
+                                    Please use the dropdown box to approve or decline applications.
                                 </Typography>
                             </Grid>
                             <Grid item xs={1}>
                                 <AdminButtons
-                                    handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
-                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamApplicationsClick={this.handleTeamApplicationsClick}
+                                    handleMembersApplicationClick={this.handleMembersApplicationClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
@@ -476,6 +577,38 @@ class AdminPage extends React.Component {
                                     handleTeamSubmissionsSelect={this.handleTeamSubmissionsSelect}
                                     handleTeamsFormApprove={this.handleTeamsFormApprove}
                                     handleTeamsFormDecline={this.handleTeamsFormDecline} />
+                                <ul><p className="errorMessage">{errorMessage}</p></ul>
+                            </Grid>
+                            <Grid item xs={1}>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )
+            } else if (this.state.MemberApplicationForm) { //MEMBER APPLICATION STATE.
+                page = (
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                                    Manage User Applications
+                                </Typography>
+                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                   Please use the dropdown box to approve or decline applications.
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <AdminButtons
+                                    handleEventsFormClick={this.handleEventsFormClick}
+                                    handleTeamApplicationsClick={this.handleTeamApplicationsClick}
+                                    handleMembersApplicationClick={this.handleMembersApplicationClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
+                                    handleLogoutClick={this.handleLogoutClick} />
+                            </Grid>
+                            <Grid item xs={10}>
+                                <FormJoinTeamApplication
+                                    handleMemberSubmissionsSelect={this.handleMemberSubmissionsSelect}
+                                    handleMemberFormApprove={this.handleMemberFormApprove}
+                                    handleMemberFormDecline={this.handleMemberFormDecline} />
                                 <ul><p className="errorMessage">{errorMessage}</p></ul>
                             </Grid>
                             <Grid item xs={1}>
@@ -497,9 +630,9 @@ class AdminPage extends React.Component {
                             </Grid>
                             <Grid item xs={1}>
                                 <AdminButtons
-                                    handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
-                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamApplicationsClick={this.handleTeamApplicationsClick}
+                                    handleMembersApplicationClick={this.handleMembersApplicationClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
@@ -529,9 +662,9 @@ class AdminPage extends React.Component {
                             </Grid>
                             <Grid item xs={1}>
                                 <AdminButtons
-                                    handleAddMatchesClick={this.handleAddMatchesClick}
                                     handleEventsFormClick={this.handleEventsFormClick}
-                                    handleManageTeamsClick={this.handleManageTeamsClick}
+                                    handleTeamApplicationsClick={this.handleTeamApplicationsClick}
+                                    handleMembersApplicationClick={this.handleMembersApplicationClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>

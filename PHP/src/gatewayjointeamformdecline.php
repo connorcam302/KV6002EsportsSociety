@@ -21,7 +21,7 @@ class GatewayJoinTeamFormDecline extends Gateway
     public function DeclineMember($userid)
     {
         $sql = "DELETE FROM pendingMembers WHERE pendingMembers.user_id = :user_id;";
-        $params = [":userid" => $userid];
+        $params = [":user_id" => $userid];
         $result = $this->getDatabase()->executeSQL($sql, $params);
         $this->setResult($result);
     }

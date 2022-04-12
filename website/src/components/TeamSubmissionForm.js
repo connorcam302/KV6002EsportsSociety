@@ -104,7 +104,7 @@ class TeamSubmissionForm extends React.Component {
     */
     render() {
         return (
-            <div class="row uniform">
+            <div>
                 <ul><Typography sx={{ fontSize: 24, fontWeight: 600 }}>
                     Create a new Team
                 </Typography></ul>

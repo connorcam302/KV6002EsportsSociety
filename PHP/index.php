@@ -53,6 +53,9 @@ switch ($request->getPath()) {
     case 'api/accoladesform':
         $controller = new ControllerAccoladesFormApi($request, $response);
         break;
+    case 'api/jointeamform':
+        $controller = new ControllerJoinTeamForm($request, $response);
+        break;
     case 'api/pendingmembers':
         $controller = new ControllerGetPendingMembers($request, $response);
         break;

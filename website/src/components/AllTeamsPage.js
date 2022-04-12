@@ -1,11 +1,11 @@
 import React from "react";
 import Teams from "./Teams.js";
 import TeamSubmissionForm from "./TeamSubmissionForm.js";
+import JoinTeamSubmissionForm from "./JoinTeamSubmissionForm.js";
 import SearchBox from "./SearchBox.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
-
 /**
  * Team page
  *
@@ -20,13 +20,20 @@ class AllTeamsPage extends React.Component {
             TeamName: null,
             GamesDropDown: "",
             TeamsDropDown: "",
-            error: "",
+            JoinTeamDropdown:"",
+            JoinTeamPlayerDropDown:"",
+            errorCreateTeam: "",
+            errorJoinTeam: "",
         }
         this.handleSearch = this.handleSearch.bind(this);
         this.handleTeamName = this.handleTeamName.bind(this);
         this.handleGameSelect = this.handleGameSelect.bind(this);
         this.handleTeamSelect = this.handleTeamSelect.bind(this);
         this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
+
+        this.handleJoinTeamSelect = this.handleJoinTeamSelect.bind(this);
+        this.handleJoinPlayerSelect = this.handleJoinPlayerSelect.bind(this);
+        this.handleJoinTeamSubmit = this.handleJoinTeamSubmit.bind(this);
     }
 
     //Functionality for the Team Submission Form
@@ -85,17 +92,71 @@ class AllTeamsPage extends React.Component {
         })
             .then((response) => {
                 if ((this.state.TeamName === null) && (this.state.GamesDropDown === "") && (this.state.TeamsDropDown === "")) {
-                    this.setState({ error: "Please complete your form before submitting!" })
+                    this.setState({ errorCreateTeam: "Please complete your form before submitting!" })
                 } else if (this.state.TeamName === null) {
-                    this.setState({ error: "Please enter a team name!" })
+                    this.setState({ errorCreateTeam: "Please enter a team name!" })
                 } else if (this.state.GamesDropDown === "") {
-                    this.setState({ error: "Please select a game your team will play!" })
+                    this.setState({ errorCreateTeam: "Please select a game your team will play!" })
                 } else if (this.state.TeamsDropDown === "") {
-                    this.setState({ error: "Please provide a team leader!" })
+                    this.setState({ errorCreateTeam: "Please provide a team leader!" })
                 } else if (response.status === 403) {
-                    this.setState({ error: "This team name has already been submitted for approval, please try another name." })
+                    this.setState({ errorCreateTeam: "This team name has already been submitted for approval, please try another name." })
                 } else if ((response.status === 200) || (response.status === 204)) {
-                    this.setState({ error: "This team application has been submitted, please wait for approval." })
+                    this.setState({ errorCreateTeam: "This team application has been submitted, please wait for approval." })
+                    return response.json()
+                }
+            })
+            .catch((err) => {
+                console.log("something went wrong ", err)
+                console.warn(xhr.responseText) 
+            }
+            );
+    }
+
+
+    
+    /**
+    * handleJoinTeamSelect
+    * 
+    * Provides functionality to the Dropdown menu needed to select the name of teams when seeking to join a team.
+    *
+    * @param [type] $[var]   [Description]
+    */
+    handleJoinTeamSelect = (e) => {
+        this.setState({ JoinTeamDropdown: e.target.value })
+    }
+
+    
+    /**
+    * handleJoinPlayerSelect
+    * 
+    * Provides functionality to the Dropdown menu needed to select the players name when seeking to join a team.
+    *
+    */
+    handleJoinPlayerSelect = (e) => {
+        this.setState({ JoinTeamPlayerDropDown: e.target.value })
+    }
+
+    handleJoinTeamSubmit = () => {
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/jointeamform"
+
+        let formData = new FormData();
+        formData.append('teamid', this.state.JoinTeamDropdown);
+        formData.append('userid', this.state.JoinTeamPlayerDropDown);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+            .then((response) => {
+                if ((this.state.JoinTeamDropdown === "") && (this.state.JoinTeamPlayerDropDown === "")) {
+                    this.setState({ errorJoinTeam: "Please complete your form before submitting!" })
+                } else if (this.state.JoinTeamDropdown === "") {
+                    this.setState({ errorJoinTeam: "Please enter the team you wish to join!" })
+                } else if (this.state.JoinTeamPlayerDropDown === "") {
+                    this.setState({ errorJoinTeam: "Please provide your name!" })
+                } else if ((response.status === 200) || (response.status === 204)) {
+                    this.setState({ errorJoinTeam: "This team application has been submitted, please wait for approval." })
                     return response.json()
                 }
             })
@@ -129,7 +190,8 @@ class AllTeamsPage extends React.Component {
     */
     render() {
         let page;
-        let errorMessage = this.state.error
+        let errorCreateTeamMessage = this.state.errorCreateTeam
+        let errorJoinTeamMessage = this.state.errorJoinTeam
         page = (
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
@@ -152,7 +214,12 @@ class AllTeamsPage extends React.Component {
                                 handleTeamSelect={this.handleTeamSelect}
                                 handleGameSelect={this.handleGameSelect}
                                 handleTeamSubmit={this.handleTeamSubmit} />
-                            <ul><p className="errorMessage">{errorMessage}</p></ul>
+                            <ul><p className="errorMessage">{errorCreateTeamMessage}</p></ul>
+                            <JoinTeamSubmissionForm
+                                handleJoinPlayerSelect={this.handleJoinPlayerSelect}
+                                handleJoinTeamSelect={this.handleJoinTeamSelect}
+                                handleJoinTeamSubmit={this.handleJoinTeamSubmit} />
+                            <ul><p className="errorMessage">{errorJoinTeamMessage}</p></ul>
                     </Grid>
                 </Grid>
             </Box>

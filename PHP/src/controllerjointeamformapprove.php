@@ -1,7 +1,9 @@
 <?php
 
 /**
- * This controller handles and manages the ability for applications within the pendingTeams page to be inserted into the teams table of the database
+ * ControllerJoinTeamFormApprove
+ * 
+ * This controller handles and manages the ability for applications within the pendingMembers page to be inserted into the userTeams table of the database
  * 
  *
  * @author Ethan Borrill W18001798
@@ -9,7 +11,7 @@
 class ControllerJoinTeamFormApprove extends Controller
 {
     /**
-     * The setGateway function allocates the PendingTeamsFormApproval Gateway to this controller in order to access the relevant 'params' objects collected from their respective SQL Queries. 
+     * The setGateway function allocates the GatewayJoinTeamFormApprove Gateway to this controller in order to access the relevant 'params' objects collected from their respective SQL Queries. 
      */
     protected function setGateway()
     {
@@ -23,7 +25,7 @@ class ControllerJoinTeamFormApprove extends Controller
      */
     protected function processRequest()
     {
-        $userid = $this->getRequest()->getParameter("userid");
+        $userid = $this->getRequest()->getParameter("user_id");
 
         if ($this->getRequest()->getRequestMethod() === "POST") {
                 if (!is_null($userid)) {

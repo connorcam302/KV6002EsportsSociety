@@ -10,7 +10,7 @@ import FormManageTeamDetails from "./FormManageTeamDetails";
 * @author Ethan Borrill W18001798
 */
 class FormManageTeam extends React.Component {
-    
+
 
     /**
     * componentDidMount
@@ -19,23 +19,30 @@ class FormManageTeam extends React.Component {
     *
     */
     componentDidMount() {
-        let urlTeams = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/teams"
+        let urlTeams = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/team"
         this.fetchDataTeams(urlTeams)
     }
 
-     /**
-    * Constructor
-    * 
-    * Used within this class to initialise several values used within the file, such as an empty data array for accolades and teams.
-    *
-    */
-      constructor(props) {
+    /**
+   * Constructor
+   * 
+   * Used within this class to initialise several values used within the file, such as an empty data array for accolades and teams.
+   *
+   */
+    constructor(props) {
         super(props);
         this.state = {
             results: [],
         }
     }
 
+    /**
+    * fetchDataTeams
+    * 
+    * Function retrieves the data collected from the team API URL and sets the value of 'Results' to contain the relevant data.
+    *
+    * @param [type] $[var]   [Description]
+    */
     fetchDataTeams = (urlTeams) => {
         if (this.props.team_id !== undefined && this.props.team_id !== "") {
             url += "?id=" + this.props.team_id
@@ -49,20 +56,25 @@ class FormManageTeam extends React.Component {
                 }
             })
             .then((data) => {
-                this.setState({results:data.results })
+                this.setState({ results: data.results })
             })
             .catch((err) => {
                 console.log("something has gone wrong ", err)
             });
     }
 
-
+    /**
+    * render()
+    * 
+    * Renders the content needed to display the create team application form.
+    *
+    */
     render() {
 
         return (
             <div>
-                {this.state.results.map((teams, i) => (<FormManageTeamDetails key ={i} teams={teams}/>))}
-                
+                {this.state.results.map((teams, i) => (<FormManageTeamDetails key={i} teams={teams} />))}
+
                 <ul>
                     <label>
                         <select value={this.props.team_id} onChange={this.props.handleTeamSubmissionsSelect}>
@@ -72,8 +84,8 @@ class FormManageTeam extends React.Component {
                     </label>
                 </ul>
                 <div>
-                <Button onClick={this.props.handleTeamsFormDecline}>Decline Submission</Button>
-                <Button onClick={this.props.handleTeamsFormApprove}>Approve Submission</Button>
+                    <Button onClick={this.props.handleTeamsFormDecline}>Decline Submission</Button>
+                    <Button onClick={this.props.handleTeamsFormApprove}>Approve Submission</Button>
                 </div>
             </div>
         );

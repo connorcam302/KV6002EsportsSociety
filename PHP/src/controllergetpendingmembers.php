@@ -1,11 +1,11 @@
 <?php
 
 /**
- * ControllerGetPendingTeams
+ * ControllerGetPendingMembers
  * 
- * This controller is used to display content when using the '/api/pendingteams', providing means to display all or singular teams.
+ * This controller is used to display content when using the '/api/pendingmembers', providing means to display all or singular teams.
  * 
- * @example If the request contains ?id=2, the details of pendingteam 2 will be returned.
+ * @example If the request contains ?id=2, the details of pendingmember 2 will be returned.
  * 
  * @author Ethan Borrill W18001798
  */

@@ -12,7 +12,7 @@
 class ControllerPendingTeamsFormRemove extends Controller
 {
     /**
-     * The setGateway function allocates the List Gateway to this controller in order to access the relevant 'params' objects collected from their respective SQL Queries. 
+     * The setGateway function allocates the GatewayPendingTeamsFormRemove Gateway to this controller in order to access the relevant 'params' objects collected from their respective SQL Queries. 
      */
     protected function setGateway()
     {

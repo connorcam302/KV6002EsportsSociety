@@ -31,19 +31,4 @@ class GateWayJoinTeamForm extends Gateway
         $result = $this->getDatabase()->executeSQL($sql, $params);
         $this->setResult($result);
     }
-
-    /**
-     * SQL query checks if the user pending entered already within the database.
-     */
-    public function teamPending($userid)
-    {
-        $sql = "SELECT * FROM pendingTeams WHERE user_id  = :userid";
-        $params = [":userid" => $userid];
-        $result = $this->getDatabase()->executeSQL($sql, $params);
-        if ($result == FALSE) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 }
