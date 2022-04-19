@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 *
 * @author Ethan Borrill W18001798
 */
-class FormWeeklyEvents extends React.Component {
+class AdminFormWeeklyEvents extends React.Component {
     render() {
         return (
             <div>
@@ -46,4 +46,4 @@ class FormWeeklyEvents extends React.Component {
     }
 }
 
-export default FormWeeklyEvents;
+export default AdminFormWeeklyEvents;

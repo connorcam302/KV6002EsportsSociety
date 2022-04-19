@@ -2,16 +2,16 @@ import React from "react";
 import Typography from '@mui/material/Typography';
 
 /**
-* FormJoinTeamDetails
+* FormManageTeamDetails
 * 
-* This class is used to populate the Member application form with data to help read and determine application forms.
+* This class is used to populate the Team application form with data to help read and determine application forms.
 *
 * @author Ethan Borrill W18001798
 * @collab
 *
 * @todo
 */
-class FormJoinTeamDetails extends React.Component {
+class AdminFormManageTeamDetails extends React.Component {
 
     constructor(props) {
         super(props)
@@ -27,10 +27,16 @@ class FormJoinTeamDetails extends React.Component {
             
             details = <div>
                         <Typography sx={{ fontSize: 20, fontWeight: 450 }}>
-                        The user wanting to join this team:
+                        Game played by team:
                         </Typography>
                         <Typography sx={{ fontSize: 20, fontWeight: 250 }}>
-                        {this.props.pendingMembers.user_ign}
+                        {this.props.pendingTeams.game_name}
+                        </Typography>
+                        <Typography sx={{ fontSize: 20, fontWeight: 450 }}>
+                        Team Leader:
+                        </Typography>
+                        <Typography sx={{ fontSize: 20, fontWeight: 250 }}>
+                        {this.props.pendingTeams.user_ign}
                         </Typography>
                         <br></br>
                       </div>
@@ -39,10 +45,10 @@ class FormJoinTeamDetails extends React.Component {
         return(
             <div>
                 <Typography sx={{ fontSize: 20, fontWeight: 450 }}>
-                The team wanting to be joined:
+                Team name:
                 </Typography>
                 <Typography sx={{ fontSize: 20, fontWeight: 250 }}>
-                {this.props.pendingMembers.team_name}        
+                {this.props.pendingTeams.team_name}        
                 </Typography>
                 {details}
             </div>
@@ -50,4 +56,4 @@ class FormJoinTeamDetails extends React.Component {
     }
 }
 
-export default FormJoinTeamDetails;
+export default AdminFormManageTeamDetails;

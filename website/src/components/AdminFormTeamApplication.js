@@ -1,15 +1,15 @@
 import * as React from "react";
 import Button from '@mui/material/Button';
-import FormTeamApplicationDetails from "./FormTeamApplicationDetails";
+import AdminFormTeamApplicationDetails from "./AdminFormTeamApplicationDetails";
 
 /**
-* FormManageTeams
+* AdminFormTeamApplication
 * 
 * This class is used to create the form necessary to handle applications to create teams, this form is used on the 'Team applications' page of the Admin page.
 *
 * @author Ethan Borrill W18001798
 */
-class FormTeamApplication extends React.Component {
+class AdminFormTeamApplication extends React.Component {
     
 
     /**
@@ -38,7 +38,7 @@ class FormTeamApplication extends React.Component {
 
     fetchDataPendingTeams = (urlPendingTeams) => {
         if (this.props.team_id !== undefined && this.props.team_id !== "") {
-            url += "?id=" + this.props.team_id
+            urlPendingTeams += "?id=" + this.props.team_id
         }
         fetch(urlPendingTeams)
             .then((response) => {
@@ -61,7 +61,7 @@ class FormTeamApplication extends React.Component {
 
         return (
             <div>
-                {this.state.results.map((pendingTeams, i) => (<FormTeamApplicationDetails key ={i} pendingTeams={pendingTeams}/>))}
+                {this.state.results.map((pendingTeams, i) => (<AdminFormTeamApplicationDetails key ={i} pendingTeams ={pendingTeams}/>))}
                 
                 <ul>
                     <label>
@@ -72,12 +72,12 @@ class FormTeamApplication extends React.Component {
                     </label>
                 </ul>
                 <div>
-                <Button onClick={this.props.handleTeamsFormDecline}>Decline Submission</Button>
-                <Button onClick={this.props.handleTeamsFormApprove}>Approve Submission</Button>
+                <Button onClick={this.props.handleTeamsFormDecline}>Delete Application</Button>
+                <Button onClick={this.props.handleTeamsFormApprove}>Approve Application</Button>
                 </div>
             </div>
         );
     }
 }
 
-export default FormTeamApplication;
+export default AdminFormTeamApplication;

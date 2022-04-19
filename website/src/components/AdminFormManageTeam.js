@@ -1,6 +1,6 @@
 import * as React from "react";
 import Button from '@mui/material/Button';
-import FormManageTeamDetails from "./FormManageTeamDetails";
+import AdminFormManageTeamDetails from "./AdminFormManageTeamDetails";
 
 /**
 * FormManageTeams
@@ -9,7 +9,7 @@ import FormManageTeamDetails from "./FormManageTeamDetails";
 *
 * @author Ethan Borrill W18001798
 */
-class FormManageTeam extends React.Component {
+class AdminFormManageTeam extends React.Component {
 
 
     /**
@@ -45,7 +45,7 @@ class FormManageTeam extends React.Component {
     */
     fetchDataTeams = (urlTeams) => {
         if (this.props.team_id !== undefined && this.props.team_id !== "") {
-            url += "?id=" + this.props.team_id
+            urlTeams += "?id=" + this.props.team_id
         }
         fetch(urlTeams)
             .then((response) => {
@@ -73,7 +73,7 @@ class FormManageTeam extends React.Component {
 
         return (
             <div>
-                {this.state.results.map((teams, i) => (<FormManageTeamDetails key={i} teams={teams} />))}
+                {this.state.results.map((teams, i) => (<AdminFormManageTeamDetails key={i} teams={teams} />))}
 
                 <ul>
                     <label>
@@ -92,4 +92,4 @@ class FormManageTeam extends React.Component {
     }
 }
 
-export default FormManageTeam;
+export default AdminFormManageTeam;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Button from '@mui/material/Button';
-import FormJoinTeamDetails from "./FormJoinTeamDetails";
+import AdminFormJoinTeamDetails from "./AdminFormJoinTeamDetails";
 
 /**
 * FormJoinTeam
@@ -9,7 +9,7 @@ import FormJoinTeamDetails from "./FormJoinTeamDetails";
 *
 * @author Ethan Borrill W18001798
 */
-class FormJoinTeam extends React.Component {
+class AdminFormJoinTeam extends React.Component {
 
 
     /**
@@ -76,7 +76,7 @@ class FormJoinTeam extends React.Component {
 
         return (
             <div>
-                {this.state.results.map((pendingMembers, i) => (<FormJoinTeamDetails key={i} pendingMembers={pendingMembers} />))}
+                {this.state.results.map((pendingMembers, i) => (<AdminFormJoinTeamDetails key={i} pendingMembers={pendingMembers} />))}
 
                 <ul>
                     <label>
@@ -95,4 +95,4 @@ class FormJoinTeam extends React.Component {
     }
 }
 
-export default FormJoinTeam;
+export default AdminFormJoinTeam;

@@ -1,21 +1,21 @@
 <?php
 
 /**
- * ControllerJoinTeamFormDecline
+ * ControllerAdminJoinTeamFormDecline
  * 
  * This controller handles and manages the ability for applications within the pendingMembers to be deleted from the database.
  * 
  *
  * @author Ethan Borrill W18001798
  */
-class ControllerJoinTeamFormDecline extends Controller
+class ControllerAdminJoinTeamFormDecline extends Controller
 {
     /**
      * The setGateway function allocates the GatewayJoinTeamFormDecline Gateway to this controller in order to access the relevant 'params' objects collected from their respective SQL Queries. 
      */
     protected function setGateway()
     {
-        $this->gateway = new GatewayJoinTeamFormDecline();
+        $this->gateway = new GatewayAdminJoinTeamFormDecline();
     }
 
     /**

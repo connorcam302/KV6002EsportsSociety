@@ -1,7 +1,17 @@
 import React from "react";
 import Typography from '@mui/material/Typography';
 
-class FormTeamApplicationDetails extends React.Component {
+/**
+* AdminFormJoinTeamDetails
+* 
+* This class is used to populate the Member application form with data to help read and determine application forms.
+*
+* @author Ethan Borrill W18001798
+* @collab
+*
+* @todo
+*/
+class AdminFormJoinTeamDetails extends React.Component {
 
     constructor(props) {
         super(props)
@@ -17,16 +27,10 @@ class FormTeamApplicationDetails extends React.Component {
             
             details = <div>
                         <Typography sx={{ fontSize: 20, fontWeight: 450 }}>
-                        Game played by team:
+                        The user wanting to join this team:
                         </Typography>
                         <Typography sx={{ fontSize: 20, fontWeight: 250 }}>
-                        {this.props.pendingTeams.game_name}
-                        </Typography>
-                        <Typography sx={{ fontSize: 20, fontWeight: 450 }}>
-                        Team Leader:
-                        </Typography>
-                        <Typography sx={{ fontSize: 20, fontWeight: 250 }}>
-                        {this.props.pendingTeams.user_ign}
+                        {this.props.pendingMembers.user_ign}
                         </Typography>
                         <br></br>
                       </div>
@@ -35,10 +39,10 @@ class FormTeamApplicationDetails extends React.Component {
         return(
             <div>
                 <Typography sx={{ fontSize: 20, fontWeight: 450 }}>
-                Team name:
+                The team wanting to be joined:
                 </Typography>
                 <Typography sx={{ fontSize: 20, fontWeight: 250 }}>
-                {this.props.pendingTeams.team_name}        
+                {this.props.pendingMembers.team_name}        
                 </Typography>
                 {details}
             </div>
@@ -46,4 +50,4 @@ class FormTeamApplicationDetails extends React.Component {
     }
 }
 
-export default FormTeamApplicationDetails;
+export default AdminFormJoinTeamDetails;

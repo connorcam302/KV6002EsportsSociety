@@ -1,6 +1,5 @@
 import * as React from "react";
 import Button from '@mui/material/Button';
-import AdminPage from "./AdminPage";
 
 
 /**
@@ -13,7 +12,7 @@ import AdminPage from "./AdminPage";
 * 
 * 
 */
-class FormTeamAccolades extends React.Component {
+class AdminFormTeamAccolades extends React.Component {
 
 
 
@@ -134,4 +133,4 @@ class FormTeamAccolades extends React.Component {
 }
 
 
-export default FormTeamAccolades;
+export default AdminFormTeamAccolades;

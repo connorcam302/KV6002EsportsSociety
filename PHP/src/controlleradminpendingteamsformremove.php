@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ControllerPendingTeamsFormRemove
+ * ControllerAdminPendingTeamsFormRemove
  * 
  * This controller handles and manages the papers on users reading lists.
  * 
@@ -9,14 +9,14 @@
  *
  * @author Ethan Borrill W18001798
  */
-class ControllerPendingTeamsFormRemove extends Controller
+class ControllerAdminPendingTeamsFormRemove extends Controller
 {
     /**
      * The setGateway function allocates the GatewayPendingTeamsFormRemove Gateway to this controller in order to access the relevant 'params' objects collected from their respective SQL Queries. 
      */
     protected function setGateway()
     {
-        $this->gateway = new GatewayPendingTeamsFormRemove();
+        $this->gateway = new GatewayAdminPendingTeamsFormRemove();
     }
 
      /**

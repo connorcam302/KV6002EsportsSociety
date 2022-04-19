@@ -2,13 +2,13 @@
 
 
 /**
-* GatewayJoinTeamFormApprove
+* GatewayAdminJoinTeamFormApprove
 * 
 * This gateway provides the SQL query needed to insert an approved user into their requested team within the userTeam table used within the webpage.
 *
 * @author Ethan Borrill W18001798
 */
-class GatewayJoinTeamFormApprove extends Gateway
+class GatewayAdminJoinTeamFormApprove extends Gateway
 {
     public function __construct()
     {
@@ -27,6 +27,5 @@ class GatewayJoinTeamFormApprove extends Gateway
         $this->setResult($result);
     }
 
-    
 
 }

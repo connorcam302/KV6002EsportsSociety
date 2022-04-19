@@ -1,7 +1,7 @@
 <?php
 
 /**
- * GatewayGetPendingMembers
+ * GatewayAdminGetPendingMembers
  * 
  * This gateway is used to obtain the details of users from the pendingMembers form to be displayed within the Join Team application's form prior to submission or deletion.
  * 
@@ -9,7 +9,7 @@
  * 
  */         
 
-class GatewayGetPendingMembers extends Gateway  {
+class GatewayAdminGetPendingMembers extends Gateway  {
     private $sql = "SELECT pendingMembers.userTeam_id, pendingMembers.user_id, team_name, user_ign FROM pendingMembers
                     JOIN team ON pendingMembers.userTeam_id = team.team_id JOIN user ON pendingMembers.user_id = user.user_id";
     

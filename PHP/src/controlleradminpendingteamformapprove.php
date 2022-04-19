@@ -6,14 +6,14 @@
  *
  * @author Ethan Borrill W18001798
  */
-class ControllerPendingTeamFormApprove extends Controller
+class ControllerAdminPendingTeamFormApprove extends Controller
 {
     /**
      * The setGateway function allocates the PendingTeamsFormApproval Gateway to this controller in order to access the relevant 'params' objects collected from their respective SQL Queries. 
      */
     protected function setGateway()
     {
-        $this->gateway = new GatewayPendingTeamsFormApprove();
+        $this->gateway = new GatewayAdminPendingTeamsFormApprove();
     }
 
     /**

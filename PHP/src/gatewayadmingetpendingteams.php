@@ -1,7 +1,7 @@
 <?php
 
 /**
- * GatewayGetPendingTeams
+ * GatewayAdminGetPendingTeams
  * 
  * This gateway is used to obtain the details of teams from the PendingTeams form to be displayed within the manageTeam's form prior to submission or deletion.
  * 
@@ -9,7 +9,7 @@
  * 
  */         
 
-class GatewayGetPendingTeams extends Gateway  {
+class GatewayAdminGetPendingTeams extends Gateway  {
     private $sql = "SELECT pendingTeams.team_id, team_name, game.game_name, user_ign FROM pendingTeams
                     JOIN game ON pendingTeams.game_id = game.game_id JOIN user ON pendingTeams.team_lead = user.user_id";
     

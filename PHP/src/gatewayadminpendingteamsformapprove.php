@@ -2,13 +2,13 @@
 
 
 /**
-* GatewayPendingTeamsFormApprove
+* GatewayAdminPendingTeamsFormApprove
 * 
 * This gateway provides the SQL query needed to insert an approved team into the offical Teams table used within the webpage.
 *
 * @author Ethan Borrill W18001798
 */
-class GatewayPendingTeamsFormApprove extends Gateway
+class GatewayAdminPendingTeamsFormApprove extends Gateway
 {
     public function __construct()
     {

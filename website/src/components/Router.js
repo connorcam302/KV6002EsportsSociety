@@ -39,7 +39,7 @@ export default class Router extends React.Component {
     // }
 
     fetchPlayerData = () => {
-        let playerUrl = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/player"
+        let playerUrl = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/player"
         fetch(playerUrl)
         .then( (response) => {
             if (response.status === 200) {
@@ -57,7 +57,7 @@ export default class Router extends React.Component {
     }
 
     fetchTeamData = () => {
-        let teamUrl = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/team"
+        let teamUrl = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/team"
         fetch(teamUrl)
         .then( (response) => {
             if (response.status === 200) {

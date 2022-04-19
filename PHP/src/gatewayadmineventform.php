@@ -1,14 +1,14 @@
 <?php
 
 /**
-* GatewayEventForm
+* GatewayAdminEventForm
 * 
 * This gateway is used to insert details from the Event Form on the Admin Page into the Events table of the database.
 * It additionally includes an SQL query which checks to see if the event being entered has already been used.
 *
 * @author Ethan Borrill W18001798
 */
-class GatewayEventForm extends Gateway
+class GatewayAdminEventForm extends Gateway
 {
     public function __construct() {
         $this->setDatabase(DATABASE);

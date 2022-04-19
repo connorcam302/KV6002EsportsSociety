@@ -2,13 +2,13 @@
 
 
 /**
-* GatewayJoinTeamFormDecline
+* GatewayAdminJoinTeamFormDecline
 * 
 * This gateway provides the SQL query needed to delete member applications from the 'pendingMembers' table of the database.
 *
 * @author Ethan Borrill W18001798
 */
-class GatewayJoinTeamFormDecline extends Gateway
+class GatewayAdminJoinTeamFormDecline extends Gateway
 {
     public function __construct()
     {

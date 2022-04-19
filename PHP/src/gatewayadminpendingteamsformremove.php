@@ -2,13 +2,13 @@
 
 
 /**
-* GatewayPendingTeamsFormRemove
+* GatewayAdminPendingTeamsFormRemove
 * 
 * This gateway provides the SQL query needed to delete team applications from the 'PendingTeams' table of the database - whihc is used to deny the creation of a new team.
 *
 * @author Ethan Borrill W18001798
 */
-class GatewayPendingTeamsFormRemove extends Gateway
+class GatewayAdminPendingTeamsFormRemove extends Gateway
 {
     public function __construct()
     {

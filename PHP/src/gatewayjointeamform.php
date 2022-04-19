@@ -23,7 +23,7 @@ class GateWayJoinTeamForm extends Gateway
     public function joinTeam($teamid,$userid)
     {
         $sql = "INSERT into pendingMembers (team_id,user_id,) 
-                       values(:teamname,:userid,)";
+                       values(:teamid,:userid,)";
         $params = [
             ":teamid" => $teamid,
             ":userid" => $userid,

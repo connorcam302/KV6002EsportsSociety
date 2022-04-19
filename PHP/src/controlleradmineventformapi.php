@@ -2,20 +2,17 @@
 
 
 /**
-* ControllerEventFormApi
+* ControllerAdminEventFormApi
 * 
 * This controller oversees the process which allows for the insertion of an event into the database, the controller first checks that no entries are NULL
 * Which in the event none are, the SQL query made in the GatewayEventForms is executed and the event is added to the database.
 *
 * @author Ethan Borrill W18001798
-* @collab
-*
-* @todo
 */
-class ControllerEventFormApi extends Controller {
+class ControllerAdminEventFormApi extends Controller {
 
     protected function setGateway() {
-        $this->gateway = new GatewayEventForm();
+        $this->gateway = new GatewayAdminEventForm();
     }
 
     protected function processRequest() {

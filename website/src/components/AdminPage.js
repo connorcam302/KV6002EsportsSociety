@@ -1,10 +1,10 @@
 import React from "react";
 import AdminButtons from "./AdminButtons.js";
 import jwt_decode from "jwt-decode";
-import FormWeeklyEvents from "./FormWeeklyEvents.js";
-import FormTeamApplication from "./FormTeamApplication.js";
-import FormTeamAccolades from "./FormTeamAccolades.js";
-import FormJoinTeamApplication from "./FormJoinTeamApplication.js";
+import AdminFormWeeklyEvents from "./AdminFormWeeklyEvents.js";
+import AdminFormTeamApplication from "./AdminFormTeamApplication.js";
+import AdminFormTeamAccolades from "./AdminFormTeamAccolades.js";
+import AdminFormJoinTeamApplication from "./AdminFormJoinTeamApplication.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
@@ -295,7 +295,7 @@ class AdminPage extends React.Component {
                     this.setState({ error: "Please select an application before approving!" })
                 }
                 else if ((response.status === 200) || (response.status === 204)) {
-                    this.setState({ error: "This team submission has been approved!" })
+                    this.setState({ error: "This team submission has been approved! You can now safely delete this application." })
                     return response.json()
                 }
             })
@@ -463,7 +463,7 @@ class AdminPage extends React.Component {
                     this.setState({ error: "Please select an application before approving!" })
                 }
                 else if ((response.status === 200) || (response.status === 204)) {
-                    this.setState({ error: "This users application has been approved!" })
+                    this.setState({ error: "This users application has been approved! You can now safely delete this application." })
                     return response.json()
                 }
             })
@@ -539,7 +539,7 @@ class AdminPage extends React.Component {
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
-                                <FormWeeklyEvents
+                                <AdminFormWeeklyEvents
                                     handleEventTitle={this.handleEventTitle}
                                     handleEventDesc={this.handleEventDesc}
                                     handleEventImage={this.handleEventImage}
@@ -573,7 +573,7 @@ class AdminPage extends React.Component {
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
-                                <FormTeamApplication
+                                <AdminFormTeamApplication
                                     handleTeamSubmissionsSelect={this.handleTeamSubmissionsSelect}
                                     handleTeamsFormApprove={this.handleTeamsFormApprove}
                                     handleTeamsFormDecline={this.handleTeamsFormDecline} />
@@ -605,7 +605,7 @@ class AdminPage extends React.Component {
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
-                                <FormJoinTeamApplication
+                                <AdminFormJoinTeamApplication
                                     handleMemberSubmissionsSelect={this.handleMemberSubmissionsSelect}
                                     handleMemberFormApprove={this.handleMemberFormApprove}
                                     handleMemberFormDecline={this.handleMemberFormDecline} />
@@ -637,7 +637,7 @@ class AdminPage extends React.Component {
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
                             <Grid item xs={10}>
-                                <FormTeamAccolades
+                                <AdminFormTeamAccolades
                                     handleTeamAccoladeSelect={this.handleTeamAccoladeSelect}
                                     handleTeamSelect={this.handleTeamSelect}
                                     handleAccoladeSubmit={this.handleAccoladeSubmit} />

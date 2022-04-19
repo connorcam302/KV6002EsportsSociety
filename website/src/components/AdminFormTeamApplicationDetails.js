@@ -1,17 +1,7 @@
 import React from "react";
 import Typography from '@mui/material/Typography';
 
-/**
-* FormManageTeamDetails
-* 
-* This class is used to populate the Team application form with data to help read and determine application forms.
-*
-* @author Ethan Borrill W18001798
-* @collab
-*
-* @todo
-*/
-class FormManageTeamDetails extends React.Component {
+class AdminFormTeamApplicationDetails extends React.Component {
 
     constructor(props) {
         super(props)
@@ -56,4 +46,4 @@ class FormManageTeamDetails extends React.Component {
     }
 }
 
-export default FormManageTeamDetails;
+export default AdminFormTeamApplicationDetails;

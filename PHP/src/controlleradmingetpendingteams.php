@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ControllerGetPendingTeams
+ * ControllerAdminGetPendingTeams
  * 
  * This controller is used to display content when using the '/api/pendingteams', providing means to display all or singular teams.
  * 
@@ -10,10 +10,10 @@
  * @author Ethan Borrill W18001798
  */
 
-class ControllerGetPendingTeams extends Controller {
+class ControllerAdminGetPendingTeams extends Controller {
     
     protected function setGateway() {
-        $this->gateway = new GatewayGetPendingTeams();
+        $this->gateway = new GatewayAdminGetPendingTeams();
     }
 
     /**

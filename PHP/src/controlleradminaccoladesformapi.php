@@ -1,7 +1,7 @@
 <?php
 
 /**
-* ControllerAccoladesFormApi
+* ControllerAdminAccoladesFormApi
 * 
 * The controller takes provides the SQL gateway 'GatewayAccoladeForms' a method of performing its SQL query.
 * In this case, insert the collected information into the teamaccolade table of the
@@ -11,12 +11,12 @@
 *
 */
 
-class ControllerAccoladesFormApi extends Controller
+class ControllerAdminAccoladesFormApi extends Controller
 {
 
     protected function setGateway()
     {
-        $this->gateway = new GatewayAccoladesForm();
+        $this->gateway = new GatewayAdminAccoladesForm();
     }
 
     

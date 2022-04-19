@@ -47,34 +47,35 @@ switch ($request->getPath()) {
     case 'api/accolades':
         $controller = new ControllerAccolades($request, $response);
         break;
-    case 'api/eventsform':
-        $controller = new ControllerEventFormApi($request, $response);
-        break;
-    case 'api/accoladesform':
-        $controller = new ControllerAccoladesFormApi($request, $response);
-        break;
     case 'api/jointeamform':
         $controller = new ControllerJoinTeamForm($request, $response);
         break;
-    case 'api/pendingmembers':
-        $controller = new ControllerGetPendingMembers($request, $response);
-        break;
-    case 'api/pendingmembersapprove':
-        $controller = new ControllerJoinTeamFormApprove($request, $response);
-        break;
-    case 'api/pendingmembersdisapprove':
-        $controller = new ControllerJoinTeamFormDecline($request, $response);
-        break;
     case 'api/teamsform':
         $controler = new ControllerCreateTeamForm($request, $response);
+        break;
+    case 'api/eventsform':
+        $controller = new ControllerAdminEventFormApi($request, $response);
+        break;
+    case 'api/accoladesform':
+        $controller = new ControllerAdminAccoladesFormApi($request, $response);
+        break;
+    case 'api/pendingmembers':
+        $controller = new ControllerAdminGetPendingMembers($request, $response);
+        break;
+    case 'api/pendingmembersapprove':
+        $controller = new ControllerAdminJoinTeamFormApprove($request, $response);
+        break;
+    case 'api/pendingmembersdisapprove':
+        $controller = new ControllerAdminJoinTeamFormDecline($request, $response);
+        break;
     case 'api/pendingteams':
-        $controller = new ControllerGetPendingTeams($request, $response);
+        $controller = new ControllerAdminGetPendingTeams($request, $response);
         break;
     case 'api/pendingteamsremove':
-        $controller = new ControllerPendingTeamsFormRemove($request, $response);
+        $controller = new ControllerAdminPendingTeamsFormRemove($request, $response);
         break;
     case 'api/pendingteamsapprove':
-        $controller = new ControllerPendingTeamFormApprove($request, $response);
+        $controller = new ControllerAdminPendingTeamFormApprove($request, $response);
         break;
     case 'api/editplayer':
         $controller = new ControllerEditPlayer($request, $response);
