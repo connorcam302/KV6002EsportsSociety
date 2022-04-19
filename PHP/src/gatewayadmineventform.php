@@ -18,13 +18,12 @@ class GatewayAdminEventForm extends Gateway
 /**
  * SQL Query for inserting Event form data.
  */
-public function AddEvent($eventName,$eventDesc,$eventImg,$eventDate) {
-    $sql = "INSERT into events (event_name,event_description,event_img,event_date) 
-                       values(:eventName,:eventDesc,:eventImg, :eventDate)";
+public function AddEvent($eventName,$eventDesc,$eventDate) {
+    $sql = "INSERT into events (event_name,event_description,event_date) 
+                       values(:eventName,:eventDesc,:eventDate)";
     $params = [
                ":eventName" => $eventName,
                ":eventDesc" => $eventDesc,
-               ":eventImg" => $eventImg,
                ":eventDate" => $eventDate,     
             ];
     $result = $this->getDatabase()->executeSQL($sql, $params);

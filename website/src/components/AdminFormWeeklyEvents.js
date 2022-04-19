@@ -27,13 +27,6 @@ class AdminFormWeeklyEvents extends React.Component {
                 /></ul>
 
                 <ul><input
-                    type='text'
-                    placeholder='Image used in Event'
-                    value={this.props.eventDesc}
-                    onChange={this.props.handleEventImage}
-                /></ul>
-
-                <ul><input
                     type='date'
                     placeholder='Date & Time of event'
                     value={this.props.eventDesc}

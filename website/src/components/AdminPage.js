@@ -65,7 +65,6 @@ class AdminPage extends React.Component {
 
         this.handleEventTitle = this.handleEventTitle.bind(this);
         this.handleEventDesc = this.handleEventDesc.bind(this);
-        this.handleEventImage = this.handleEventImage.bind(this);
         this.handleEventDate = this.handleEventDate.bind(this);
         this.handleEventSubmit = this.handleEventSubmit.bind(this);
 
@@ -176,16 +175,6 @@ class AdminPage extends React.Component {
     */
     handleEventDesc = (e) => {
         this.setState({ EventDesc: e.target.value })
-    }
-
-    /**
-    * handleEventTitle(e)
-    * 
-    * Handles the input and change of text within the 'Event Image' field used within the Events form page.
-    *
-    */
-    handleEventImage = (e) => {
-        this.setState({ EventImage: e.target.value })
     }
 
     /**
@@ -542,7 +531,6 @@ class AdminPage extends React.Component {
                                 <AdminFormWeeklyEvents
                                     handleEventTitle={this.handleEventTitle}
                                     handleEventDesc={this.handleEventDesc}
-                                    handleEventImage={this.handleEventImage}
                                     handleEventDate={this.handleEventDate}
                                     handleEventSubmit={this.handleEventSubmit} />
                                 <ul><p className="errorMessage">{errorMessage}</p></ul>

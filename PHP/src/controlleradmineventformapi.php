@@ -18,7 +18,6 @@ class ControllerAdminEventFormApi extends Controller {
     protected function processRequest() {
         $eventName = $this->getRequest()->getParameter("event_name");
         $eventDesc = $this->getRequest()->getParameter("event_description");
-        $eventImg = $this->getRequest()->getParameter("event_img");
         $eventDate = $this->getRequest()->getParameter("event_date");
 
         if ($this->getRequest()->getRequestMethod() === "POST"){
@@ -26,8 +25,8 @@ class ControllerAdminEventFormApi extends Controller {
             //then try to add user to database
             if (!$this->getGateway()->eventExists($eventName)){
 
-                if (!is_null($eventName) && !is_null($eventDesc) && !is_null($eventImg)  && !is_null($eventDate)) {
-                        $this->getGateway()->AddEvent($eventName,$eventDesc,$eventImg,$eventDate);        
+                if (!is_null($eventName) && !is_null($eventDesc) && !is_null($eventDate)) {
+                        $this->getGateway()->AddEvent($eventName,$eventDesc,$eventDate);        
                 } else {
                     $this->getResponse()->setMessage("The event details you have entered cannot be used!");
                     $this->getResponse()->setStatus(406);
