@@ -41,7 +41,6 @@ class AdminFormManageTeam extends React.Component {
     * 
     * Function retrieves the data collected from the team API URL and sets the value of 'Results' to contain the relevant data.
     *
-    * @param [type] $[var]   [Description]
     */
     fetchDataTeams = (urlTeams) => {
         if (this.props.team_id !== undefined && this.props.team_id !== "") {
@@ -84,8 +83,8 @@ class AdminFormManageTeam extends React.Component {
                     </label>
                 </ul>
                 <div>
-                    <Button onClick={this.props.handleTeamsFormDecline}>Decline Submission</Button>
                     <Button onClick={this.props.handleTeamsFormApprove}>Approve Submission</Button>
+                    <Button onClick={this.props.handleTeamsFormDecline}>Decline/Delete Submission</Button>
                 </div>
             </div>
         );

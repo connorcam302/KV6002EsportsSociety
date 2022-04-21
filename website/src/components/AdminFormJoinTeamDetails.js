@@ -20,6 +20,12 @@ class AdminFormJoinTeamDetails extends React.Component {
         }
     }
 
+    /**
+    * render()
+    * 
+    * Renders the content needed to display the Applications to join the requested teams.
+    *
+    */
     render() {
         let details = "";
 

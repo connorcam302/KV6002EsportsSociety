@@ -10,7 +10,7 @@ import AdminFormTeamApplicationDetails from "./AdminFormTeamApplicationDetails";
 * @author Ethan Borrill W18001798
 */
 class AdminFormTeamApplication extends React.Component {
-    
+
 
     /**
     * componentDidMount
@@ -23,19 +23,25 @@ class AdminFormTeamApplication extends React.Component {
         this.fetchDataPendingTeams(urlPendingTeams)
     }
 
-     /**
+    /**
     * Constructor
     * 
     * Used within this class to initialise several values used within the file, such as an empty data array for accolades and teams.
     *
     */
-      constructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
             results: [],
         }
     }
 
+    /**
+    * fetchDataPendingTeams
+    * 
+    * Function retrieves the data collected from the pendingTeams API URL and sets the value of 'Results' to contain the relevant data.
+    *
+    */
     fetchDataPendingTeams = (urlPendingTeams) => {
         if (this.props.team_id !== undefined && this.props.team_id !== "") {
             urlPendingTeams += "?id=" + this.props.team_id
@@ -49,7 +55,7 @@ class AdminFormTeamApplication extends React.Component {
                 }
             })
             .then((data) => {
-                this.setState({results:data.results })
+                this.setState({ results: data.results })
             })
             .catch((err) => {
                 console.log("something has gone wrong ", err)
@@ -57,12 +63,18 @@ class AdminFormTeamApplication extends React.Component {
     }
 
 
+    /**
+    * render()
+    * 
+    * Renders the content needed to display the team application form.
+    *
+    */
     render() {
 
         return (
             <div>
-                {this.state.results.map((pendingTeams, i) => (<AdminFormTeamApplicationDetails key ={i} pendingTeams ={pendingTeams}/>))}
-                
+                {this.state.results.map((pendingTeams, i) => (<AdminFormTeamApplicationDetails key={i} pendingTeams={pendingTeams} />))}
+
                 <ul>
                     <label>
                         <select value={this.props.team_id} onChange={this.props.handleTeamSubmissionsSelect}>
@@ -72,8 +84,8 @@ class AdminFormTeamApplication extends React.Component {
                     </label>
                 </ul>
                 <div>
-                <Button onClick={this.props.handleTeamsFormDecline}>Delete Application</Button>
-                <Button onClick={this.props.handleTeamsFormApprove}>Approve Application</Button>
+                    <Button onClick={this.props.handleTeamsFormApprove}>Approve Application</Button>
+                    <Button onClick={this.props.handleTeamsFormDecline}>Decline/Delete Application</Button>
                 </div>
             </div>
         );

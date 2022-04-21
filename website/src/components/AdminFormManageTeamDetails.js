@@ -20,6 +20,12 @@ class AdminFormManageTeamDetails extends React.Component {
         }
     }
 
+    /**
+    * render()
+    * 
+    * Renders the content needed to display the details of Team applications.
+    *
+    */
     render() {
         let details = "";
 

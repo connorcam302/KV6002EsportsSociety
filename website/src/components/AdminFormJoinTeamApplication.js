@@ -42,7 +42,6 @@ class AdminFormJoinTeam extends React.Component {
     * 
     * Function retrieves the data collected from the pendingMember API URL and sets the value of 'Results' to contain the relevant data.
     *
-    * @param [type] $[var]   [Description]
     */
     fetchDataPlayers = (urlPlayers) => {
         if (this.props.user_id !== undefined && this.props.user_id !== "") {

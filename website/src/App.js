@@ -1,12 +1,5 @@
 import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from './components/Navbar.js';
-import Homepage from './components/Homepage';
-import LoginRegisterPage from './components/LoginRegisterPage';
-import AdminPage from './components/AdminPage'
-import ErrorPage from './components/ErrorPage'
-import TeamPage from './components/TeamPage';
 import Router from './components/Router'
 
 /**

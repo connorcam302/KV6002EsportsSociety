@@ -8,7 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import { Typography } from "@mui/material";
 import Navbar from './Navbar'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Homepage from './Homepage';
 import LoginRegisterPage from './LoginRegisterPage';
 import AdminPage from './AdminPage'
 import ErrorPage from './ErrorPage'
@@ -98,7 +97,7 @@ export default class Router extends React.Component {
             <Navbar />
               <Routes>
                 <Route path="/">
-                  <Route index element={<Homepage/>} />
+                  <Route index element={<WeeklyEventsPage/>} />
                   <Route path="login" element={<LoginRegisterPage />} />
                   <Route path="admin" element={<AdminPage />} />
                   <Route path="results" element={<ResultsPage />} />
