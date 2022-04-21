@@ -14,6 +14,7 @@ class AdminButtons extends React.Component {
         return (
             <div>
                 <ul><Button onClick={this.props.handleEventsFormClick}>Add an event</Button></ul>
+                <ul><Button onClick={this.props.handleMatchFormClick}>Add match results</Button></ul>
                 <ul><Button onClick={this.props.handleTeamApplicationsClick}>Team Applications</Button></ul>
                 <ul><Button onClick={this.props.handleMembersApplicationClick}>Member Applications</Button></ul>
                 <ul><Button onClick={this.props.handleTeamAccoladesClick}>Manage Team Accolades</Button></ul>

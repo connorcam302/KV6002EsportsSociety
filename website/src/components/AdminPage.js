@@ -5,6 +5,7 @@ import AdminFormWeeklyEvents from "./AdminFormWeeklyEvents.js";
 import AdminFormTeamApplication from "./AdminFormTeamApplication.js";
 import AdminFormTeamAccolades from "./AdminFormTeamAccolades.js";
 import AdminFormJoinTeamApplication from "./AdminFormJoinTeamApplication.js";
+import AdminResultsForm from "./AdminResultsForm.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';

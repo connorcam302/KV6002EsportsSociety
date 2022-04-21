@@ -3,6 +3,7 @@ import ResultsTable from "./ResultsTable";
 import { Timeline } from 'react-twitter-widgets';
 import { FacebookProvider, Page } from 'react-facebook';
 import InstagramFeed from 'react-ig-feed';
+import AdminResultsForm from "./AdminResultsForm";
 
 /**
 * ResultsPage
@@ -62,7 +63,7 @@ class ResultsPage extends React.Component {
 
                 {/*
                 <div className="insta">
-                    <InstagramFeed token="example" counter="6" />
+                    <InstagramFeed token="684773662810417" counter="6" />
                     </div>*/}
 
             </div>
