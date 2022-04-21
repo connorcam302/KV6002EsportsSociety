@@ -45,7 +45,6 @@ class AdminPage extends React.Component {
 
             EventTitle: null,
             EventDesc: null,
-            EventImage: null,
             EventDate: null,
 
             TeamDropDown: "",
@@ -201,7 +200,6 @@ class AdminPage extends React.Component {
         let formData = new FormData();
         formData.append('event_name', this.state.EventTitle);
         formData.append('event_description', this.state.EventDesc);
-        formData.append('event_img', this.state.EventImage);
         formData.append('event_date', this.state.EventDate);
         fetch(url, {
             method: 'POST',
@@ -209,14 +207,12 @@ class AdminPage extends React.Component {
             body: formData
         })
             .then((response) => {
-                if ((this.state.EventTitle === null) && (this.state.EventDesc === null) && (this.state.EventImage === null) && (this.state.EventDate === null)) {
+                if ((this.state.EventTitle === null) && (this.state.EventDesc === null) && (this.state.EventDate === null)) {
                     this.setState({ error: "Please answer all fields within the form before submitting." })
                 } else if (this.state.EventTitle === null) {
                     this.setState({ error: "Please enter a Title for the event." })
                 } else if (this.state.EventDesc === null) {
                     this.setState({ error: "Please enter a description for the event." })
-                } else if (this.state.EventImage === null) {
-                    this.setState({ error: "Please provide an Image to be shown with the event" })
                 } else if (this.state.EventDate === null) {
                     this.setState({ error: "Please enter a date for the event." })
                 } else if (response.status === 406) {

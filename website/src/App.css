@@ -174,10 +174,6 @@ select {
 
 /* Lewis CSS */
 
-{
-  box-sizing: border-box;
-}
-
 .eventcolumn {
   float: left;
   width: 40%;
