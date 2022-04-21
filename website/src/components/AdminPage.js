@@ -40,6 +40,7 @@ class AdminPage extends React.Component {
             error: "",
 
             EventsForm: false,
+            ResultsForm: false,
             TeamApplicationForm: false,
             MemberApplicationForm: false,
             AccoladesForm: false,
@@ -47,6 +48,11 @@ class AdminPage extends React.Component {
             EventTitle: null,
             EventDesc: null,
             EventDate: null,
+
+            MatchteamDropDown: "",
+            MatchOpponent: null,
+            MatchDate: null,
+            MatchResults: null,
 
             TeamDropDown: "",
             AccoladesDropDown: "",
@@ -58,6 +64,7 @@ class AdminPage extends React.Component {
         this.handleTeamApplicationsClick = this.handleTeamApplicationsClick.bind(this);
         this.handleTeamAccoladesClick = this.handleTeamAccoladesClick.bind(this);
         this.handleMembersApplicationClick = this.handleMembersApplicationClick.bind(this);
+        this.handleMatchFormClick = this.handleMatchFormClick.bind(this);
 
         this.handleTeamAccoladeSelect = this.handleTeamAccoladeSelect.bind(this);
         this.handleTeamSelect = this.handleTeamSelect.bind(this);
@@ -75,6 +82,12 @@ class AdminPage extends React.Component {
         this.handleMemberSubmissionsSelect = this.handleMemberSubmissionsSelect.bind(this);
         this.handleMemberFormDecline = this.handleMemberFormDecline.bind(this);
         this.handleMemberFormApprove = this.handleMemberFormApprove.bind(this);
+
+        this.handleMatchTeam  = this.handleMatchTeam.bind(this);
+        this.handleMatchOpponent = this.handleMatchOpponent.bind(this);
+        this.handleMatchDate = this.handleMatchDate.bind(this);
+        this.handleMatchResults = this.handleMatchResults.bind(this);
+        this.handleMatchSubmit = this.handleMatchSubmit.bind(this);
     }
 
 
@@ -84,7 +97,6 @@ class AdminPage extends React.Component {
     * This function collects any webtoken stored within the browser made when logging into the site, this is then decoded to check the is_admin value stored within.
     * Should the value of the is_admin be 1, admin access is granted - otherwise the unauthorised webpage will be displayed to prevent unwanted access.
     *
-    * @param [type] $[var]   [Description]
     */
     componentDidMount() {
         if (localStorage.getItem('UserLoginToken')) {
@@ -128,7 +140,6 @@ class AdminPage extends React.Component {
     * 
     * Functionality to handle a users logout click within the collection of buttons on the left hand side, will remove the token from local storage - essentially logging the user out.
     *
-    * @param [type] $[var]   [Description]
     */
     handleLogoutClick = () => {
         this.setState(
@@ -150,6 +161,7 @@ class AdminPage extends React.Component {
         this.setState(
             {
                 EventsForm: true,
+                ResultsForm: false,
                 TeamApplicationForm: false,
                 MemberApplicationForm: false,
                 AccoladesForm: false
@@ -231,6 +243,112 @@ class AdminPage extends React.Component {
             );
     }
 
+    //FUNCTIONALITY FOR THE MATCH RESULTS FORM.
+    /**
+    * handleMatchFormClick
+    * 
+    * This is used on the Add match results form button, will set the state needed for the Match Results form to be displayed to be true.
+    *
+    */
+    handleMatchFormClick =() => {
+        this.setState(
+            {
+                EventsForm: false,
+                ResultsForm: true,
+                TeamApplicationForm: false,
+                MemberApplicationForm: false,
+                AccoladesForm: false
+            }
+        )
+    }
+
+    /**
+    * handleMatchTeam
+    * 
+    * This function handles the updating of the dropdown box used on the 'Match Results' page, which is essential for navigating applications via updating the ID used in the dropdown box to identify each item.
+    *
+    */
+     handleMatchTeam = (e) => {
+        this.setState({ MatchteamDropDown: e.target.value })
+    }
+
+    /**
+    * handleMatchOpponent(e)
+    * 
+    * Handles the input and change of text within the 'Opponent' field used within the Events form page.
+    *
+    */
+     handleMatchOpponent = (e) => {
+        this.setState({ MatchOpponent: e.target.value })
+    }
+
+    /**
+    * handleMatchDate(e)
+    * 
+    * Handles the input and change of text within the 'Match date' field used within the Events form page.
+    *
+    */
+     handleMatchDate = (e) => {
+        this.setState({ MatchDate: e.target.value })
+    }
+
+    /**
+    * handleMatchResults(e)
+    * 
+    * Handles the input and change of text within the 'Match Field' field used within the Events form page.
+    *
+    */
+     handleMatchResults = (e) => {
+        this.setState({ MatchResults: e.target.value })
+    }
+
+
+    /**
+    * handleMatchSubmit
+    * 
+    * This function is used on the Submission button present on the Match results form page. 
+    * Upon pressing the button, The contents entered within each field is checked to not be empty - if not the details are submitted to the matchHistory table in the database.
+    *
+    */
+    handleMatchSubmit = () => {
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/matchresultsform"
+
+        let formData = new FormData();
+        formData.append('match_teamId', this.state.MatchteamDropDown);
+        formData.append('match_opponent', this.state.MatchOpponent);
+        formData.append('match_date', this.state.MatchDate);
+        formData.append('match_outcome', this.state.MatchResults);
+        fetch(url, {
+            method: 'POST',
+            headers: new Headers(),
+            body: formData
+        })
+            .then((response) => {
+                if ((this.state.MatchteamDropDown === "") && (this.state.MatchOpponent === null) && (this.state.MatchDate === null) && (this.state.MatchResults === null)) {
+                    this.setState({ error: "Please answer all fields within the form before submitting." })
+                } else if (this.state.MatchteamDropDown === "") {
+                    this.setState({ error: "Please select a team which played in the match!" })
+                } else if (this.state.MatchOpponent === null) {
+                    this.setState({ error: "Please enter the Opponent of this match." })
+                } else if (this.state.MatchDate === null) {
+                    this.setState({ error: "Please enter the date the match took place on." })
+                } else if (this.state.MatchResults === null) {
+                    this.setState({ error: "Please the results of the match." })
+                } else if (response.status === 406) {
+                    this.setState({ error: "The match details you have entered cannot be used!" })
+                } else if (response.status === 403) {
+                    this.setState({ error: "Sorry, a match with these details already exists!" })
+                } else if ((response.status === 200) || (response.status === 204)) {
+                    this.setState({ error: "The matches results has been successfully created and uploaded!" })
+                    return response.json()
+                }
+            })
+            .catch((err) => {
+                console.log("something went wrong ", err)
+            }
+            );
+    }
+
     //FUNCTIONALITY FOR THE TEAM MANAGEMENT PAGE.
     /**
     * handleTeamApplicationsClick
@@ -242,6 +360,7 @@ class AdminPage extends React.Component {
         this.setState(
             {
                 EventsForm: false,
+                ResultsForm: false,
                 TeamApplicationForm: true,
                 MemberApplicationForm: false,
                 AccoladesForm: false
@@ -333,6 +452,7 @@ class AdminPage extends React.Component {
         this.setState(
             {
                 EventsForm: false,
+                ResultsForm: false,
                 TeamApplicationForm: false,
                 MemberApplicationForm: false,
                 AccoladesForm: true
@@ -409,6 +529,7 @@ class AdminPage extends React.Component {
         this.setState(
             {
                 EventsForm: false,
+                ResultsForm: false,
                 TeamApplicationForm: false,
                 MemberApplicationForm: true,
                 AccoladesForm: false
@@ -519,6 +640,7 @@ class AdminPage extends React.Component {
                             <Grid item xs={1}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
+                                    handleMatchFormClick={this.handleMatchFormClick}
                                     handleTeamApplicationsClick={this.handleTeamApplicationsClick}
                                     handleMembersApplicationClick={this.handleMembersApplicationClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
@@ -530,6 +652,41 @@ class AdminPage extends React.Component {
                                     handleEventDesc={this.handleEventDesc}
                                     handleEventDate={this.handleEventDate}
                                     handleEventSubmit={this.handleEventSubmit} />
+                                <ul><p className="errorMessage">{errorMessage}</p></ul>
+                            </Grid>
+                            <Grid item xs={1}>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )
+            } else if (this.state.ResultsForm) { //TEAM APPLICATION STATE
+                page = (
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                                    Add match results
+                                </Typography>
+                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                    Enter the details of a match below!
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <AdminButtons
+                                    handleEventsFormClick={this.handleEventsFormClick}
+                                    handleMatchFormClick={this.handleMatchFormClick}
+                                    handleTeamApplicationsClick={this.handleTeamApplicationsClick}
+                                    handleMembersApplicationClick={this.handleMembersApplicationClick}
+                                    handleTeamAccoladesClick={this.handleTeamAccoladesClick}
+                                    handleLogoutClick={this.handleLogoutClick} />
+                            </Grid>
+                            <Grid item xs={10}>
+                                <AdminResultsForm
+                                    handleMatchTeam={this.handleMatchTeam}
+                                    handleMatchOpponent={this.handleMatchOpponent}
+                                    handleMatchDate={this.handleMatchDate}
+                                    handleMatchResults={this.handleMatchResults}
+                                    handleMatchSubmit={this.handleMatchSubmit} />
                                 <ul><p className="errorMessage">{errorMessage}</p></ul>
                             </Grid>
                             <Grid item xs={1}>
@@ -552,6 +709,7 @@ class AdminPage extends React.Component {
                             <Grid item xs={1}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
+                                    handleMatchFormClick={this.handleMatchFormClick}
                                     handleTeamApplicationsClick={this.handleTeamApplicationsClick}
                                     handleMembersApplicationClick={this.handleMembersApplicationClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
@@ -584,6 +742,7 @@ class AdminPage extends React.Component {
                             <Grid item xs={1}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
+                                    handleMatchFormClick={this.handleMatchFormClick}
                                     handleTeamApplicationsClick={this.handleTeamApplicationsClick}
                                     handleMembersApplicationClick={this.handleMembersApplicationClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
@@ -616,6 +775,7 @@ class AdminPage extends React.Component {
                             <Grid item xs={1}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
+                                    handleMatchFormClick={this.handleMatchFormClick}
                                     handleTeamApplicationsClick={this.handleTeamApplicationsClick}
                                     handleMembersApplicationClick={this.handleMembersApplicationClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
@@ -648,6 +808,7 @@ class AdminPage extends React.Component {
                             <Grid item xs={1}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
+                                    handleMatchFormClick={this.handleMatchFormClick}
                                     handleTeamApplicationsClick={this.handleTeamApplicationsClick}
                                     handleMembersApplicationClick={this.handleMembersApplicationClick}
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
