@@ -9,9 +9,6 @@
 * Into the teamAccolade table of the database.
 *
 * @author Ethan Borrill W18001798
-* @collab
-*
-* @todo
 */
 class GatewayAdminAccoladesForm extends Gateway
 {

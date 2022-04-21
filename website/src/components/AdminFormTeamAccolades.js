@@ -23,7 +23,7 @@ class AdminFormTeamAccolades extends React.Component {
     *
     */
     componentDidMount() {
-        let urlAccolade = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/accolades"
+        let urlAccolade = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/accolades"
         this.fetchDataAccolade(urlAccolade)
 
         let urlTeam = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/team"

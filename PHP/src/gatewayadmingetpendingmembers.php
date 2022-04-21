@@ -6,7 +6,6 @@
  * This gateway is used to obtain the details of users from the pendingMembers form to be displayed within the Join Team application's form prior to submission or deletion.
  * 
  * @author Ethan Borrill W18001798
- * 
  */         
 
 class GatewayAdminGetPendingMembers extends Gateway  {

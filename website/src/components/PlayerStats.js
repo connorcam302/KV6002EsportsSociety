@@ -36,9 +36,9 @@ export default class PlayerStats extends React.Component {
     */
 
     componentDidMount() {
-        let url = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/results?player="
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/results?player="
         this.fetchData(url)
-        let accoladesurl = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/accolades?playerbest="
+        let accoladesurl = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/accolades?playerbest="
         this.fetchAccoladeData(accoladesurl)
     }
     

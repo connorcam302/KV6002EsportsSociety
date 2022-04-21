@@ -7,7 +7,6 @@
 * In this case, insert the collected information into the teamaccolade table of the
 *
 * @author Ethan Borrill W18001798
-* @collab
 *
 */
 

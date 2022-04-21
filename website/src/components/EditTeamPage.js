@@ -38,7 +38,7 @@ export default class EditTeamPage extends React.Component {
                 isAdmin: decodedToken.user_isAdmin
             })
         }
-        let url = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/team?id="
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/team?id="
         this.fetchData(url)
     }
 
@@ -61,7 +61,7 @@ export default class EditTeamPage extends React.Component {
     */
     
     handleSubmitClick = () => {
-        let url = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/editteam"
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/editteam"
 
         let formData = new FormData();
         formData.append('id', this.props.teamid);
