@@ -131,3 +131,44 @@ select {
   border: 1px solid rgb(179, 179, 179);
   border-radius: 4px;
 }
+
+/* Results page layout */
+
+.resultsWrapper{
+  display: grid;
+  grid-gap: 1%;
+  margin: 1%;
+  margin-bottom: 2%;
+  grid-auto-rows: min-content;
+  grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
+  grid-template-areas: 
+  ". main main ."
+  ". rTable rTable ."
+  ". socials socials ."
+  ". fb twitterFeed .";
+}
+
+.main{
+  grid-area: main;
+  text-align: left;
+}
+
+.rTable{
+  grid-area: rTable;
+}
+.rTable h2{
+  text-align: left;
+}
+
+.socials{
+  grid-area: socials;
+}
+
+.twitterFeed{
+  grid-area: twitterFeed;
+}
+
+.fbPage{
+  grid-area: fb;
+}
+

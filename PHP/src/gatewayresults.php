@@ -7,13 +7,15 @@
  * with specific criteria, or every result in the esports.db database.
  * 
  * @author Connor Campbell W18003255
+ * @collab Jacob Clark w18003237 - Added game title to orignal statement pull
  * 
  * @todo    - Additional search criteria will be added as needed throughout development.
  */         
 
 class GatewayResults extends Gateway  {
-    private $sql = "SELECT match_id, match_date, match_opponent, match_outcome, match_teamId, team_name FROM matchHistory
-                    JOIN team ON team_id = match_teamId";
+    private $sql = "SELECT match_id, match_date, match_opponent, match_outcome, match_teamId, team_name, game_name FROM matchHistory
+                    JOIN team ON team_id = match_teamId
+                    JOIN game ON team.game_id = game.game_id";
     
     public function __construct() {
         $this->setDatabase(DATABASE);

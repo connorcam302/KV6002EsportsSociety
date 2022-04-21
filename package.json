@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-facebook": "^8.1.4",
+    "react-ig-feed": "^1.0.4"
+  }
+}

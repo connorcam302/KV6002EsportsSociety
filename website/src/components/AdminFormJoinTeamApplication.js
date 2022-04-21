@@ -46,7 +46,7 @@ class AdminFormJoinTeam extends React.Component {
     */
     fetchDataPlayers = (urlPlayers) => {
         if (this.props.user_id !== undefined && this.props.user_id !== "") {
-            url += "?id=" + this.props.user_id
+            urlPlayers += "?id=" + this.props.user_id
         }
         fetch(urlPlayers)
             .then((response) => {

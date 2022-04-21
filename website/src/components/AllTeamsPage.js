@@ -81,7 +81,9 @@ class AllTeamsPage extends React.Component {
     */
     handleTeamSubmit = () => {
         let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/teamsform"
-        var xhr = new XMLHttpRequest();
+
+        let xhr = new XMLHttpRequest();
+
         let formData = new FormData();
         formData.append('team_name', this.state.TeamName);
         formData.append('game_id', this.state.GamesDropDown);
@@ -140,7 +142,9 @@ class AllTeamsPage extends React.Component {
 
     handleJoinTeamSubmit = () => {
         let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/jointeamform"
-        var xhr = new XMLHttpRequest();
+
+        let xhr = new XMLHttpRequest();
+
         let formData = new FormData();
         formData.append('teamid', this.state.JoinTeamDropdown);
         formData.append('userid', this.state.JoinTeamPlayerDropDown);

@@ -17,6 +17,7 @@ import PlayerPage from './PlayerPage'
 import AllTeamsPage from './AllTeamsPage'
 import EditTeamPage from "./EditTeamPage";
 import EditPlayerPage from "./EditPlayerPage";
+import ResultsPage from "./ResultsPage";
 
 export default class Router extends React.Component {
 
@@ -99,6 +100,7 @@ export default class Router extends React.Component {
                   <Route index element={<Homepage/>} />
                   <Route path="login" element={<LoginRegisterPage />} />
                   <Route path="admin" element={<AdminPage />} />
+                  <Route path="results" element={<ResultsPage />} />
                   <Route path="team" element={<AllTeamsPage />} />
                   {this.state.teamResults.map( (team) => ( <Route path={this.makeTeamPath(team.team_id)} element={<TeamPage teamid={team.team_id}/>} /> ))}
                   {this.state.teamResults.map( (team) => ( <Route path={this.makeEditTeamPath(team.team_id)} element={<EditTeamPage teamid={team.team_id}/>} /> ))}
