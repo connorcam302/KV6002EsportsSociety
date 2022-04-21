@@ -98,7 +98,7 @@ export default class EditPlayerPage extends React.Component {
     
     
     handleSubmitClick = () => {
-        let url = "http://unn-w18003255.newnumyspace.co.uk/KV6002/Assessment/api/editplayer"
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/editplayer"
 
         let formData = new FormData();
         formData.append('email', this.state.newEmail);
