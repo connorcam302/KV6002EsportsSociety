@@ -44,6 +44,9 @@ switch ($request->getPath()) {
     case 'api/games':
         $controller = new ControllerGames($request, $response);
         break;
+    case 'api/events':
+        $controller = new ControllerEvents($request, $response);
+        break;
     case 'api/accolades':
         $controller = new ControllerAccolades($request, $response);
         break;

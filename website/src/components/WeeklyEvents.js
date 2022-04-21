@@ -12,7 +12,7 @@ class WeeklyEvents extends React.Component {
     }
 
     componentDidMount() {
-        const url = "http://unn-w18022703.newnumyspace.co.uk/KV6002/Assessment/api/event"
+        const url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/events"
 
         fetch(url)
           .then( (response) => {
