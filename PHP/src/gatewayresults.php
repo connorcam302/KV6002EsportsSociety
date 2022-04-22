@@ -68,4 +68,17 @@ class GatewayResults extends Gateway  {
         $this->setResult($result);
     }
 
+    public function addResult($team_id, $match_date, $match_opponent, $match_result ) {
+        $sql = "INSERT into matchHistory (match_teamId,match_date,match_opponent, match_outcome)
+                             VALUES (:match_teamId, :match_date, :match_opponent, :match_outcome)";
+        $params = [
+            ":match_teamId" => $team_id, 
+            ":match_date" => $match_date, 
+            ":match_opponent" => $match_opponent, 
+            ":match_outcome" => $match_result,
+        ];
+        $result = $this->getDatabase()->executeSQL($sql, $params);
+        $this->setResult($result);
+    }
+
 }

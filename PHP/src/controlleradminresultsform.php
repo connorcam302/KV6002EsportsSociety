@@ -12,7 +12,7 @@
 class ControllerAdminResultsForm extends Controller {
 
     protected function setGateway() {
-        $this->gateway = new GatewayAdminResultsForm();
+        $this->gateway = new GatewayResults();
     }
 
     protected function processRequest() {
