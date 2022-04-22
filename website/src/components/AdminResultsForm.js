@@ -98,7 +98,7 @@ class AdminResultsForm extends React.Component {
                     onChange={this.props.handleMatchResults}
                 /></ul>
 
-                <ul><Button onClick={this.props.handleMatchSubmit}>Submit Results</Button></ul>
+                <ul><Button onClick={this.props.handleMatchSubmit} sx={{backgroundColor:"#D5761D",color: 'white'}}>Submit Results</Button></ul>
             </div>
         );
     }

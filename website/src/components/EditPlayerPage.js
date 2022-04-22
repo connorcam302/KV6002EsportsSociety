@@ -4,6 +4,10 @@ import jwt_decode from "jwt-decode";
 import { TextField, Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import EditPlayerForm from "./EditPlayerForm";
+import Uploady from "@rpldy/uploady";
+import UploadButton from "@rpldy/upload-button";
+import Helmet from "react-helmet";
+
 
 
 /**
@@ -17,6 +21,9 @@ import EditPlayerForm from "./EditPlayerForm";
 *
 * @todo -Fix bug with player's current info not being added to the fields by default.
 */
+
+    
+
 
 
 export default class EditPlayerPage extends React.Component {
@@ -33,6 +40,7 @@ export default class EditPlayerPage extends React.Component {
             newTwitch:"",
             newTwitter:"",
             newInstagram:"",
+            newPicture:"",
             results:[],
             sucess: ""
         }
@@ -59,6 +67,10 @@ export default class EditPlayerPage extends React.Component {
 
     }
 
+    filterBySize = (file) => {
+        //filter out images larger than 5MB
+        return file.size <= 5242880;
+      };
     
     /**
     * handle--
@@ -178,7 +190,6 @@ export default class EditPlayerPage extends React.Component {
     this.state.results.map( (player) => (playerTwitter = player.user_twitter))
     this.state.results.map( (player) => (playerInstagram = player.user_instagram))
 
-
     console.log(playerIGN)
 
         /*
@@ -188,6 +199,9 @@ export default class EditPlayerPage extends React.Component {
        if(this.state.user_id == this.props.playerid || this.state.isAdmin == 1){
         return(
             <div>
+                <Helmet>
+                <title>Edit Player</title>
+                </Helmet>
                 <Typography variant="h1" align="center">
                     {playerIGN}
                 </Typography>

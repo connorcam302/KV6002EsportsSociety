@@ -6,6 +6,7 @@ import SearchBox from "./SearchBox.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
+import Helmet from "react-helmet";
 /**
  * Team page
  *
@@ -199,6 +200,9 @@ class AllTeamsPage extends React.Component {
         let errorJoinTeamMessage = this.state.errorJoinTeam
         page = (
             <Box sx={{ flexGrow: 1 }}>
+                <Helmet>
+                    <title>Teams</title>
+                </Helmet>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography sx={{ fontSize: 30, fontWeight: 500 }}>

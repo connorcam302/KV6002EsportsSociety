@@ -1,6 +1,7 @@
 import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Router from './components/Router'
+import Footer from './components/Footer';
 
 /**
 * App
@@ -25,6 +26,7 @@ import Router from './components/Router'
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
       main: "#170D05",
       light: "#84847C",
@@ -36,7 +38,17 @@ const theme = createTheme({
       contrastText: "#1a1a1a"
     },
   },
+  MuiFormLabel: {
+    root: {
+      '&$focused': {
+        color: 'red'
+      }
+    }
+  },
   typography: {
+    allVariants: {
+      color: "white"
+    },
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -71,6 +83,7 @@ function App() {
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
         <Router />
+        <Footer />
       </ThemeProvider>
     </div>
   );

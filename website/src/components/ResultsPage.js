@@ -4,6 +4,7 @@ import { Timeline } from 'react-twitter-widgets';
 import { FacebookProvider, Page } from 'react-facebook';
 import InstagramFeed from 'react-ig-feed';
 import AdminResultsForm from "./AdminResultsForm";
+import Helmet from "react-helmet";
 
 /**
 * ResultsPage
@@ -23,6 +24,9 @@ class ResultsPage extends React.Component {
     render() {
         return (
             <div className="resultsWrapper">
+                <Helmet>
+                    <title>Results</title>
+                </Helmet>
 
                 <div className="main">
                     <h1>Game Results</h1>

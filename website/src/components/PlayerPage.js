@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { TwitchEmbed } from "react-twitch-embed";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 import jwt_decode from "jwt-decode";
+import Helmet from "react-helmet";
 
 
 /**
@@ -81,13 +82,14 @@ export default class PlayerPage extends React.Component {
     render() {
         let playerIGN;
         let playerName;
+        let playerBio;
         let playerTwitch;
         let playerTwitter;
         let playerInstagram;
+        
 
         let twitchPopout;
         let twitterPopout;
-        let instagramPopout;
 
         let twitter;
         let twitch;
@@ -97,6 +99,7 @@ export default class PlayerPage extends React.Component {
 
         this.state.results.map( (player) => playerIGN = player.user_ign)
         this.state.results.map( (player) => playerName = (player.user_firstName + " " + player.user_lastName))
+        this.state.results.map( (player) => playerBio = player.user_bio)
         this.state.results.map( (player) => playerTwitch = player.user_twitch)
         this.state.results.map( (player) => playerTwitter = player.user_twitter)
         this.state.results.map( (player) => playerInstagram = player.user_instagram)
@@ -113,7 +116,8 @@ export default class PlayerPage extends React.Component {
                 <TwitterTimelineEmbed
                 sourceType="profile"
                 screenName={playerTwitter}
-                options={{height: 480, width: "100%"}}
+                options={{height: 480, width: "100%", theme: 'dark'}}
+                
             />
             )
             twitter = (
@@ -179,7 +183,10 @@ export default class PlayerPage extends React.Component {
         }
 
         return(
-            <Box sx={{marginBottom:2, paddingLeft:3,paddingRight:3,marginLeft: 10,marginRight:10, paddingTop:2, paddingBottom:4,}}>
+            <Box sx={{marginBottom:2, paddingLeft:3,paddingRight:3,marginLeft: 10,marginRight:10, paddingTop:2, paddingBottom:4,}}>                        
+            <Helmet>
+                <title>{playerIGN}</title>
+            </Helmet>
             <Box sx={{paddingTop:2,paddingBottom:3}}>
                 <Grid container spacing={2} sx={{paddingLeft:2}}>
                     <img src={ProfilePic} className="profliepic"/>
@@ -211,27 +218,29 @@ export default class PlayerPage extends React.Component {
             </Box>
             <Grid container spacing={5}>
                 <Grid item xs={8}>
-                    <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%"}}>
-                        <TeamPlayers teamid={this.props.teamid}/>
+                    <Box sx={{backgroundColor:"#424242", borderRadius: '10px 10px 10px 10px', border: "3px solid #D5761D", height: "100%"}}>
+                        <Typography sx={{padding:2}}>
+                            {playerBio}
+                        </Typography>
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
+                <Box sx={{backgroundColor:"#424242", borderRadius: '10px 10px 10px 10px', border: "3px solid #D5761D", height: "100%",paddingLeft:1, paddingRight:1,}}>
                     <PlayerResults playerid={this.props.playerid}/>
                 </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
+                    <Box sx={{backgroundColor:"#424242", borderRadius: '10px 10px 10px 10px', border: "3px solid #D5761D", height: "100%",paddingLeft:1, paddingRight:1,}}>
                         <PlayerTeams playerid={this.props.playerid}/>
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
+                <Box sx={{backgroundColor:"#424242", borderRadius: '10px 10px 10px 10px', border: "3px solid #D5761D", height: "100%",paddingLeft:1, paddingRight:1,}}>
                     <PlayerStats playerid={this.props.playerid}/>
                 </Box>
                 </Grid>
                 <Grid item xs={4}>
-                <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
+                <Box sx={{backgroundColor:"#424242", borderRadius: '10px 10px 10px 10px', border: "3px solid #D5761D", height: "100%",paddingLeft:1, paddingRight:1,}}>
                     <PlayerAccolades playerid={this.props.playerid}/>
                 </Box>
                 </Grid>

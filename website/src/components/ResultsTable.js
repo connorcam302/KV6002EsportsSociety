@@ -24,7 +24,7 @@ class ResultsTable extends React.Component {
     }
 
     componentDidMount() {
-        let url = "http://localhost/KV6002/Assessment/api/results"
+        let url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/results"
         this.fetchData(url)
     }
 
@@ -103,6 +103,7 @@ class ResultsTable extends React.Component {
                     columns={columns}
                     pageSize={10}
                     rowsPerPageOptions={[10]}
+                    sx={{backgroundColor:"#424242", border: 2, borderColor: '#D5761D',}}
                 />
             </div>
         );

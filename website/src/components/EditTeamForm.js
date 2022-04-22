@@ -31,6 +31,9 @@ export default class EditTeamForm extends React.Component {
                         value={this.props.name} 
                         onChange={this.props.handleName} 
                         variant="filled"
+                        style={{
+                            backgroundColor: "#827C74"
+                        }}
                     />
                 </Box>
                 <Box>

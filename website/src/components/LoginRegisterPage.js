@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { Box } from "@mui/system";
+import Helmet from "react-helmet";
 
 /**
 * LoginRegisterPage
@@ -270,6 +271,9 @@ class LoginRegisterPage extends React.Component {
          */
         let page = (
             <Box sx={{ flexGrow: 1 }}>
+                <Helmet>
+                    <title>Login</title>
+                </Helmet>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
@@ -303,6 +307,9 @@ class LoginRegisterPage extends React.Component {
         if (this.state.registerpage) {
             page = (
                 <Box sx={{ flexGrow: 1 }}>
+                    <Helmet>
+                        <title>Register</title>
+                    </Helmet>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
@@ -339,6 +346,9 @@ class LoginRegisterPage extends React.Component {
         if (this.state.registered) {
             page = (
                 <Box sx={{ flexGrow: 1 }}>
+                    <Helmet>
+                        <title>Registered</title>
+                    </Helmet>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
@@ -372,6 +382,9 @@ class LoginRegisterPage extends React.Component {
         if (this.state.user) {
             page = (
                 <Box sx={{ flexGrow: 1 }}>
+                    <Helmet>
+                        <title>Logged In</title>
+                    </Helmet>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography sx={{ fontSize: 30, fontWeight: 500 }}>

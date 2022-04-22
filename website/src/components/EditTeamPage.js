@@ -2,6 +2,7 @@ import React from "react";
 import { Typography } from "@mui/material";
 import jwt_decode from "jwt-decode";
 import EditTeamForm from "./EditTeamForm";
+import Helmet from "react-helmet";
 
 /**
 * EditTeamPage
@@ -134,6 +135,9 @@ export default class EditTeamPage extends React.Component {
        if(this.state.user_id == teamLead || this.state.isAdmin == 1){
         return(
             <div>
+                <Helmet>
+                    <title>Edit Team</title>
+                </Helmet>
                 <Typography variant="h1" align="center">
                     {teamName}
                 </Typography>

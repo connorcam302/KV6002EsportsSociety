@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { useNavigate, Link } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import ProfilePic from "../img/defaultprofilepicture.png"
+import Logo from "../img/vikingssiloette.png"
 
 /**
 * Navbar

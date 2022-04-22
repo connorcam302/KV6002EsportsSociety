@@ -13,12 +13,11 @@ class AdminButtons extends React.Component {
     render() {
         return (
             <div>
-                <ul><Button onClick={this.props.handleEventsFormClick}>Add an event</Button></ul>
-                <ul><Button onClick={this.props.handleMatchFormClick}>Add match results</Button></ul>
-                <ul><Button onClick={this.props.handleTeamApplicationsClick}>Team Applications</Button></ul>
-                <ul><Button onClick={this.props.handleMembersApplicationClick}>Member Applications</Button></ul>
-                <ul><Button onClick={this.props.handleTeamAccoladesClick}>Manage Team Accolades</Button></ul>
-                <ul><Button onClick={this.props.handleLogoutClick}>Logout </Button></ul>
+                <ul><Button onClick={this.props.handleEventsFormClick} size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block', textAlign:"center", width:"100%"}}>Add an event</Button></ul>
+                <ul><Button onClick={this.props.handleMatchFormClick} size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block',width:"100%"}}>Add match results</Button></ul>
+                <ul><Button onClick={this.props.handleTeamApplicationsClick} size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block',width:"100%"}}>Team Applications</Button></ul>
+                <ul><Button onClick={this.props.handleMembersApplicationClick} size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block',width:"100%"}}>Member Applications</Button></ul>
+                <ul><Button onClick={this.props.handleTeamAccoladesClick} size="large" sx={{backgroundColor:"#D5761D",color: 'white', display: 'block',width:"100%"}}>Manage Team Accolades</Button></ul>
             </div>
         );
     }

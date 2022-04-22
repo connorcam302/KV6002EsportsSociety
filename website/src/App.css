@@ -56,6 +56,11 @@ a:link {
   text-align: center;
 }  
 
+body{
+  color:white;
+  background-color: #212121;
+}
+
 ul{
   text-align: center;
   list-style: none;
@@ -118,7 +123,10 @@ a {
 }
 
 img {
+  width: auto;
+  height : auto;
   max-width:100%;
+  max-width: 100%;
 }
 
 /* Select Game Teams */
@@ -207,7 +215,7 @@ select {
 
 .news{
   float:right;
-  background:rgb(255, 255, 255);
+  background-color: #212121;
   width:15%;
   height:100%;
   padding: 15px;

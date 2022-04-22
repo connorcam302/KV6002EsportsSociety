@@ -7,6 +7,7 @@ import { Box, Grid, Typography, Button } from "@mui/material";
 import ProfilePic from "../img/defaultprofilepicture.png"
 import jwt_decode from "jwt-decode";
 import { Link } from "react-router-dom";
+import Helmet from "react-helmet";
 
 /**
 * TeamPage 
@@ -101,6 +102,9 @@ export default class TeamPage extends React.Component {
 
         return(
             <Box sx={{marginBottom:2, paddingLeft:3,paddingRight:3,marginLeft: 10,marginRight:10, paddingTop:2, paddingBottom:4,}}>
+            <Helmet>
+                <title>{teamName}</title>
+            </Helmet>
             <Box sx={{paddingTop:2,paddingBottom:3}}>
                 <Grid container spacing={2} sx={{paddingLeft:2}}>
                     <img src={ProfilePic} className="profliepic" style={{width:"20%", borderRadius: '5% 5% 5% 5%'}}/>
@@ -119,23 +123,23 @@ export default class TeamPage extends React.Component {
             </Box>
             <Grid container spacing={5}>
                 <Grid item xs={8}>
-                    <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%"}}>
+                    <Box sx={{backgroundColor:"#424242", borderRadius: '10px 10px 10px 10px', border: "3px solid #D5761D", height: "100%"}}>
                         <TeamPlayers teamid={this.props.teamid}/>
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", width: "100%", paddingLeft:1, paddingRight:1,}}>
+                <Box sx={{backgroundColor:"#424242", borderRadius: '10px 10px 10px 10px', border: "3px solid #D5761D", width: "100%", paddingLeft:1, paddingRight:1,}}>
                     <TeamResults teamid={this.props.teamid}/>
                 </Box>
                 </Grid>
                 <Grid item xs={2}/>
                 <Grid item xs={4}>
-                <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", width: "100%",paddingLeft:1, paddingRight:1,}}>
+                <Box sx={{backgroundColor:"#424242", borderRadius: '10px 10px 10px 10px', border: "3px solid #D5761D", width: "100%",paddingLeft:1, paddingRight:1,}}>
                     <TeamStats teamid={this.props.teamid}/>
                 </Box>
                 </Grid>
                 <Grid item xs={4}>
-                <Box sx={{backgroundColor:"#787878", borderRadius: '10px 10px 10px 10px', border: "3px solid black", height: "100%",paddingLeft:1, paddingRight:1,}}>
+                <Box sx={{backgroundColor:"#424242", borderRadius: '10px 10px 10px 10px', border: "3px solid #D5761D", height: "100%",paddingLeft:1, paddingRight:1,}}>
                     <TeamAccolades teamid={this.props.teamid}/>
                 </Box>
                 </Grid>

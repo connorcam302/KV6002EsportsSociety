@@ -84,8 +84,8 @@ class AdminFormTeamApplication extends React.Component {
                     </label>
                 </ul>
                 <div>
-                    <Button onClick={this.props.handleTeamsFormApprove}>Approve Application</Button>
-                    <Button onClick={this.props.handleTeamsFormDecline}>Decline/Delete Application</Button>
+                    <Button onClick={this.props.handleTeamsFormApprove} sx={{backgroundColor:"#D5761D",color: 'white', margin:2}}>Approve Application</Button>
+                    <Button onClick={this.props.handleTeamsFormDecline} sx={{backgroundColor:"#D5761D",color: 'white', margin:2}}>Decline/Delete Application</Button>
                 </div>
             </div>
         );

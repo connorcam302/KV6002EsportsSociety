@@ -1,6 +1,7 @@
 import React from "react";
 import WeeklyEvents from "./WeeklyEvents.js"
 import TwitchStream from "./TwitchStream.js";
+import Helmet from "react-helmet";
 
 class WeeklyEventsPage extends React.Component {
 render(){
@@ -10,6 +11,9 @@ render(){
         <head>
 
         </head>
+            <Helmet>
+                <title>Events</title>
+            </Helmet>
             <body>
             <h1>WEEKLY EVENTS AND NEWS</h1>
             <div className="news">

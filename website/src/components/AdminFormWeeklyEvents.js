@@ -33,7 +33,7 @@ class AdminFormWeeklyEvents extends React.Component {
                     onChange={this.props.handleEventDate}
                 /></ul>
 
-                <ul><Button onClick={this.props.handleEventSubmit}>Submit Event</Button></ul>
+                <ul><Button onClick={this.props.handleEventSubmit} size="large" sx={{backgroundColor:"#D5761D",color: 'white'}}>Submit Event</Button></ul>
             </div>
         );
     }

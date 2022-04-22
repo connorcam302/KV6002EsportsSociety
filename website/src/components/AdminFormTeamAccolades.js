@@ -126,7 +126,7 @@ class AdminFormTeamAccolades extends React.Component {
                     </label>
                 </ul>
 
-                <ul><Button onClick={this.props.handleAccoladeSubmit}>Submit Accolade</Button></ul>
+                <ul><Button onClick={this.props.handleAccoladeSubmit} sx={{backgroundColor:"#D5761D",color: 'white'}}>Submit Accolade</Button></ul>
             </div>
         );
     }

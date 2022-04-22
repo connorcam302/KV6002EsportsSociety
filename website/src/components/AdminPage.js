@@ -9,6 +9,7 @@ import AdminResultsForm from "./AdminResultsForm.js";
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
+import Helmet from "react-helmet";
 
 /**
 * AdminPage
@@ -627,7 +628,11 @@ class AdminPage extends React.Component {
         if (this.state.admin) {
             if (this.state.EventsForm) { //EVENTS FORM STATE
                 page = (
+                    
                     <Box sx={{ flexGrow: 1 }}>
+                        <Helmet>
+                            <title>Admin</title>
+                        </Helmet>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
@@ -637,7 +642,7 @@ class AdminPage extends React.Component {
                                     Enter the event's details down below!
                                 </Typography>
                             </Grid>
-                            <Grid item xs={1}>
+                            <Grid item xs={2}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleMatchFormClick={this.handleMatchFormClick}
@@ -646,7 +651,7 @@ class AdminPage extends React.Component {
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
-                            <Grid item xs={10}>
+                            <Grid item xs={9}>
                                 <AdminFormWeeklyEvents
                                     handleEventTitle={this.handleEventTitle}
                                     handleEventDesc={this.handleEventDesc}
@@ -662,6 +667,9 @@ class AdminPage extends React.Component {
             } else if (this.state.ResultsForm) { //TEAM APPLICATION STATE
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
+                        <Helmet>
+                            <title>Admin</title>
+                        </Helmet>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
@@ -671,7 +679,7 @@ class AdminPage extends React.Component {
                                     Enter the details of a match below!
                                 </Typography>
                             </Grid>
-                            <Grid item xs={1}>
+                            <Grid item xs={2}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleMatchFormClick={this.handleMatchFormClick}
@@ -680,7 +688,7 @@ class AdminPage extends React.Component {
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
-                            <Grid item xs={10}>
+                            <Grid item xs={9}>
                                 <AdminResultsForm
                                     handleMatchTeam={this.handleMatchTeam}
                                     handleMatchOpponent={this.handleMatchOpponent}
@@ -697,6 +705,9 @@ class AdminPage extends React.Component {
             } else if (this.state.TeamApplicationForm) { //TEAM APPLICATION STATE
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
+                        <Helmet>
+                            <title>Admin</title>
+                        </Helmet>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
@@ -706,7 +717,7 @@ class AdminPage extends React.Component {
                                     Please use the dropdown box to approve or decline applications.
                                 </Typography>
                             </Grid>
-                            <Grid item xs={1}>
+                            <Grid item xs={2}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleMatchFormClick={this.handleMatchFormClick}
@@ -715,7 +726,7 @@ class AdminPage extends React.Component {
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
-                            <Grid item xs={10}>
+                            <Grid item xs={9}>
                                 <AdminFormTeamApplication
                                     handleTeamSubmissionsSelect={this.handleTeamSubmissionsSelect}
                                     handleTeamsFormApprove={this.handleTeamsFormApprove}
@@ -730,6 +741,9 @@ class AdminPage extends React.Component {
             } else if (this.state.MemberApplicationForm) { //MEMBER APPLICATION STATE.
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
+                        <Helmet>
+                            <title>Admin</title>
+                        </Helmet>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
@@ -739,7 +753,7 @@ class AdminPage extends React.Component {
                                    Please use the dropdown box to approve or decline applications.
                                 </Typography>
                             </Grid>
-                            <Grid item xs={1}>
+                            <Grid item xs={2}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleMatchFormClick={this.handleMatchFormClick}
@@ -748,7 +762,7 @@ class AdminPage extends React.Component {
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
-                            <Grid item xs={10}>
+                            <Grid item xs={9}>
                                 <AdminFormJoinTeamApplication
                                     handleMemberSubmissionsSelect={this.handleMemberSubmissionsSelect}
                                     handleMemberFormApprove={this.handleMemberFormApprove}
@@ -763,6 +777,9 @@ class AdminPage extends React.Component {
             } else if (this.state.AccoladesForm) { //ACCOLADES FORM STATE
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
+                        <Helmet>
+                            <title>Admin</title>
+                        </Helmet>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
@@ -772,7 +789,7 @@ class AdminPage extends React.Component {
                                     Please select the team below and the accolades you wish to add!
                                 </Typography>
                             </Grid>
-                            <Grid item xs={1}>
+                            <Grid item xs={2}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleMatchFormClick={this.handleMatchFormClick}
@@ -781,7 +798,7 @@ class AdminPage extends React.Component {
                                     handleTeamAccoladesClick={this.handleTeamAccoladesClick}
                                     handleLogoutClick={this.handleLogoutClick} />
                             </Grid>
-                            <Grid item xs={10}>
+                            <Grid item xs={9}>
                                 <AdminFormTeamAccolades
                                     handleTeamAccoladeSelect={this.handleTeamAccoladeSelect}
                                     handleTeamSelect={this.handleTeamSelect}
@@ -796,6 +813,9 @@ class AdminPage extends React.Component {
             } else { //LANDING PAGE STATE.
                 page = (
                     <Box sx={{ flexGrow: 1 }}>
+                        <Helmet>
+                            <title>Admin</title>
+                        </Helmet>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
@@ -805,7 +825,7 @@ class AdminPage extends React.Component {
                                     Please select an option from the list on the left!
                                 </Typography>
                             </Grid>
-                            <Grid item xs={1}>
+                            <Grid item xs={2}>
                                 <AdminButtons
                                     handleEventsFormClick={this.handleEventsFormClick}
                                     handleMatchFormClick={this.handleMatchFormClick}
@@ -825,6 +845,9 @@ class AdminPage extends React.Component {
         } else { //Unauthorised ACCESS STATE
             page = (
                 <Box sx={{ flexGrow: 1 }}>
+                    <Helmet>
+                        <title>Admin</title>
+                    </Helmet>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography sx={{ fontSize: 30, fontWeight: 500 }}>

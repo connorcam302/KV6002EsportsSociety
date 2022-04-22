@@ -46,6 +46,9 @@ export default class EditPlayerForm extends React.Component {
                         value={this.props.email} 
                         onChange={this.props.handleEmail} 
                         variant="filled"
+                        style={{
+                            backgroundColor: "#827C74"
+                        }}
                     />
                 </Box>
                 <Box sx={{padding:2}}>
@@ -57,6 +60,9 @@ export default class EditPlayerForm extends React.Component {
                         value={this.props.ign} 
                         onChange={this.props.handleIGN} 
                         variant="filled"
+                        style={{
+                            backgroundColor: "#827C74"
+                        }}
                     />
                 </Box>
                 <Box sx={{padding:2}}>
@@ -68,6 +74,9 @@ export default class EditPlayerForm extends React.Component {
                         value={this.props.firstName} 
                         onChange={this.props.handleFirstName} 
                         variant="filled"
+                        style={{
+                            backgroundColor: "#827C74"
+                        }}
                     />
                 </Box>
                 <Box sx={{padding:2}}>
@@ -79,6 +88,9 @@ export default class EditPlayerForm extends React.Component {
                         value={this.props.lastName} 
                         onChange={this.props.handleLastName} 
                         variant="filled"
+                        style={{
+                            backgroundColor: "#827C74"
+                        }}
                     />
                 </Box>
                 <Box sx={{padding:2}}>
@@ -89,6 +101,9 @@ export default class EditPlayerForm extends React.Component {
                         value={this.props.twitch} 
                         onChange={this.props.handleTwitch} 
                         variant="filled"
+                        style={{
+                            backgroundColor: "#827C74"
+                        }}
                     />
                 </Box>
                 <Box sx={{padding:2}}>
@@ -99,6 +114,9 @@ export default class EditPlayerForm extends React.Component {
                         value={this.props.firstName} 
                         onChange={this.props.handleTwitter} 
                         variant="filled"
+                        style={{
+                            backgroundColor: "#827C74"
+                        }}
                     />
                 </Box>
                 <Box sx={{padding:2}}>
@@ -109,6 +127,9 @@ export default class EditPlayerForm extends React.Component {
                         value={this.props.instagram}
                         onChange={this.props.handleInstagram} 
                         variant="filled"
+                        style={{
+                            backgroundColor: "#827C74"
+                        }}
                     />
                 </Box>
                 <Box> 
