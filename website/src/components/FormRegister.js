@@ -46,8 +46,8 @@ class FormRegister extends React.Component {
                     value={this.props.userLast}
                     onChange={this.props.handlelastName}
                 /></ul>
-                <ul><Button onClick={this.props.handleRegisterClick}>Register account</Button></ul>
-                <ul><Button onClick={this.props.handleLoginState}>Already have an account? log in here!</Button></ul>
+                <ul><Button onClick={this.props.handleRegisterClick} sx={{backgroundColor:"#D5761D",color: 'white'}}>Register account</Button></ul>
+                <ul><Button onClick={this.props.handleLoginState} sx={{backgroundColor:"#D5761D",color: 'white'}}>Already have an account? log in here!</Button></ul>
             </div>
         )
     }

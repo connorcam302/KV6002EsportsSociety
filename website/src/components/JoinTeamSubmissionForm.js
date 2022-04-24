@@ -121,7 +121,7 @@ class JoinTeamSubmissionForm extends React.Component {
                         </select>
                     </label>
                 </ul>
-                <ul><Button onClick={this.props.handleJoinTeamSubmit}>Submit Team</Button></ul>
+                <ul><Button onClick={this.props.handleJoinTeamSubmit} sx={{backgroundColor:"#D5761D",color: 'white'}}>Submit Team</Button></ul>
             </div>
         );
     }

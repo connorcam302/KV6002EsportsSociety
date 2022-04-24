@@ -132,7 +132,7 @@ class TeamSubmissionForm extends React.Component {
                         </select>
                     </label>
                 </ul>
-                <ul><Button onClick={this.props.handleTeamSubmit}>Submit Team</Button></ul>
+                <ul><Button onClick={this.props.handleTeamSubmit} sx={{backgroundColor:"#D5761D",color: 'white'}}>Submit Team</Button></ul>
             </div>
         );
     }

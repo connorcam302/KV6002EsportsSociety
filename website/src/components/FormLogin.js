@@ -26,8 +26,8 @@ class FormLogin extends React.Component {
                     value={this.props.password}
                     onChange={this.props.handlePassword}
                 /></ul>
-                <ul><Button onClick={this.props.handleLoginClick}>Log in</Button></ul>
-                <ul><Button onClick={this.props.handleRegisterState}>Don't have an account? register one here!</Button></ul>
+                <ul><Button onClick={this.props.handleLoginClick} sx={{backgroundColor:"#D5761D",color: 'white'}}>Log in</Button></ul>
+                <ul><Button onClick={this.props.handleRegisterState} sx={{backgroundColor:"#D5761D",color: 'white'}}>Don't have an account? register one here!</Button></ul>
             </div>
         );
     }
