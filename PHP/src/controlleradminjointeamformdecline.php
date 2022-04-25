@@ -15,7 +15,7 @@ class ControllerAdminJoinTeamFormDecline extends Controller
      */
     protected function setGateway()
     {
-        $this->gateway = new GatewayAdminJoinTeamFormDecline();
+        $this->gateway = new GatewayPendingMembers();
     }
 
     /**

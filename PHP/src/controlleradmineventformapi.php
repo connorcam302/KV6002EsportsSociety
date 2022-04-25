@@ -12,7 +12,7 @@
 class ControllerAdminEventFormApi extends Controller {
 
     protected function setGateway() {
-        $this->gateway = new GatewayAdminEventForm();
+        $this->gateway = new GatewayEvents();
     }
 
     protected function processRequest() {

@@ -3,7 +3,6 @@
 /**
  * ControllerAdminPendingTeamsFormRemove
  * 
- * This controller handles and manages the papers on users reading lists.
  * 
  * The class uses a POST request method within an if statement to reject an pending team application, deleting it from the database.
  *
@@ -16,7 +15,7 @@ class ControllerAdminPendingTeamsFormRemove extends Controller
      */
     protected function setGateway()
     {
-        $this->gateway = new GatewayAdminPendingTeamsFormRemove();
+        $this->gateway = new GatewayPendingTeams();
     }
 
      /**

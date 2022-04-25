@@ -13,7 +13,7 @@ class ControllerCreateTeamForm extends Controller
 {
     protected function setGateway()
     {
-        $this->gateway = new GateWayCreateTeamForm();
+        $this->gateway = new GatewayPendingTeams();
     }
 
     protected function processRequest()

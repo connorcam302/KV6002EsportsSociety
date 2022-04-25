@@ -13,7 +13,7 @@ class ControllerJoinTeamForm extends Controller
      */
     protected function setGateway()
     {
-        $this->gateway = new GateWayJoinTeamForm();
+        $this->gateway = new GatewayPendingMembers();
     }
 
     /**
@@ -23,8 +23,8 @@ class ControllerJoinTeamForm extends Controller
      */
     protected function processRequest()
     {
-        $teamid = $this->getRequest()->getParameter("teamid");
-        $userid = $this->getRequest()->getParameter("userid");
+        $teamid = $this->getRequest()->getParameter("user_teamid");
+        $userid = $this->getRequest()->getParameter("user_id");
 
         if ($this->getRequest()->getRequestMethod() === "POST") {
                 if (!is_null($teamid) && !is_null($userid)) {

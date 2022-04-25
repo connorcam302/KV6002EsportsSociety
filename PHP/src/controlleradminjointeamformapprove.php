@@ -15,7 +15,7 @@ class ControllerAdminJoinTeamFormApprove extends Controller
      */
     protected function setGateway()
     {
-        $this->gateway = new GatewayAdminJoinTeamFormApprove();
+        $this->gateway = new GatewayTeam();
     }
 
     /**

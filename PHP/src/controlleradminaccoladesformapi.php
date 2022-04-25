@@ -15,7 +15,7 @@ class ControllerAdminAccoladesFormApi extends Controller
 
     protected function setGateway()
     {
-        $this->gateway = new GatewayAdminAccoladesForm();
+        $this->gateway = new GatewayAccolades();
     }
 
     

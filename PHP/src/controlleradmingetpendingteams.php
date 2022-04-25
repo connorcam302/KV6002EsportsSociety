@@ -13,7 +13,7 @@
 class ControllerAdminGetPendingTeams extends Controller {
     
     protected function setGateway() {
-        $this->gateway = new GatewayAdminGetPendingTeams();
+        $this->gateway = new GatewayPendingTeams();
     }
 
     /**

@@ -7,17 +7,19 @@
  * with specific criteria, or every result in the esports.db database.
  * 
  * @author Connor Campbell W18003255
- * @collab Jacob Clark w18003237 - Added game title to orignal statement pull
+ * @collab Jacob Clark w18003237 - Added game title to orignal statement pull and insert statement for addResults
  * 
  * @todo    - Additional search criteria will be added as needed throughout development.
- */         
+ */
 
-class GatewayResults extends Gateway  {
+class GatewayResults extends Gateway
+{
     private $sql = "SELECT match_id, match_date, match_opponent, match_outcome, match_teamId, team_name, game_name FROM matchHistory
                     JOIN team ON team_id = match_teamId
                     JOIN game ON team.game_id = game.game_id";
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->setDatabase(DATABASE);
     }
 
@@ -25,8 +27,9 @@ class GatewayResults extends Gateway  {
      * Adds order to the query so that results are in chronological order.
      */
 
-    public function addOrder(){
-      $this->sql .= " ORDER BY match_date DESC";
+    public function addOrder()
+    {
+        $this->sql .= " ORDER BY match_date DESC";
     }
 
     /**
@@ -58,6 +61,12 @@ class GatewayResults extends Gateway  {
         $this->setResult($result);
     }
 
+      /**
+     * Returns a a players's 3 latest results.
+     *
+     * @return   array
+     */
+
     public function findPlayerResults($id)
     {
         $this->sql .= " JOIN userTeam ON team.team_id = userTeam.userTeam_id
@@ -68,17 +77,23 @@ class GatewayResults extends Gateway  {
         $this->setResult($result);
     }
 
-    public function addResult($team_id, $match_date, $match_opponent, $match_result ) {
+      /**
+     * Inserts a record into the match history table using the provided variables
+     *
+     * @return   array
+     */
+
+    public function addResult($team_id, $match_date, $match_opponent, $match_result)
+    {
         $sql = "INSERT into matchHistory (match_teamId,match_date,match_opponent, match_outcome)
                              VALUES (:match_teamId, :match_date, :match_opponent, :match_outcome)";
         $params = [
-            ":match_teamId" => $team_id, 
-            ":match_date" => $match_date, 
-            ":match_opponent" => $match_opponent, 
+            ":match_teamId" => $team_id,
+            ":match_date" => $match_date,
+            ":match_opponent" => $match_opponent,
             ":match_outcome" => $match_result,
         ];
         $result = $this->getDatabase()->executeSQL($sql, $params);
         $this->setResult($result);
     }
-
 }

@@ -13,7 +13,7 @@ class ControllerAdminPendingTeamFormApprove extends Controller
      */
     protected function setGateway()
     {
-        $this->gateway = new GatewayAdminPendingTeamsFormApprove();
+        $this->gateway = new GatewayTeam();
     }
 
     /**

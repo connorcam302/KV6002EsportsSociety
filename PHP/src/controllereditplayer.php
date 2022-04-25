@@ -14,7 +14,7 @@
 class ControllerEditPlayer extends Controller {
     
     protected function setGateway() {
-        $this->gateway = new GatewayEditPlayer();
+        $this->gateway = new GatewayPlayer();
     }
 
     /**

@@ -14,7 +14,7 @@
 class ControllerEditTeam extends Controller {
     
     protected function setGateway() {
-        $this->gateway = new GatewayEditTeam();
+        $this->gateway = new GatewayTeam();
     }
 
     /**

@@ -12,11 +12,13 @@
  *          - Additional search criteria will be added as needed throughout development.
  */
 
-class GatewayPlayer extends Gateway  {
+class GatewayPlayer extends Gateway
+{
 
-    private $sql = "SELECT user.user_email, user.user_id, user_ign, user_firstName, user_lastName, user_twitch, user_twitter, user_instagram, user_bio FROM user"; 
+    private $sql = "SELECT user.user_email, user.user_id, user_ign, user_firstName, user_lastName, user_twitch, user_twitter, user_instagram, user_bio FROM user";
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->setDatabase(DATABASE);
     }
 
@@ -72,11 +74,82 @@ class GatewayPlayer extends Gateway  {
      * @return   array
      */
 
-    public function findByTeam($id) {
+    public function findByTeam($id)
+    {
         $this->sql .= " JOIN userTeam on user.user_id = userTeam.user_ID
         WHERE userTeam.userTeam_ID = :id";
         $params = ["id" => $id];
         $result = $this->getDatabase()->executeSQL($this->sql, $params);
+        $this->setResult($result);
+    }
+
+    public function editPlayer($email, $userign, $userFirst, $userLast, $userTwitch, $userTwitter, $userInstagram, $id)
+    {
+        $sql = "UPDATE user
+                SET user_email = :useremail, 
+                    user_ign = :userign, 
+                    user_firstName = :userfirstName, 
+                    user_lastName = :userlastName, 
+                    user_twitch = :usertwitch, 
+                    user_twitter = :usertwitter,
+                    user_instagram = :userinstagram
+                where user_id = :id";
+        $params = [
+            ":useremail" => $email,
+            ":userign" => $userign,
+            ":userfirstName" => $userFirst,
+            ":userlastName" => $userLast,
+            ":usertwitch" => $userTwitch,
+            ":usertwitter" => $userTwitter,
+            ":userinstagram" => $userInstagram,
+            ":id" => $id,
+        ];
+        $result = $this->getDatabase()->executeSQL($sql, $params);
+        $this->setResult($result);
+    }
+
+    /**
+     * SQL query for registering a new user on the webpage and to the database.
+     */
+    public function registerUser($email, $password, $userign, $userFirst, $userLast)
+    {
+        $sql = "INSERT into user (user_email,user_password,user_ign,user_firstName,user_lastName) 
+                       values(:useremail,:hashedpassword,:userign, :userfirstName, :userlastName)";
+        $params = [
+            ":useremail" => $email,
+            ":hashedpassword" => $password,
+            ":userign" => $userign,
+            ":userfirstName" => $userFirst,
+            ":userlastName" => $userLast
+
+        ];
+        $result = $this->getDatabase()->executeSQL($sql, $params);
+        $this->setResult($result);
+    }
+
+    /**
+     * SQL query checks if the email address entered is already in use within the database.
+     */
+    public function emailUsed($email)
+    {
+        $sql = "SELECT * FROM user WHERE user_email  = :useremail";
+        $params = [":useremail" => $email];
+        $result = $this->getDatabase()->executeSQL($sql, $params);
+        if ($result == FALSE) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+     /**
+     * Function executes an SQL query to locate the password, ID and admin status of a user based on the email address associated that is provided.
+     * 
+     */
+    public function loginUser($email) {
+        $sql = " Select user_id, user_password,user_ign, user_isAdmin from user where user_email = :user_email";
+        $params = [":user_email" => $email];
+        $result = $this->getDatabase()->executeSQL($sql, $params);
         $this->setResult($result);
     }
 }

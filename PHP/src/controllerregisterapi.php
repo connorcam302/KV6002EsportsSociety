@@ -15,7 +15,7 @@
 class ControllerRegisterApi extends Controller {
 
     protected function setGateway() {
-        $this->gateway = new GatewayRegister();
+        $this->gateway = new GatewayPlayer();
     }
 
     protected function processRequest() {
