@@ -17,12 +17,12 @@ class GatewayPendingMembers extends Gateway
     {
         $this->setDatabase(DATABASE);
     }
+
     /**
      * Returns all results within the database.
      *
      * @return   array
      */
-
     public function findAll()
     {
         $result = $this->getDatabase()->executeSQL($this->sql);
@@ -42,8 +42,8 @@ class GatewayPendingMembers extends Gateway
      */
     public function joinTeam($teamid, $userid)
     {
-        $sql = "INSERT into pendingMembers (userTeam_id, user_id,) 
-                       values(:userteam,:userid,)";
+        $sql = "INSERT into pendingMembers (userTeam_id, user_id) 
+                       values(:userteam,:userid)";
         $params = [
             ":userteam" => $teamid,
             ":userid" => $userid,

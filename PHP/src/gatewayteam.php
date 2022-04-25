@@ -7,6 +7,7 @@
  * with specific criteria, or every team in the esports.db database.
  * 
  * @author Connor Campbell W18003255
+ * @collab Ethan Borrill W18001798
  * 
  * @todo    - Additional search criteria will be added as needed throughout development.
  */
@@ -25,7 +26,6 @@ class GatewayTeam extends Gateway
     /**
      * Returns all teams within the database.
      *
-     * @return   array
      */
 
     public function findAll()
@@ -37,8 +37,6 @@ class GatewayTeam extends Gateway
     /**
      * Returns specific team based on ID.
      *
-     * @param    int  $id The ID of the player in question.
-     * @return   array
      */
 
     public function findOne($id)
@@ -53,8 +51,6 @@ class GatewayTeam extends Gateway
      * Providing a game ID will return an array of the teams that currently are competing
      * in this game.
      *
-     * @param    int  $id The ID of the game in question.
-     * @return   array
      */
 
     public function findByGame($id)
@@ -75,15 +71,8 @@ class GatewayTeam extends Gateway
     }
 
     /**
-     * GatewayAdminJoinTeamFormApprove
-     * 
-     * This gateway provides the SQL query needed to insert an approved user into their requested team within the userTeam table used within the webpage.
-     *
-     * @author Ethan Borrill W18001798
-     */
-
-    /**
      * SQL query for adding a user to a team from the pendingMembers table into the offical userTeam table used within the website.
+     * @author Ethan Borrill W18001798
      */
     public function ApproveMember($userid)
     {
@@ -95,6 +84,7 @@ class GatewayTeam extends Gateway
 
     /**
      * SQL query for registering a new team from the pendingTeams table into the offical Teams table used within the website.
+     * @author Ethan Borrill W18001798
      */
     public function ApproveTeam($teamid)
     {

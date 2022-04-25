@@ -1,9 +1,17 @@
 <?php
 
 /**
- * GatewayEvent
- * 
- */
+* GatewayEvents
+* 
+* This class acts as a gateway for all content relating to the retrieval of event data from the database, this gateway also includes the SQL queries needed to insert events into the database to be displayed,
+* with an additional query to check if an event already exists.
+*
+* @author Ethan Borrill W18001798
+* @collab Connor Campbell W18003255
+*
+* @todo
+*/
+
 
 class GatewayEvents extends Gateway
 {
@@ -28,14 +36,12 @@ class GatewayEvents extends Gateway
     }
 
     /**
-     * GatewayAdminEventForm
      * 
-     * This gateway is used to insert details from the Event Form on the Admin Page into the Events table of the database.
+     * The queries below are used to insert details from the Event Form on the Admin Page into the Events table of the database.
      * It additionally includes an SQL query which checks to see if the event being entered has already been used.
      *
      * @author Ethan Borrill W18001798
-    */
-
+     */
 
     /**
      * SQL Query for inserting Event form data.

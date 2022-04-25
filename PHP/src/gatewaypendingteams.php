@@ -1,7 +1,7 @@
 <?php
 
 /**
- * GatewayAdminGetPendingTeams
+ * GatewayPendingTeams
  * 
  * This gateway is used to obtain the details of teams from the PendingTeams form to be displayed within the manageTeam's form prior to submission or deletion.
  * 
@@ -39,9 +39,7 @@ class GatewayPendingTeams extends Gateway
     }
 
     /**
-     * GateWayCreateTeamForm
-
-     * This gateway provides the SQL queries needed for the Team form to function, collecting all details entered into the teams submission form and inserting them into the pendingTeams table in the database,
+     * The SQL queries below are needed for the Team form to function, collecting all details entered into the teams submission form and inserting them into the pendingTeams table in the database,
      * which will then be held for approving, an additional query exists to check if a team of the same name exists within the database.
 
      * @author Ethan Borrill W18001798

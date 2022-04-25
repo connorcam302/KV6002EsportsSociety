@@ -337,8 +337,6 @@ class AdminPage extends React.Component {
                     this.setState({ error: "Please the results of the match." })
                 } else if (response.status === 406) {
                     this.setState({ error: "The match details you have entered cannot be used!" })
-                } else if (response.status === 403) {
-                    this.setState({ error: "Sorry, a match with these details already exists!" })
                 } else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "The matches results has been successfully created and uploaded!" })
                     return response.json()
@@ -635,12 +633,12 @@ class AdminPage extends React.Component {
                         </Helmet>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
-                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                            <ul><Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                     Add an event!
-                                </Typography>
-                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                </Typography></ul>
+                             <ul><Typography sx={{ fontSize: 24, fontWeight: 350 }}>
                                     Enter the event's details down below!
-                                </Typography>
+                                </Typography></ul>   
                             </Grid>
                             <Grid item xs={2}>
                                 <AdminButtons
@@ -782,12 +780,12 @@ class AdminPage extends React.Component {
                         </Helmet>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
-                                <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
+                                <ul><Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                     Add an Accolade
-                                </Typography>
-                                <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
+                                </Typography></ul>
+                                <ul><Typography sx={{ fontSize: 24, fontWeight: 350 }}>
                                     Please select the team below and the accolades you wish to add!
-                                </Typography>
+                                </Typography></ul>
                             </Grid>
                             <Grid item xs={2}>
                                 <AdminButtons

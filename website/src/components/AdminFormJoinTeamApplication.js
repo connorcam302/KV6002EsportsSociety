@@ -86,8 +86,8 @@ class AdminFormJoinTeam extends React.Component {
                     </label>
                 </ul>
                 <div>
-                    <Button onClick={this.props.handleMemberFormDecline} size="large" sx={{backgroundColor:"#D5761D",color: 'white', margin:2}}>Decline Submission</Button>
                     <Button onClick={this.props.handleMemberFormApprove} size="large" sx={{backgroundColor:"#D5761D",color: 'white', margin:2}}>Approve Submission</Button>
+                    <Button onClick={this.props.handleMemberFormDecline} size="large" sx={{backgroundColor:"#D5761D",color: 'white', margin:2}}>Decline/Delete Submission</Button>
                 </div>
             </div>
         );

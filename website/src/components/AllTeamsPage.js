@@ -147,8 +147,8 @@ class AllTeamsPage extends React.Component {
         let xhr = new XMLHttpRequest();
 
         let formData = new FormData();
-        formData.append('teamid', this.state.JoinTeamDropdown);
-        formData.append('userid', this.state.JoinTeamPlayerDropDown);
+        formData.append('userTeam_id', this.state.JoinTeamDropdown);
+        formData.append('user_id', this.state.JoinTeamPlayerDropDown);
         fetch(url, {
             method: 'POST',
             headers: new Headers(),

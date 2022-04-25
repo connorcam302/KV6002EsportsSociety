@@ -23,7 +23,7 @@ class ControllerJoinTeamForm extends Controller
      */
     protected function processRequest()
     {
-        $teamid = $this->getRequest()->getParameter("user_teamid");
+        $teamid = $this->getRequest()->getParameter("userTeam_id");
         $userid = $this->getRequest()->getParameter("user_id");
 
         if ($this->getRequest()->getRequestMethod() === "POST") {
