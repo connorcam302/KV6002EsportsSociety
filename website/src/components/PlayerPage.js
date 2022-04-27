@@ -86,6 +86,8 @@ export default class PlayerPage extends React.Component {
         let playerTwitch;
         let playerTwitter;
         let playerInstagram;
+        let playerPicture;
+        let playerPictureURL;
         
 
         let twitchPopout;
@@ -103,6 +105,15 @@ export default class PlayerPage extends React.Component {
         this.state.results.map( (player) => playerTwitch = player.user_twitch)
         this.state.results.map( (player) => playerTwitter = player.user_twitter)
         this.state.results.map( (player) => playerInstagram = player.user_instagram)
+        this.state.results.map( (player) => playerPictureURL = player.user_profilepicture)
+
+        console.log(playerPicture)
+
+        if(playerPictureURL){
+            playerPicture = <img src="https://i.ibb.co/Y3LTKWb/Fox.jpg" className="profliepic"/>
+        } else {
+            playerPicture = (<img src={ProfilePic} className="profliepic"/>)
+        }
 
         /*
         * Checking for player socials, if they have them links to them will be provided in the top right
@@ -189,7 +200,7 @@ export default class PlayerPage extends React.Component {
             </Helmet>
             <Box sx={{paddingTop:2,paddingBottom:3}}>
                 <Grid container spacing={2} sx={{paddingLeft:2}}>
-                    <img src={ProfilePic} className="profliepic"/>
+                    {playerPicture}
                     <Box sx={{paddingTop: "2.5%", paddingLeft: 2, textAlign:"left", display: "block"}}>
                         <Typography variant="h1">
                             {playerIGN}

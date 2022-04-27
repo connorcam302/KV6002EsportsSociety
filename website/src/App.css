@@ -114,6 +114,8 @@ button:hover {
 
 .profliepic{
   border-radius: 5%;
+  width: 300px;
+  height: 300px;
   display: block; /* remove extra space below image */
 }
 
