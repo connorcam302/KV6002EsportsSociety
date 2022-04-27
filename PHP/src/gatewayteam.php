@@ -15,7 +15,7 @@
 class GatewayTeam extends Gateway
 {
 
-    private $sql = "SELECT team_id, team_name, game.game_name, team_lead FROM team
+    private $sql = "SELECT team_id, team_name, game.game_name, team_lead, team_picture FROM team
     JOIN game ON team.game_id = game.game_id";
 
     public function __construct()

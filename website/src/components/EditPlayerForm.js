@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Box, Button, Typography } from "@mui/material";
+import { TextField, Box, Button, Typography, Input } from "@mui/material";
 import { Link } from "react-router-dom";
 
 
@@ -37,6 +37,14 @@ export default class EditPlayerForm extends React.Component {
     render() {
         return (
             <div>
+                <Box sx={{padding:2}}>
+                <Typography>Profile Picture</Typography>
+                <Input 
+                    type="file" 
+                    name="fileToUpload" 
+                    id="fileToUpload" 
+                    onChange={this.props.handlePicture} />
+                </Box>
                 <Box sx={{padding:2}}>
                     <TextField 
                         focused 

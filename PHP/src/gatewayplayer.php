@@ -15,7 +15,7 @@
 class GatewayPlayer extends Gateway
 {
 
-    private $sql = "SELECT user.user_email, user.user_id, user_ign, user_firstName, user_lastName, user_twitch, user_twitter, user_instagram, user_bio FROM user";
+    private $sql = "SELECT user.user_email, user.user_id, user_ign, user_firstName, user_lastName, user_twitch, user_twitter, user_instagram, user_bio, user_profilepicture FROM user";
 
     public function __construct()
     {
