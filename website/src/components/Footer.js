@@ -1,8 +1,7 @@
-import { Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { FaInstagram, FaTwitter, FaTwitch, FaFacebook, FaDiscord } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { Divider } from "@mui/material";
-
 
 /**
 * Footer
@@ -16,7 +15,6 @@ import { Divider } from "@mui/material";
 *
 * @todo
 */
-
 
 function Footer(){
     return(

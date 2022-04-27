@@ -64,6 +64,15 @@ class AdminResultsForm extends React.Component {
             });
     }
 
+    handleResultFormReset = () => {
+        this.setState({
+          MatchResults: "",
+          MatchteamDropDown: "",
+          MatchOpponent: "",
+          MatchDate: ""
+        });
+    };
+
 
     render() {
         return (
@@ -71,7 +80,7 @@ class AdminResultsForm extends React.Component {
                 <ul>
                     <label>
                         <select value={this.props.team_id} onChange={this.props.handleMatchTeam}>
-                            <option value="">Select a team here</option>
+                            <option value="dropDownDefault">Select a team here</option>
                             {this.state.teams.map((team) => <option value={team.team_id}>{team.team_name}</option>)}
                         </select>
                     </label>
@@ -80,21 +89,21 @@ class AdminResultsForm extends React.Component {
                 <ul><input
                     type='text'
                     placeholder='Opponent'
-                    value={this.props.eventDesc}
+                    value={this.props.resultOpponent}
                     onChange={this.props.handleMatchOpponent}
                 /></ul>
 
                 <ul><input
                     type='date'
                     placeholder='Date of the games played'
-                    value={this.props.eventDesc}
+                    value={this.props.resultDate}
                     onChange={this.props.handleMatchDate}
                 /></ul>
 
                 <ul><input
                     type='text'
                     placeholder='Results total for each team'
-                    value={this.props.eventDesc}
+                    value={this.props.resultOutcome}
                     onChange={this.props.handleMatchResults}
                 /></ul>
 

@@ -235,6 +235,8 @@ class AdminPage extends React.Component {
                     this.setState({ error: "Sorry, an event with this name already exists!" })
                 } else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "Event has been successfully created and uploaded!" })
+                    this.setState({EventsForm: false});
+                    this.setState({EventsForm: true});
                     return response.json()
                 }
             })
@@ -305,6 +307,22 @@ class AdminPage extends React.Component {
 
 
     /**
+     * handleResultFormReset
+     * 
+     * Clears result form fields
+     */
+
+    handleResultFormReset = () => {
+        this.setState({
+          MatchResults: "",
+          MatchteamDropDown: "",
+          MatchOpponent: "",
+          MatchDate: ""
+        });
+    };
+
+
+    /**
     * handleMatchSubmit
     * 
     * This function is used on the Submission button present on the Match results form page. 
@@ -319,26 +337,30 @@ class AdminPage extends React.Component {
         formData.append('match_opponent', this.state.MatchOpponent);
         formData.append('match_date', this.state.MatchDate);
         formData.append('match_outcome', this.state.MatchResults);
+        
+        if ((this.state.MatchteamDropDown === "") && (this.state.MatchOpponent === null) && (this.state.MatchDate === null) && (this.state.MatchResults === null)) {
+            this.setState({ error: "Please answer all fields within the form before submitting." })
+        } else if (this.state.MatchteamDropDown === "") {
+            this.setState({ error: "Please select a team which played in the match!" })
+        } else if (this.state.MatchOpponent === null) {
+            this.setState({ error: "Please enter the Opponent of this match." })
+        } else if (this.state.MatchDate === null) {
+            this.setState({ error: "Please enter the date the match took place on." })
+        } else if (this.state.MatchResults === null) {
+            this.setState({ error: "Please enter the results of the match in numerical format." })
+        } else{
         fetch(url, {
             method: 'POST',
             headers: new Headers(),
             body: formData
         })
             .then((response) => {
-                if ((this.state.MatchteamDropDown === "") && (this.state.MatchOpponent === null) && (this.state.MatchDate === null) && (this.state.MatchResults === null)) {
-                    this.setState({ error: "Please answer all fields within the form before submitting." })
-                } else if (this.state.MatchteamDropDown === "") {
-                    this.setState({ error: "Please select a team which played in the match!" })
-                } else if (this.state.MatchOpponent === null) {
-                    this.setState({ error: "Please enter the Opponent of this match." })
-                } else if (this.state.MatchDate === null) {
-                    this.setState({ error: "Please enter the date the match took place on." })
-                } else if (this.state.MatchResults === null) {
-                    this.setState({ error: "Please enter the results of the match." })
-                } else if (response.status === 406) {
-                    this.setState({ error: "The match details you have entered cannot be used!" })
-                } else if ((response.status === 200) || (response.status === 204)) {
+                if (response.status === 406) {
+                    this.setState({ error: "The match details you have entered cannot be used!"})}
+                else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "The matches results has been successfully created and uploaded!" })
+                    this.setState({ResultsForm: false});
+                    this.setState({ResultsForm: true});
                     return response.json()
                 }
             })
@@ -346,7 +368,7 @@ class AdminPage extends React.Component {
                 console.log("something went wrong ", err)
             }
             );
-    }
+    }   }
 
     //FUNCTIONALITY FOR THE TEAM MANAGEMENT PAGE.
     /**

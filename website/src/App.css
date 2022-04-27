@@ -150,17 +150,18 @@ select {
   margin: 1%;
   margin-bottom: 2%;
   grid-auto-rows: min-content;
-  grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
   grid-template-areas: 
-  ". main main ."
-  ". rTable rTable ."
-  ". socials socials ."
-  ". fb twitterFeed .";
+  ". main main main ."
+  ". rTable rTable rTable ."
+  ". socials socials socials ."
+  ". fb twitterFeed  discServer  .";
 }
 
 .main{
   grid-area: main;
   text-align: left;
+  font-size: large;
 }
 
 .rTable{
@@ -172,10 +173,28 @@ select {
 
 .socials{
   grid-area: socials;
+  text-align: left;
+  font-size: large;
+}
+
+.discServer{
+  grid-area: discServer;
 }
 
 .twitterFeed{
   grid-area: twitterFeed;
+}
+
+.twitter{
+  height:500px;
+	width:350px;
+	float:centre;
+}
+
+.discord{
+  height:500px;
+	width:350px;
+	float:centre;
 }
 
 .fbPage{
