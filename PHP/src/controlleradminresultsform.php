@@ -26,7 +26,7 @@ class ControllerAdminResultsForm extends Controller {
                 if (!is_null($team_id) && !is_null($match_opponent) && !is_null($match_date) && !is_null($match_result)) {
                         $this->getGateway()->addResult($team_id,$match_date,$match_opponent,$match_result);        
                 } else {
-                    $this->getResponse()->setMessage("The event details you have entered cannot be used!");
+                    $this->getResponse()->setMessage("The match details you have entered cannot be used!");
                     $this->getResponse()->setStatus(406);
                 }
             

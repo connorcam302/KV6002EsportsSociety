@@ -334,7 +334,7 @@ class AdminPage extends React.Component {
                 } else if (this.state.MatchDate === null) {
                     this.setState({ error: "Please enter the date the match took place on." })
                 } else if (this.state.MatchResults === null) {
-                    this.setState({ error: "Please the results of the match." })
+                    this.setState({ error: "Please enter the results of the match." })
                 } else if (response.status === 406) {
                     this.setState({ error: "The match details you have entered cannot be used!" })
                 } else if ((response.status === 200) || (response.status === 204)) {
