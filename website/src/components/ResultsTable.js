@@ -77,11 +77,11 @@ class ResultsTable extends React.Component {
 
         const columns = [
             //{ field: 'id', headerName: 'ID', width: 70 },
-            { field: 'teamname', headerName: 'Team Name', width: 400 },
-            { field: 'opponent', headerName: 'Opponent', width: 400 },
-            { field: 'game', headerName: 'Game', width: 400 },
+            { field: 'teamname', headerName: 'Team Name', width: 300 },
+            { field: 'opponent', headerName: 'Opponent', width: 300 },
+            { field: 'game', headerName: 'Game', width: 300 },
             { field: 'date', headerName: 'Match Date', width: 300 },
-            { field: 'result', headerName: 'Match Outcome', width: 200 }
+            { field: 'result', headerName: 'Match Outcome', width: 150 }
         ];
 
         
@@ -89,6 +89,9 @@ class ResultsTable extends React.Component {
         const rows =
             this.state.results.map((result) => createData(result.match_id, result.team_name, result.match_opponent, result.match_date, result.match_outcome, result.game_name))
             ;
+
+
+        console.log(rows)
 
         return (
 

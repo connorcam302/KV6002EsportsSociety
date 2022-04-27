@@ -215,25 +215,27 @@ class AdminPage extends React.Component {
         formData.append('event_name', this.state.EventTitle);
         formData.append('event_description', this.state.EventDesc);
         formData.append('event_date', this.state.EventDate);
+        
+        if ((this.state.EventTitle === null) && (this.state.EventDesc === null) && (this.state.EventDate === null)) {
+            this.setState({ error: "Please answer all fields within the form before submitting." })
+        } else if (this.state.EventTitle === null) {
+            this.setState({ error: "Please enter a Title for the event." })
+        } else if (this.state.EventDesc === null) {
+            this.setState({ error: "Please enter a description for the event." })
+        } else if (this.state.EventDate === null) {
+            this.setState({ error: "Please enter a date for the event." })
+        } else{
         fetch(url, {
             method: 'POST',
             headers: new Headers(),
             body: formData
         })
             .then((response) => {
-                if ((this.state.EventTitle === null) && (this.state.EventDesc === null) && (this.state.EventDate === null)) {
-                    this.setState({ error: "Please answer all fields within the form before submitting." })
-                } else if (this.state.EventTitle === null) {
-                    this.setState({ error: "Please enter a Title for the event." })
-                } else if (this.state.EventDesc === null) {
-                    this.setState({ error: "Please enter a description for the event." })
-                } else if (this.state.EventDate === null) {
-                    this.setState({ error: "Please enter a date for the event." })
-                } else if (response.status === 406) {
-                    this.setState({ error: "The event details you have entered cannot be used!" })
-                } else if (response.status === 403) {
+                if (response.status === 403) {
                     this.setState({ error: "Sorry, an event with this name already exists!" })
-                } else if ((response.status === 200) || (response.status === 204)) {
+                }else if (response.status === 406) {
+                    this.setState({ error: "The event details you have entered cannot be used!" })
+                }else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "Event has been successfully created and uploaded!" })
                     this.setState({EventsForm: false});
                     this.setState({EventsForm: true});
@@ -244,6 +246,7 @@ class AdminPage extends React.Component {
                 console.log("something went wrong ", err)
             }
             );
+        }
     }
 
     //FUNCTIONALITY FOR THE MATCH RESULTS FORM.
@@ -453,6 +456,8 @@ class AdminPage extends React.Component {
                     this.setState({ error: "Please select an application before attempting to delete!" })
                 } else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "This team application has been successfully deleted!" })
+                    this.setState({TeamApplicationForm: false});
+                    this.setState({TeamApplicationForm: true});
                     return response.json()
                 }
             })
@@ -530,6 +535,8 @@ class AdminPage extends React.Component {
                 }
                 else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "Accolade has been successfully Assigned!" })
+                    this.setState({AccoladesForm: false});
+                    this.setState({AccoladesForm: true});
                     return response.json()
                 }
             })
@@ -623,6 +630,8 @@ class AdminPage extends React.Component {
                     this.setState({ error: "Please select an application before attempting to delete!" })
                 } else if ((response.status === 200) || (response.status === 204)) {
                     this.setState({ error: "This users application has been declined and deleted!" })
+                    this.setState({MemberApplicationForm: false});
+                    this.setState({MemberApplicationForm: true});
                     return response.json()
                 }
             })

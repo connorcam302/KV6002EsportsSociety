@@ -158,6 +158,12 @@ select {
   ". fb twitterFeed  discServer  .";
 }
 
+.MuiDataGrid-colCellTitle {
+  display: block;
+  text-align:center;
+  width: 100%;
+}
+
 .main{
   grid-area: main;
   text-align: left;
