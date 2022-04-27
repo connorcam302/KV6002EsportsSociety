@@ -9,7 +9,6 @@
  * 
  * @author Ethan Borrill W18001798
  */
-
 class ControllerAdminGetPendingMembers extends Controller {
     
     protected function setGateway() {

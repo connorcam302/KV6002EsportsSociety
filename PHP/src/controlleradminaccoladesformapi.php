@@ -3,13 +3,12 @@
 /**
 * ControllerAdminAccoladesFormApi
 * 
-* The controller takes provides the SQL gateway 'GatewayAccoladeForms' a method of performing its SQL query.
+* The controller provides the SQL gateway 'GatewayAccoladeForms' a method of performing its SQL query.
 * In this case, insert the collected information into the teamaccolade table of the
 *
 * @author Ethan Borrill W18001798
 *
 */
-
 class ControllerAdminAccoladesFormApi extends Controller
 {
 

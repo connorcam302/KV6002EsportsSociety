@@ -7,8 +7,8 @@ import Button from '@mui/material/Button';
 * This class is used to create the form necessary to create and upload new sets of match
 history for the website
 *
-* @author Jacob Clark w18003237
-* @collab Ethan Borrill
+* @author Ethan Borrill W18001798
+* @collab Jacob Clark w18003237
 */
 
 class AdminResultsForm extends React.Component {

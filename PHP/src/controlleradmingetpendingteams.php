@@ -9,7 +9,6 @@
  * 
  * @author Ethan Borrill W18001798
  */
-
 class ControllerAdminGetPendingTeams extends Controller {
     
     protected function setGateway() {

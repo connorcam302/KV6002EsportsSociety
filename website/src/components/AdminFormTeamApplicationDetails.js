@@ -1,6 +1,18 @@
 import React from "react";
 import Typography from '@mui/material/Typography';
 
+
+
+/**
+* AdminFormTeamApplicationDetails
+* 
+* The class is used to populate the team application form with data to help read and determine application forms.
+*
+* @author Ethan Borrill W18001798
+* @collab
+*
+* @todo
+*/
 class AdminFormTeamApplicationDetails extends React.Component {
 
     constructor(props) {
@@ -10,6 +22,12 @@ class AdminFormTeamApplicationDetails extends React.Component {
         }
     }
 
+    /**
+    * render()
+    * 
+    * Renders the content needed to display the Applications to create a team.
+    *
+    */
     render() {
         let details = "";
 

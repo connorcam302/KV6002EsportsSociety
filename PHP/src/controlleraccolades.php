@@ -10,7 +10,6 @@
  * 
  * @author Connor Campbell W18003255
  */
-
 class ControllerAccolades extends Controller {
     
     protected function setGateway() {

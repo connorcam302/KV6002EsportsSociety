@@ -17,7 +17,7 @@ import Helmet from "react-helmet";
 * This class is used to manage the functionalites and content seen within the Administrative pages of the application, which are only accessible by verified users in teh database.
 * To check this, the user's webtoken is decoded to check whether the isAdmin value retrieved in association with their account is a value of 1, which will allow them access.
 *
-* Within this pafe, users can access several forms related to the functions within the website, such as the weekly results page, events and teams - these forms are then used to update content shown on these pages.
+* Within this page, users can access several forms related to the functions within the website, such as the weekly results page, events and teams - these forms are then used to update content shown on these pages.
 *
 * @author Ethan Borrill W18001798
 */
@@ -580,7 +580,7 @@ class AdminPage extends React.Component {
     }
 
     /**
-    * handleMemberFormApprove
+    * handleMemberFormDecline
     * 
     * This function handles the Deletion of a member application from the pendingMembers list, this is assigned to the 'Decline application' button on the Members Applications.
     * The form is managed using the dropdown box, which displays the name of the User in accordance with the list of applications displayed above the dropdown.

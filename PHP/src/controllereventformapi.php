@@ -8,9 +8,6 @@
 * Which in the event none are, the SQL query made in the GatewayEventForms is executed and the event is added to the database.
 *
 * @author Ethan Borrill W18001798
-* @collab
-*
-* @todo
 */
 class ControllerEventFormApi extends Controller {
 
