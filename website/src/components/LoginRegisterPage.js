@@ -153,7 +153,7 @@ class LoginRegisterPage extends React.Component {
     * handleLoginClick()
     * 
     * This functionality is used when the user presses the 'Login' button on the login page, this will first check the form data entered into it
-    * - which should the details be correct, the 'user' boolean is updated to true and a token is created to keep the user logged into the website should they leave.
+    * - which should the details be correct, a token is created to keep the user logged into the website should they leave and the user is redirected to the events page.
     *
     * In the event the details entered are incorrect, this will be flagged within an error message and prevent the user from logging in.
     * @param [type] $[var]   [Description]
