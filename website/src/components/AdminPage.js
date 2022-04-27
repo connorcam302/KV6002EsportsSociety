@@ -663,7 +663,7 @@ class AdminPage extends React.Component {
                             <title>Admin</title>
                         </Helmet>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                             <ul><Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                     Add an event!
                                 </Typography></ul>
@@ -700,7 +700,7 @@ class AdminPage extends React.Component {
                             <title>Admin</title>
                         </Helmet>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                     Add match results
                                 </Typography>
@@ -738,7 +738,7 @@ class AdminPage extends React.Component {
                             <title>Admin</title>
                         </Helmet>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                     Team Applications
                                 </Typography>
@@ -774,7 +774,7 @@ class AdminPage extends React.Component {
                             <title>Admin</title>
                         </Helmet>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                     Manage User Applications
                                 </Typography>
@@ -810,7 +810,7 @@ class AdminPage extends React.Component {
                             <title>Admin</title>
                         </Helmet>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                                 <ul><Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                     Add an Accolade
                                 </Typography></ul>
@@ -846,7 +846,7 @@ class AdminPage extends React.Component {
                             <title>Admin</title>
                         </Helmet>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                                 <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                     Administrative Options
                                 </Typography>
@@ -878,7 +878,7 @@ class AdminPage extends React.Component {
                         <title>Admin</title>
                     </Helmet>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                             <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                 Unauthorised access!
                             </Typography>

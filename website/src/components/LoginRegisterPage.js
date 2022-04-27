@@ -20,7 +20,6 @@ class LoginRegisterPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: false,
             admin: false,
             registered: false,
             registerpage: false,
@@ -173,6 +172,8 @@ class LoginRegisterPage extends React.Component {
         })
             .then((response) => {
                 if (response.status === 200) { //If the status code of the webpage is 200, perform the login function from the API.
+                    alert("Login Successful. Redirecting")
+                    window.location.replace("http://unn-w18003255.newnumyspace.co.uk/events");
                     return response.json()
                 } else if ((this.state.email === null) && (this.state.password === null)) {
                     this.setState({ error: "Please enter your email address & password  before attempting to login." })
@@ -189,7 +190,6 @@ class LoginRegisterPage extends React.Component {
                 if ("token" in data.results) {
                     this.setState(
                         {
-                            user: true,
                             token: data.results.token
                         }
                     )
@@ -221,25 +221,29 @@ class LoginRegisterPage extends React.Component {
         formData.append('user_ign', this.state.userign);
         formData.append('user_firstName', this.state.userFirst);
         formData.append('user_lastName', this.state.userLast);
+
+
+        if ((this.state.email === null) && (this.state.password === null) && (this.state.userign === null) && (this.state.userFirst === null) && (this.state.userLast === null)) {
+            this.setState({ error: "Please answer all fields within the form before submitting." })
+        } else if (this.state.email === null) {
+            this.setState({ error: "Please enter an email." })
+        } else if (this.state.password === null) {
+            this.setState({ error: "Please enter a password (8-16 characters )." })
+        } else if (this.state.userign === null) {
+            this.setState({ error: "Please enter your In-Game Name" })
+        } else if (this.state.userFirst === null) {
+            this.setState({ error: "Please enter your first name." })
+        } else if (this.state.userLast === null) {
+            this.setState({ error: "Please enter your last name." })
+        } 
+        else{
         fetch(url, {
             method: 'POST',
             headers: new Headers(),
             body: formData
         })
             .then((response) => {
-                if ((this.state.email === null) && (this.state.password === null) && (this.state.userign === null) && (this.state.userFirst === null) && (this.state.userLast === null)) {
-                    this.setState({ error: "Please answer all fields within the form before submitting." })
-                } else if (this.state.email === null) {
-                    this.setState({ error: "Please enter an email." })
-                } else if (this.state.password === null) {
-                    this.setState({ error: "Please enter a password (8-16 characters )." })
-                } else if (this.state.userign === null) {
-                    this.setState({ error: "Please enter your In-Game Name" })
-                } else if (this.state.userFirst === null) {
-                    this.setState({ error: "Please enter your first name." })
-                } else if (this.state.userLast === null) {
-                    this.setState({ error: "Please enter your last name." })
-                } else if (response.status === 406) {
+                if (response.status === 406) {
                     this.setState({ error: "The email address or password you have entered is not acceptable." })
                 } else if (response.status === 403) {
                     this.setState({ error: "The email address you have entered already exists, please try another email address." })
@@ -256,7 +260,7 @@ class LoginRegisterPage extends React.Component {
                 console.log("something went wrong ", err)
             }
             );
-    }
+        }    }
 
     /**
      * 
@@ -275,7 +279,7 @@ class LoginRegisterPage extends React.Component {
                     <title>Login</title>
                 </Helmet>
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                         <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                             Login
                         </Typography>
@@ -311,7 +315,7 @@ class LoginRegisterPage extends React.Component {
                         <title>Register</title>
                     </Helmet>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                             <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                 Register
                             </Typography>
@@ -350,7 +354,7 @@ class LoginRegisterPage extends React.Component {
                         <title>Registered</title>
                     </Helmet>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sx={{ justifyContent: 'center' }}>
                             <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
                                 Your details have been successfully registered!
                             </Typography>
@@ -368,35 +372,6 @@ class LoginRegisterPage extends React.Component {
                                 handleRegisterState={this.handleRegisterState}
                             />
                             <ul><p className="errorMessage">{errorMessage}</p></ul>
-                        </Grid>
-                        <Grid item xs={4}>
-                        </Grid>
-                    </Grid>
-                </Box>
-            )
-        }
-
-        /**
-         * Content to be displayed if a user has successfully logged into their account.
-         */
-        if (this.state.user) {
-            page = (
-                <Box sx={{ flexGrow: 1 }}>
-                    <Helmet>
-                        <title>Logged In</title>
-                    </Helmet>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Typography sx={{ fontSize: 30, fontWeight: 500 }}>
-                                Login successful!
-                            </Typography>
-                            <Typography sx={{ fontSize: 24, fontWeight: 350 }}>
-                                You have been successfully logged! Please enjoy the site!
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                        </Grid>
-                        <Grid item xs={4} sx={{ justifyContent: 'center' }}>
                         </Grid>
                         <Grid item xs={4}>
                         </Grid>
