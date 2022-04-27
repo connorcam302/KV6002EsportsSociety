@@ -79,7 +79,6 @@ export default function ButtonAppBar() {
      */
 
     if(authenticated && admin) {
-        console.log("User is admin.")
         return (
         <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
@@ -142,7 +141,6 @@ export default function ButtonAppBar() {
      */
 
     if(authenticated && !admin) {
-        console.log("User is not admin.")
         return(
             <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">

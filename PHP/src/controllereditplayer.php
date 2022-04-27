@@ -29,6 +29,7 @@ class ControllerEditPlayer extends Controller {
             $ign = $this->getRequest()->getParameter("ign");
             $first = $this->getRequest()->getParameter("first");
             $last = $this->getRequest()->getParameter("last");
+            $bio = $this->getRequest()->getParameter("bio");
             $twitch = $this->getRequest()->getParameter("twitch");
             $twitter = $this->getRequest()->getParameter("twitter");
             $instagram = $this->getRequest()->getParameter("instagram");
@@ -38,7 +39,7 @@ class ControllerEditPlayer extends Controller {
                 $this->getResponse()->setMessage("Ensure that all mandatory fields are not null.");
                 $this->getResponse()->setStatus(410);
             } elseif (!is_null($email) && !is_null($ign) && !is_null($first) && !is_null($last) && !is_null($id)) {
-                $this->getGateway()->editPlayer($email,$ign,$first,$last,$twitch,$twitter,$instagram,$id);
+                $this->getGateway()->editPlayer($email,$ign,$first,$last,$bio,$twitch,$twitter,$instagram,$id);
             } else {
                 $this->getResponse()->setMessage("Error was encountered.");
                 $this->getResponse()->setStatus(505);

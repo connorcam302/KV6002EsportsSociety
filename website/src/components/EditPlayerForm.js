@@ -55,7 +55,8 @@ export default class EditPlayerForm extends React.Component {
                         onChange={this.props.handleEmail} 
                         variant="filled"
                         style={{
-                            backgroundColor: "#827C74"
+                            backgroundColor: "#827C74",
+                            width: "30%",
                         }}
                     />
                 </Box>
@@ -69,7 +70,8 @@ export default class EditPlayerForm extends React.Component {
                         onChange={this.props.handleIGN} 
                         variant="filled"
                         style={{
-                            backgroundColor: "#827C74"
+                            backgroundColor: "#827C74",
+                            width: "30%",
                         }}
                     />
                 </Box>
@@ -83,7 +85,8 @@ export default class EditPlayerForm extends React.Component {
                         onChange={this.props.handleFirstName} 
                         variant="filled"
                         style={{
-                            backgroundColor: "#827C74"
+                            backgroundColor: "#827C74",
+                            width: "30%",
                         }}
                     />
                 </Box>
@@ -97,7 +100,24 @@ export default class EditPlayerForm extends React.Component {
                         onChange={this.props.handleLastName} 
                         variant="filled"
                         style={{
-                            backgroundColor: "#827C74"
+                            backgroundColor: "#827C74",
+                            width: "30%",
+                        }}
+                    />
+                </Box>
+                <Box sx={{padding:2}}>
+                    <TextField 
+                        focused 
+                        required
+                        label="Bio"
+                        defaultValue={this.state.playerBio}
+                        value={this.props.bio} 
+                        onChange={this.props.handleBio} 
+                        variant="filled"
+                        multiline="true"
+                        style={{
+                            backgroundColor: "#827C74",
+                            width: "30%",
                         }}
                     />
                 </Box>
@@ -110,7 +130,8 @@ export default class EditPlayerForm extends React.Component {
                         onChange={this.props.handleTwitch} 
                         variant="filled"
                         style={{
-                            backgroundColor: "#827C74"
+                            backgroundColor: "#827C74",
+                            width: "30%",
                         }}
                     />
                 </Box>
@@ -123,7 +144,8 @@ export default class EditPlayerForm extends React.Component {
                         onChange={this.props.handleTwitter} 
                         variant="filled"
                         style={{
-                            backgroundColor: "#827C74"
+                            backgroundColor: "#827C74",
+                            width: "30%",
                         }}
                     />
                 </Box>
@@ -136,7 +158,8 @@ export default class EditPlayerForm extends React.Component {
                         onChange={this.props.handleInstagram} 
                         variant="filled"
                         style={{
-                            backgroundColor: "#827C74"
+                            backgroundColor: "#827C74",
+                            width: "30%",
                         }}
                     />
                 </Box>

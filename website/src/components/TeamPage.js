@@ -4,7 +4,7 @@ import TeamResults from "./TeamResults";
 import TeamStats from "./TeamStats"
 import TeamAccolades from "./TeamAccolades"
 import { Box, Grid, Typography, Button } from "@mui/material";
-import ProfilePic from "../img/defaultprofilepicture.png"
+import ProfilePic from "../img/vikingprofile.png"
 import jwt_decode from "jwt-decode";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
@@ -70,15 +70,28 @@ export default class TeamPage extends React.Component {
     makeEditPath = (id) => {
         return "../editteam/" + id
     }
+    makePath = (id) => {
+        return "../team/" + id
+    }
     
     render() {
         let teamName;
         let teamGame;
         let teamLead;
+        let teamPictureURL;
+        let teamPicture;
         let editButton = ""
+
         this.state.results.map( (team) => teamName = team.team_name)
         this.state.results.map( (team) => teamGame = team.game_name)
         this.state.results.map( (team) => teamLead = team.team_lead)
+        this.state.results.map( (team) => teamPictureURL = team.team_picture)
+
+        if(teamPictureURL){
+            teamPicture = (<img src={teamPictureURL} className="profliepic" style={{borderRadius: '5% 5% 5% 5%'}}/>)
+        } else {
+            teamPicture = (<img src={ProfilePic} className="profliepic" style={{borderRadius: '5% 5% 5% 5%'}}/>)
+        }
         
         /*
         * Checks if the user is the team lead or an admin, if either of these is true an edit page
@@ -98,7 +111,7 @@ export default class TeamPage extends React.Component {
                     </Link>
                 )
             }
-        }
+        } 
 
         return(
             <Box sx={{marginBottom:2, paddingLeft:3,paddingRight:3,marginLeft: 10,marginRight:10, paddingTop:2, paddingBottom:4,}}>
@@ -107,7 +120,9 @@ export default class TeamPage extends React.Component {
             </Helmet>
             <Box sx={{paddingTop:2,paddingBottom:3}}>
                 <Grid container spacing={2} sx={{paddingLeft:2}}>
-                    <img src={ProfilePic} className="profliepic" style={{width:"20%", borderRadius: '5% 5% 5% 5%'}}/>
+                    <Link to={this.makePath(this.props.teamid)}>
+                        {teamPicture}
+                    </Link>
                     <Box sx={{paddingTop: "2.5%", paddingLeft: 2, textAlign:"left", display: "block"}}>
                         <Typography variant="h1">
                             {teamName}

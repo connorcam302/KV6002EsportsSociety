@@ -107,10 +107,8 @@ export default class PlayerPage extends React.Component {
         this.state.results.map( (player) => playerInstagram = player.user_instagram)
         this.state.results.map( (player) => playerPictureURL = player.user_profilepicture)
 
-        console.log(playerPicture)
-
-        if(playerPictureURL){
-            playerPicture = <img src="https://i.ibb.co/Y3LTKWb/Fox.jpg" className="profliepic"/>
+        if(playerPicture && playerPicture !== undefined){
+            playerPicture = <img src={playerPictureURL} className="profliepic"/>
         } else {
             playerPicture = (<img src={ProfilePic} className="profliepic"/>)
         }
@@ -121,7 +119,7 @@ export default class PlayerPage extends React.Component {
         * will also be included.
         */
 
-        if(playerTwitter) {
+        if(playerTwitter && playerTwitter === !null) {
             let twitterlink = "https://www.twitter.com/" + playerTwitter + "/";
             twitterPopout = (
                 <TwitterTimelineEmbed
@@ -138,9 +136,10 @@ export default class PlayerPage extends React.Component {
                     </Typography>
                 </a>
             )
+            
         }
 
-        if(playerTwitch) {
+        if(playerTwitch && playerTwitch === !null) {
             let twitchlink = "https://www.twitch.tv/" + playerTwitch + "/";
             twitchPopout = (
                 <TwitchEmbed
@@ -160,7 +159,7 @@ export default class PlayerPage extends React.Component {
             )
         }
 
-        if(playerInstagram) {
+        if(playerInstagram && playerInstagram === !null) {
             let iglink = "https://www.instagram.com/" + playerInstagram + "/";
             instagram = (
                 <a href={iglink} target="_blank">

@@ -72,6 +72,14 @@ export default class TeamPlayers extends React.Component {
             return link
         }
 
+        for(let i = 0; i < this.state.results.length; i++){
+            if(this.state.results[i].user_profilepicture){
+                this.state.results[i].user_profilepictureimg = (<img src={this.state.results[i].user_profilepicture} className="profilepic" style={{width:"100%", borderRadius: '5% 5% 5% 5%'}}/>)
+            } else{
+                this.state.results[i].user_profilepictureimg = (<img src={ProfilePic} className="profilepic" style={{width:"100%", borderRadius: '5% 5% 5% 5%'}}/>)
+            }
+        }
+
         return(
             <div>
                  <Box sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center',}}>
@@ -79,7 +87,7 @@ export default class TeamPlayers extends React.Component {
                         <Box sx={{width:"12%", padding:1,}}>
                             <Link to={makePlayerLink(player.user_id)}>
                                 <Tooltip title={player.user_ign}>
-                                    <img src={ProfilePic} className="profilepic" style={{width:"100%", borderRadius: '5% 5% 5% 5%'}}/>
+                                    {player.user_profilepictureimg}
                                 </Tooltip>
                             </Link>
                         </Box>)

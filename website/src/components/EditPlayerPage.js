@@ -33,16 +33,18 @@ export default class EditPlayerPage extends React.Component {
         this.state = {
             user_id:"",
             isAdmin:"",
-            newEmail:"",
-            newign: "",
-            newFirstName:"",
-            newLastName:"",
-            newTwitch:"",
-            newTwitter:"",
-            newInstagram:"",
-            newPicture:"",
+            newEmail: null,
+            newign: null,
+            newFirstName:null,
+            newLastName:null,
+            newTwitch:null,
+            newTwitter:null,
+            newInstagram:null,
+            newPicture:null,
+            newBio:null,
             results:[],
-            sucess: ""
+            sucess: "",
+
         }
         this.handleEmail = this.handleEmail.bind(this);
         this.handleIGN = this.handleIGN.bind(this);
@@ -51,6 +53,7 @@ export default class EditPlayerPage extends React.Component {
         this.handleTwitch = this.handleTwitch.bind(this);
         this.handleTwitter = this.handleTwitter.bind(this);
         this.handleInstagram = this.handleInstagram.bind(this);
+        this.handleBio = this.handleBio.bind(this);
         this.handleSubmitClick = this.handleSubmitClick.bind(this);
     }
 
@@ -99,6 +102,9 @@ export default class EditPlayerPage extends React.Component {
     }    
     handleInstagram = (e) => {
         this.setState({ newInstagram: e.target.value })
+    }   
+     handleBio = (e) => {
+        this.setState({ newBio: e.target.value })
     }    
 
     /**
@@ -120,9 +126,10 @@ export default class EditPlayerPage extends React.Component {
         formData.append('twitch', this.state.newTwitch);
         formData.append('twitter', this.state.newTwitter);
         formData.append('instagram', this.state.newInstagram);
+        formData.append('bio', this.state.newBio);
         formData.append('id', this.props.playerid);
 
-        if (this.state.email === null || !this.state.ign === null  || !this.state.firstName === null  || !this.state.lastName === null ) {
+        if (this.state.newEmail === null || !this.state.newign === null  || !this.state.newFirstName === null  || !this.state.newLastName === null ) {
             this.setState({ message: "Please fill all required fields." })
         } else {
             fetch(url, {
@@ -142,6 +149,7 @@ export default class EditPlayerPage extends React.Component {
                 })
                 .catch((err) => {
                     console.log("something went wrong ", err)
+                    this.setState({ message: "Please fill all required fields." })
                 }
                 );
         }
@@ -176,6 +184,7 @@ export default class EditPlayerPage extends React.Component {
     let playerIGN;
     let playerFirstName;
     let playerLastName;
+    let playerBio;
     let playerTwitch;
     let playerTwitter;
     let playerInstagram;
@@ -186,11 +195,10 @@ export default class EditPlayerPage extends React.Component {
     this.state.results.map( (player) => (playerIGN = player.user_ign))
     this.state.results.map( (player) => (playerFirstName = player.user_firstName))
     this.state.results.map( (player) => (playerLastName = player.user_lastName))
+    this.state.results.map( (player) => (playerBio = player.user_bio))
     this.state.results.map( (player) => (playerTwitch = player.user_twitch))
     this.state.results.map( (player) => (playerTwitter = player.user_twitter))
     this.state.results.map( (player) => (playerInstagram = player.user_instagram))
-
-    console.log(playerIGN)
 
         /*
         * Checks if the user is attempting to edit their own profile, or is an admin. If 
@@ -218,6 +226,8 @@ export default class EditPlayerPage extends React.Component {
                     handleFirstName={this.handleFirstName}
                     playerLastName={playerLastName}
                     handleLastName={this.handleLastName}
+                    playerBio={playerBio}
+                    handleBio={this.handleBio}
                     playerTwitch={playerTwitch}
                     handleTwitch={this.handleTwitch}
                     playerTwitter={playerTwitter}

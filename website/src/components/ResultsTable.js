@@ -90,9 +90,6 @@ class ResultsTable extends React.Component {
             this.state.results.map((result) => createData(result.match_id, result.team_name, result.match_opponent, result.match_date, result.match_outcome, result.game_name))
             ;
 
-
-        console.log(rows)
-
         return (
 
             <div style={{ width: '100%' }}>

@@ -84,7 +84,6 @@ export default class EditTeamPage extends React.Component {
                             message: "Details Successfully Updated"
                         }
                     )
-                    console.log("Team Name Changed.")
                 } else if (this.state.email === null) {
                     this.setState({ error: "Please enter a team name." })
                 } 

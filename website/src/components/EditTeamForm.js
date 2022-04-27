@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Box, Button, Typography } from "@mui/material";
+import { TextField, Box, Button, Typography, Input } from "@mui/material";
 import { Link } from "react-router-dom";
 
 /**
@@ -23,6 +23,14 @@ export default class EditTeamForm extends React.Component {
         return (
             <div>
                 <Box sx={{padding:2}}>
+                    <Box sx={{padding:2}}>
+                    <Typography>Team Picture</Typography>
+                    <Input 
+                        type="file" 
+                        name="fileToUpload" 
+                        id="fileToUpload" 
+                        onChange={this.props.handlePicture} />
+                    </Box>
                     <TextField 
                         focused 
                         required
@@ -32,7 +40,8 @@ export default class EditTeamForm extends React.Component {
                         onChange={this.props.handleName} 
                         variant="filled"
                         style={{
-                            backgroundColor: "#827C74"
+                            backgroundColor: "#827C74",
+                            width: "30%"
                         }}
                     />
                 </Box>

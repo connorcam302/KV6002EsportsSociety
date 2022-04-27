@@ -83,13 +83,14 @@ class GatewayPlayer extends Gateway
         $this->setResult($result);
     }
 
-    public function editPlayer($email, $userign, $userFirst, $userLast, $userTwitch, $userTwitter, $userInstagram, $id)
+    public function editPlayer($email, $userign, $userFirst, $userLast, $userBio, $userTwitch, $userTwitter, $userInstagram, $id)
     {
         $sql = "UPDATE user
                 SET user_email = :useremail, 
                     user_ign = :userign, 
                     user_firstName = :userfirstName, 
                     user_lastName = :userlastName, 
+                    user_bio = :userBio, 
                     user_twitch = :usertwitch, 
                     user_twitter = :usertwitter,
                     user_instagram = :userinstagram
@@ -99,6 +100,7 @@ class GatewayPlayer extends Gateway
             ":userign" => $userign,
             ":userfirstName" => $userFirst,
             ":userlastName" => $userLast,
+            ":userBio" => $userBio, 
             ":usertwitch" => $userTwitch,
             ":usertwitter" => $userTwitter,
             ":userinstagram" => $userInstagram,
