@@ -107,7 +107,7 @@ export default class PlayerPage extends React.Component {
         this.state.results.map( (player) => playerInstagram = player.user_instagram)
         this.state.results.map( (player) => playerPictureURL = player.user_profilepicture)
 
-        if(playerPicture && playerPicture !== undefined){
+        if(playerPictureURL){
             playerPicture = <img src={playerPictureURL} className="profliepic"/>
         } else {
             playerPicture = (<img src={ProfilePic} className="profliepic"/>)

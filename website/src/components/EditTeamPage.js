@@ -68,7 +68,7 @@ export default class EditTeamPage extends React.Component {
         formData.append('id', this.props.teamid);
         formData.append('name', this.state.name);
         
-        if (this.state.name === null){
+        if (this.state.name === null || this.state.name === ""){
             this.setState({ message: "Please fill all required fields." })
         } else {
             fetch(url, {
