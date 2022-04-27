@@ -1,8 +1,22 @@
 import { Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import { FaInstagram, FaTwitter, FaTwitch, FaFacebook, FaDiscord } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { Divider } from "@mui/material";
+
+
+/**
+* Footer
+* 
+* Creates a footer for the website to be shown on every page at the bottom. This contains
+* all of the Northumbria Vikings socials links shown as their respective icons. Icons
+* are taken from the ReactIcons package.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo
+*/
+
 
 function Footer(){
     return(

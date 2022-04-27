@@ -1,5 +1,17 @@
 import React from "react";
-import { TwitchChat, TwitchClip, TwitchEmbed,TwitchPlayer } from "react-twitch-embed";
+import {TwitchEmbed} from "react-twitch-embed";
+
+
+/**
+* TwitchStream
+* 
+* Creates a widget of the northumbria_esports twitch.tv stream using the TwitchEmbed package.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo
+*/
 
 export default class TwitchStream extends React.Component {
     render() {

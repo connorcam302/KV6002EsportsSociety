@@ -1,11 +1,4 @@
 import React from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { Typography } from "@mui/material";
 import Navbar from './Navbar'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginRegisterPage from './LoginRegisterPage';
@@ -19,6 +12,17 @@ import EditPlayerPage from "./EditPlayerPage";
 import ResultsPage from "./ResultsPage";
 import WeeklyEventsPage from "./WeeklyEventsPage";
 
+/**
+* Router
+* 
+*  Allows for routing between the pages using URl paths.
+*
+* @author Connor Campbell W18003255
+* @collab
+*
+* @todo
+*/
+
 export default class Router extends React.Component {
 
     constructor(props){
@@ -29,15 +33,23 @@ export default class Router extends React.Component {
         }
     }
 
+    /**
+    * componentDidMount()
+    * 
+    * Ran when the page is initially loaded. Obtains data from both the 'api/player' and 'api/team'
+    * endpoints.
+    */
+
     componentDidMount() {
         this.fetchPlayerData()
         this.fetchTeamData()
     }
 
-    // componentDidUpdate(prevProps) {
-    //     this.fetchPlayerData()
-    //     this.fetchTeamData()
-    // }
+    /**
+    * fetchPlayerData(url)
+    * 
+    * Fetches API data for all players. The data is stored in state.
+    */
 
     fetchPlayerData = () => {
         let playerUrl = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/player"
@@ -57,6 +69,12 @@ export default class Router extends React.Component {
         });
     }
 
+    /**
+    * fetchTeamData(url)
+    * 
+    * Fetches API data for all teams. The data is stored in state.
+    */
+
     fetchTeamData = () => {
         let teamUrl = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/team"
         fetch(teamUrl)
@@ -75,21 +93,72 @@ export default class Router extends React.Component {
         });
     }
 
+    
+    /**
+    * makeTeamPath
+    * 
+    * Creates the path in order to route to a specific team's page.
+    *
+    * @param String id   The ID of the team.
+    * 
+    * @return String
+    */
+    
     makeTeamPath = (id) => {
         return "team/" + id
     }
+
+    /**
+    * makePlayerPath
+    * 
+    * Creates the path in order to route to a specific player's page.
+    *
+    * @param String id   The ID of the player.
+    * 
+    * @return String
+    */
 
     makePlayerPath = (id) => {
         return "player/" + id
     }
 
+    /**
+    * makeEditTeamPath
+    * 
+    * Creates the path in order to route to a specific team's edit page.
+    *
+    * @param String id   The ID of the team.
+    * 
+    * @return String
+    */
+
     makeEditTeamPath = (id) => {
         return "editteam/" + id
     }
 
+    /**
+    * makeEditPlayerPath
+    * 
+    * Creates the path in order to route to a specific player's edit page.
+    *
+    * @param String id   The ID of the player.
+    * 
+    * @return String
+    */
+
     makeEditPlayerPath = (id) => {
         return "editplayer/" + id
     }
+
+    /**
+    * render()
+    * 
+    * Creates all of the paths to the various pages, for pages that's occurance are static such as admin or results, they have
+    * a predefined path. For pages that may be added over time, such as player pages, the list of players is iterated through
+    * creating a page for each with the url being "players/theirID".
+    * 
+    * @return JSX Obj
+    */
 
     render() {
         return(
