@@ -29,7 +29,7 @@ class ResultsPage extends React.Component {
 
                 <div className="main">
                     <h1>Game Results</h1>
-                    <p>Check out the latest results across all of our different teams inclduing information on opponents, dates, games and of course scoring. The table can be filtered using the toolbar at the top to search through all the matches played. Results will be added as new matches take place so be sure to check back here weekly to see how your favorite teams are performing.</p>
+                    <p>Check out the latest results across all of our different teams including information on opponents, dates, games and of course scoring. The table can be filtered using the toolbar at the top to search through all the matches played. Results will be added as new matches take place so be sure to check back here weekly to see how your favorite teams are performing.</p>
                 </div>
 
                 
