@@ -119,7 +119,7 @@ export default class PlayerPage extends React.Component {
         * will also be included.
         */
 
-        if(playerTwitter && playerTwitter === !null) {
+        if(playerTwitter && playerTwitter !==  !null) {
             let twitterlink = "https://www.twitter.com/" + playerTwitter + "/";
             twitterPopout = (
                 <TwitterTimelineEmbed
@@ -139,7 +139,7 @@ export default class PlayerPage extends React.Component {
             
         }
 
-        if(playerTwitch && playerTwitch === !null) {
+        if(playerTwitch && playerTwitch !== null) {
             let twitchlink = "https://www.twitch.tv/" + playerTwitch + "/";
             twitchPopout = (
                 <TwitchEmbed
@@ -159,7 +159,7 @@ export default class PlayerPage extends React.Component {
             )
         }
 
-        if(playerInstagram && playerInstagram === !null) {
+        if(playerInstagram && playerInstagram !==  !null) {
             let iglink = "https://www.instagram.com/" + playerInstagram + "/";
             instagram = (
                 <a href={iglink} target="_blank">

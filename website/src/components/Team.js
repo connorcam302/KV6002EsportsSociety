@@ -2,6 +2,8 @@
  * Team Class
  *
  * @author Harry Laws w19024957
+ * 
+ * 
  */
 
 import React from "react";
@@ -24,14 +26,6 @@ class Team extends React.Component {
             );
         }
     }
-                                        
-                                        
-                                               
-    
-         
-        
-    
-      
 
 export default Team;
  

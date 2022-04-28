@@ -1,12 +1,18 @@
 /**
- * Papers search Box
+ * Teams search Box
  *
  * @author Harry Laws w19024957
+ * 
+ * 
  */
 import React from "react";
 
 class SearchBox extends React.Component {
-
+/**
+ * 
+ * Search teams by team name on the teams page.
+ * 
+ */
     render() {
         return (
             <label>
