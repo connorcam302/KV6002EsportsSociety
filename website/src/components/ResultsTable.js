@@ -1,6 +1,7 @@
 import React from "react";
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
+
 /**
  * Results Table Component
  * 
@@ -76,27 +77,32 @@ class ResultsTable extends React.Component {
         */
 
         const columns = [
-            //{ field: 'id', headerName: 'ID', width: 70 },
-            { field: 'teamname', headerName: 'Team Name', width: 300 },
-            { field: 'opponent', headerName: 'Opponent', width: 300 },
-            { field: 'game', headerName: 'Game', width: 300 },
-            { field: 'date', headerName: 'Match Date', width: 300 },
-            { field: 'result', headerName: 'Match Outcome', width: 150 }
+            //Creates the columns for the grid with appropriate lengthing and then flex to make the content stretch when there is space
+            { field: 'teamname', headerName: 'Team Name', minWidth: 350,
+            flex: 1 },
+            { field: 'opponent', headerName: 'Opponent', minWidth: 350,
+            flex: 1 },
+            { field: 'game', headerName: 'Game', minWidth: 300,
+            flex: 1 },
+            { field: 'date', headerName: 'Match Date', minWidth: 150,
+            flex: 1},
+            { field: 'result', headerName: 'Match Outcome', minWidth: 150,
+            flex: 1}
         ];
 
         
-
+        //Fills a rows variable with the data collected from the results api 
         const rows =
             this.state.results.map((result) => createData(result.match_id, result.team_name, result.match_opponent, result.match_date, result.match_outcome, result.game_name))
-            ;
+        ;
 
 
-        console.log(rows)
-
+       
+         //Builds up the table to be displayed using the rows and columns variables
         return (
 
             <div style={{ width: '100%' }}>
-                <DataGrid
+                <DataGrid className="DataGrid"
                     components={{ Toolbar: GridToolbar }}
                     autoHeight
                     rows={rows}
