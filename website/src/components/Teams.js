@@ -2,7 +2,9 @@
 /**
  * teams Class
  *
- * @team Harry Laws w19024957
+ * @author Harry Laws w19024957
+ * 
+ * 
  */
  
  import React from "react";
@@ -18,6 +20,13 @@ class Teams extends React.Component {
         console.log("constructor")
     }
     
+    /**
+    * componentDidMount
+    * 
+    * Team data will be returened Using api/teams.
+    * 
+    */
+
     componentDidMount() {
         const url = "http://unn-w18001798.newnumyspace.co.uk/KV6002/Assessment/api/team"
 
@@ -46,9 +55,15 @@ class Teams extends React.Component {
           });
     }
 
+    /**
+    * filter search (s)
+    * 
+    * search box 
+    * 
+    */
     filterSearch = (s) => {
     return s.team_name.toLowerCase().includes(this.props.search.toLowerCase())
- }
+  }
 
     
       render() {
